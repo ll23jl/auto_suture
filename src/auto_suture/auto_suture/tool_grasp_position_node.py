@@ -2,46 +2,54 @@ import rclpy
 from rclpy.node import Node
 
 from geometry_msgs.msg import PoseStamped
+from auto_suture_interfaces.srv import FindGraspPosition
 
 import numpy as np
 
 from PyKDL import Frame, Rotation, Vector
 
 
-# Grasp position node definition
 class ToolGraspPosition(Node):
 
     def __init__(self):
         super().__init__('tool_grasp_position')
 
-        # subscriber to needle position
+        self.latest_needle_pose = None
+
+        # Subscribe to needle position
         self.subscription = self.create_subscription(
             PoseStamped,
             '/needle_position',
             self.state_callback,
             10
         )
-        self.subscription  # prevent unused variable warning
 
-        # store latest needle pose
-        self.latest_needle_pose = None
-
-        # service to find grasp position
-        self.srv = self.create_service(FindGraspPosition, 'find_grasp_position', self.find_grasp_position_callback)
-
-        # callback function for the service - finds the grasp position based on the needle position and the offset of the tool
-        def find_grasp_position_callback(self, request, response):
-            response = PoseStamped()
-            response.header = msg.header
-            response.pose.position = msg.pose.position * offset_psm1_grip.p
-            response.pose.orientation = msg.pose.orientation * offset_psm1_grip.M.GetQuaternion
-
-        return response
-
-
+        # Service
+        self.srv = self.create_service(
+            FindGraspPosition,
+            'find_grasp_position',
+            self.find_grasp_position_callback
+        )
 
 
     def state_callback(self, msg):
+        """
+        Store latest needle pose
+        """
+        self.latest_needle_pose = msg
+
+
+    def find_grasp_position_callback(self, request, response):
+        """
+        Calculate grasp pose when requested
+        """
+
+        if self.latest_needle_pose is None:
+            self.get_logger().warn(
+                "No needle position received yet"
+            )
+            return response
+
 
         offset_psm1_grip = Frame(
             Rotation.RPY(-np.pi / 2., 0, 0.),
@@ -52,45 +60,57 @@ class ToolGraspPosition(Node):
             )
         )
 
+
         needle_frame = Frame(
             Rotation.Quaternion(
-                msg.pose.orientation.x,
-                msg.pose.orientation.y,
-                msg.pose.orientation.z,
-                msg.pose.orientation.w
+                self.latest_needle_pose.pose.orientation.x,
+                self.latest_needle_pose.pose.orientation.y,
+                self.latest_needle_pose.pose.orientation.z,
+                self.latest_needle_pose.pose.orientation.w
             ),
             Vector(
-                msg.pose.position.x,
-                msg.pose.position.y,
-                msg.pose.position.z
+                self.latest_needle_pose.pose.position.x,
+                self.latest_needle_pose.pose.position.y,
+                self.latest_needle_pose.pose.position.z
             )
         )
 
+
         tool_frame = needle_frame * offset_psm1_grip
 
-        pose = PoseStamped()
-        pose.header = msg.header
 
-        pose.pose.position.x = tool_frame.p.x()
-        pose.pose.position.y = tool_frame.p.y()
-        pose.pose.position.z = tool_frame.p.z()
+        grasp_pose = PoseStamped()
+
+        grasp_pose.header = self.latest_needle_pose.header
+
+        grasp_pose.pose.position.x = tool_frame.p.x()
+        grasp_pose.pose.position.y = tool_frame.p.y()
+        grasp_pose.pose.position.z = tool_frame.p.z()
+
 
         qx, qy, qz, qw = tool_frame.M.GetQuaternion()
 
-        pose.pose.orientation.x = qx
-        pose.pose.orientation.y = qy
-        pose.pose.orientation.z = qz
-        pose.pose.orientation.w = qw
+        grasp_pose.pose.orientation.x = qx
+        grasp_pose.pose.orientation.y = qy
+        grasp_pose.pose.orientation.z = qz
+        grasp_pose.pose.orientation.w = qw
 
 
-    
+        response.grasp_pose = grasp_pose
+
+        return response
+
+
 
 def main(args=None):
-    rclpy.init()
 
-    tool_grasp_position = ToolGraspPosition()
+    rclpy.init(args=args)
 
-    rclpy.spin(tool_grasp_position)
+    node = ToolGraspPosition()
+
+    rclpy.spin(node)
+
+    node.destroy_node()
 
     rclpy.shutdown()
 
