@@ -1,0 +1,15 @@
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/package_run_dependencies/auto_suture_interfaces
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/parent_prefix_path/auto_suture_interfaces
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/ament_prefix_path.sh
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/ament_prefix_path.dsv
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/path.sh
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/path.dsv
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.bash
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.sh
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.zsh
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.dsv
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.dsv
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/packages/auto_suture_interfaces
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfacesConfig.cmake
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfacesConfig-version.cmake
+/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.xml

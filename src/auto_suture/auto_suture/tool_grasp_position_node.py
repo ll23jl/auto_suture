@@ -14,29 +14,32 @@ class ToolGraspPosition(Node):
     def __init__(self):
         super().__init__('tool_grasp_position')
 
-        self.offset_psm1_grip = Frame(
-            Rotation.RPY(-np.pi / 2., 0, 0.),
-            Vector(
-                0.008973019361495972,
-                -0.005215135216712952,
-                0.005237608169473778
-            )
-        )
-
-        # Subscriber
+        # subscriber to needle position
         self.subscription = self.create_subscription(
             PoseStamped,
             '/needle_position',
             self.state_callback,
             10
         )
+        self.subscription  # prevent unused variable warning
 
-        # Publisher
-        self.publisher_ = self.create_publisher(
-            PoseStamped,
-            '/CRTK_',
-            10
-        )
+        # store latest needle pose
+        self.latest_needle_pose = None
+
+        # service to find grasp position
+        self.srv = self.create_service(FindGraspPosition, 'find_grasp_position', self.find_grasp_position_callback)
+
+        # callback function for the service - finds the grasp position based on the needle position and the offset of the tool
+        def find_grasp_position_callback(self, request, response):
+            response = PoseStamped()
+            response.header = msg.header
+            response.pose.position = msg.pose.position * offset_psm1_grip.p
+            response.pose.orientation = msg.pose.orientation * offset_psm1_grip.M.GetQuaternion
+
+        return response
+
+
+
 
     def state_callback(self, msg):
 
@@ -79,20 +82,16 @@ class ToolGraspPosition(Node):
         pose.pose.orientation.z = qz
         pose.pose.orientation.w = qw
 
-        self.publisher_.publish(pose)
+
     
 
 def main(args=None):
-    rclpy.init(args=args)
+    rclpy.init()
 
     tool_grasp_position = ToolGraspPosition()
 
     rclpy.spin(tool_grasp_position)
 
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
-    tool_grasp_position.destroy_node()
     rclpy.shutdown()
 
 

@@ -1,0 +1,9 @@
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/uninstall.dir
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/auto_suture_interfaces_uninstall.dir
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/test.dir
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/edit_cache.dir
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/rebuild_cache.dir
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/list_install_components.dir
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/install.dir
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/install/local.dir
+/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles/install/strip.dir

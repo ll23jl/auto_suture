@@ -1,0 +1,36 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jazmin/auto_suture/build/auto_suture_interfaces
+-- Install configuration: ""
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/package_run_dependencies/auto_suture_interfaces
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/parent_prefix_path/auto_suture_interfaces
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/ament_prefix_path.sh
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/ament_prefix_path.dsv
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/path.sh
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/path.dsv
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.bash
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.sh
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.zsh
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.dsv
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.dsv
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/packages/auto_suture_interfaces
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfacesConfig.cmake
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfacesConfig-version.cmake
+-- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.xml
