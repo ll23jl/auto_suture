@@ -10,8 +10,10 @@ setup.py
 ../../build/auto_suture/auto_suture.egg-info/top_level.txt
 ../../build/auto_suture/auto_suture.egg-info/zip-safe
 auto_suture/__init__.py
+auto_suture/move_to_target.py
 auto_suture/needle_position_node.py
 auto_suture/tool_grasp_position_node.py
+config/grasp_offsets.yaml
 launch/suture_sim.launch.py
 resource/auto_suture
 test/test_copyright.py

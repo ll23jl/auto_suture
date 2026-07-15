@@ -52,8 +52,6 @@ def main(args=None):
     rclpy.spin(needle_position)
 
     # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
     needle_position.destroy_node()
     rclpy.shutdown()
 

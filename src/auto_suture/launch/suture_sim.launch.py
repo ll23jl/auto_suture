@@ -48,8 +48,16 @@ def generate_launch_description():
         package="auto_suture",
         executable="tool_grasp_position",
         name="tool_grasp_position",
+        parameters=[
+            'config/grasp_offsets.yaml',
+            {
+                'psm': 'psm1',
+                'grasp_type': 'grip'
+            }
+        ],
         output="screen"
     )
+    
 
     return LaunchDescription([
         simulation,

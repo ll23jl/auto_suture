@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "auto_suture_interfaces__rs",
+		"source" : "/home/jazmin/auto_suture/build/auto_suture_interfaces/auto_suture_interfaces__rs"
+	}
+}
