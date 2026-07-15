@@ -36,7 +36,7 @@ class NeedlePosition(Node):
         # Publish
         self.publisher_.publish(pose)
 
-        self.get_logger().info(
+        self.get_logger().debug(
             f"Needle position: "
             f"({pose.pose.position.x:.3f}, "
             f"{pose.pose.position.y:.3f}, "

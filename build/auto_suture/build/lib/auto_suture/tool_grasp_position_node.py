@@ -10,13 +10,13 @@ from PyKDL import Frame, Rotation, Vector
 class ToolGraspPosition(Node):
 
     def __init__(self):
-        super().__init__('tool_grasp_position')
+        super().__init__('tool_grasp_position',automatically_declare_parameters_from_overrides=True)
 
         self.latest_needle_pose = None
 
         # Parameters selecting which grasp offset to use
-        self.declare_parameter('psm', 'psm1')
-        self.declare_parameter('grasp_type', 'grip')
+        self.declare_parameter('psm')
+        self.declare_parameter('grasp_type')
 
         self.psm = self.get_parameter('psm').value
         self.grasp_type = self.get_parameter('grasp_type').value

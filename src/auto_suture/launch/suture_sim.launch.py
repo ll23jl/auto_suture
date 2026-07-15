@@ -28,11 +28,23 @@ def generate_launch_description():
                 cwd="/home/jazmin/surgical_robotics_challenge-master",
                 env={
                     **os.environ,
-                    "PYTHONPATH": "/home/jazmin/surgical_robotics_challenge-master/scripts"
+                    "PYTHONPATH": os.pathsep.join([
+                        "/home/jazmin/surgical_robotics_challenge-master/scripts",
+                        os.environ.get("PYTHONPATH", "")
+                    ])
                 },
                 output="screen"
             )
         ]
+    )
+
+
+    # Needle frame converter node
+    needle_frame_converter = Node(
+        package="auto_suture",
+        executable="needle_frame_converter",
+        name="needle_frame_converter",
+        output="screen"
     )
 
     # Needle position node

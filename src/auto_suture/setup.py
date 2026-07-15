@@ -39,6 +39,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'needle_frame_converter = auto_suture.needle_frame_converter:main',
             'needle_position = auto_suture.needle_position_node:main',
             'tool_grasp_position = auto_suture.tool_grasp_position_node:main',
             'move_to_target = auto_suture.move_to_target_node:main',
