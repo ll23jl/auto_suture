@@ -42,25 +42,44 @@ struct FindGraspPosition_Request_
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
-      this->structure_needs_at_least_one_member = 0;
+      this->psm = "";
+      this->grasp_type = "";
     }
   }
 
   explicit FindGraspPosition_Request_(const ContainerAllocator & _alloc, rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
+  : psm(_alloc),
+    grasp_type(_alloc)
   {
-    (void)_alloc;
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
-      this->structure_needs_at_least_one_member = 0;
+      this->psm = "";
+      this->grasp_type = "";
     }
   }
 
   // field types and members
-  using _structure_needs_at_least_one_member_type =
-    uint8_t;
-  _structure_needs_at_least_one_member_type structure_needs_at_least_one_member;
+  using _psm_type =
+    std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>;
+  _psm_type psm;
+  using _grasp_type_type =
+    std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>;
+  _grasp_type_type grasp_type;
 
+  // setters for named parameter idiom
+  Type & set__psm(
+    const std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> & _arg)
+  {
+    this->psm = _arg;
+    return *this;
+  }
+  Type & set__grasp_type(
+    const std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> & _arg)
+  {
+    this->grasp_type = _arg;
+    return *this;
+  }
 
   // constant declarations
 
@@ -104,7 +123,10 @@ struct FindGraspPosition_Request_
   // comparison operators
   bool operator==(const FindGraspPosition_Request_ & other) const
   {
-    if (this->structure_needs_at_least_one_member != other.structure_needs_at_least_one_member) {
+    if (this->psm != other.psm) {
+      return false;
+    }
+    if (this->grasp_type != other.grasp_type) {
       return false;
     }
     return true;
@@ -151,25 +173,54 @@ struct FindGraspPosition_Response_
   explicit FindGraspPosition_Response_(rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
   : grasp_pose(_init)
   {
-    (void)_init;
+    if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
+      rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
+    {
+      this->success = false;
+      this->message = "";
+    }
   }
 
   explicit FindGraspPosition_Response_(const ContainerAllocator & _alloc, rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
-  : grasp_pose(_alloc, _init)
+  : grasp_pose(_alloc, _init),
+    message(_alloc)
   {
-    (void)_init;
+    if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
+      rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
+    {
+      this->success = false;
+      this->message = "";
+    }
   }
 
   // field types and members
   using _grasp_pose_type =
     geometry_msgs::msg::PoseStamped_<ContainerAllocator>;
   _grasp_pose_type grasp_pose;
+  using _success_type =
+    bool;
+  _success_type success;
+  using _message_type =
+    std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>;
+  _message_type message;
 
   // setters for named parameter idiom
   Type & set__grasp_pose(
     const geometry_msgs::msg::PoseStamped_<ContainerAllocator> & _arg)
   {
     this->grasp_pose = _arg;
+    return *this;
+  }
+  Type & set__success(
+    const bool & _arg)
+  {
+    this->success = _arg;
+    return *this;
+  }
+  Type & set__message(
+    const std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> & _arg)
+  {
+    this->message = _arg;
     return *this;
   }
 
@@ -216,6 +267,12 @@ struct FindGraspPosition_Response_
   bool operator==(const FindGraspPosition_Response_ & other) const
   {
     if (this->grasp_pose != other.grasp_pose) {
+      return false;
+    }
+    if (this->success != other.success) {
+      return false;
+    }
+    if (this->message != other.message) {
       return false;
     }
     return true;

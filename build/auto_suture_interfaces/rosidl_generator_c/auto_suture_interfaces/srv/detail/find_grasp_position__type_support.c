@@ -4,10 +4,10 @@
 
 #include <string.h>
 
-#include "auto_suture_interfaces/srv/detail/find_grasp_position__struct.h"
-#include "auto_suture_interfaces/srv/detail/find_grasp_position__functions.h"
 #include "auto_suture_interfaces/srv/detail/find_grasp_position__type_support.h"
 #include "rosidl_typesupport_interface/macros.h"
+#include "auto_suture_interfaces/srv/detail/find_grasp_position__struct.h"
+#include "auto_suture_interfaces/srv/detail/find_grasp_position__functions.h"
 
 #ifdef __cplusplus
 extern "C"

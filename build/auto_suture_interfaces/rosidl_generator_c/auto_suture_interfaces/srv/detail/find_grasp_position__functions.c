@@ -10,13 +10,27 @@
 
 #include "rcutils/allocator.h"
 
+// Include directives for member types
+// Member `psm`
+// Member `grasp_type`
+#include "rosidl_runtime_c/string_functions.h"
+
 bool
 auto_suture_interfaces__srv__FindGraspPosition_Request__init(auto_suture_interfaces__srv__FindGraspPosition_Request * msg)
 {
   if (!msg) {
     return false;
   }
-  // structure_needs_at_least_one_member
+  // psm
+  if (!rosidl_runtime_c__String__init(&msg->psm)) {
+    auto_suture_interfaces__srv__FindGraspPosition_Request__fini(msg);
+    return false;
+  }
+  // grasp_type
+  if (!rosidl_runtime_c__String__init(&msg->grasp_type)) {
+    auto_suture_interfaces__srv__FindGraspPosition_Request__fini(msg);
+    return false;
+  }
   return true;
 }
 
@@ -26,7 +40,10 @@ auto_suture_interfaces__srv__FindGraspPosition_Request__fini(auto_suture_interfa
   if (!msg) {
     return;
   }
-  // structure_needs_at_least_one_member
+  // psm
+  rosidl_runtime_c__String__fini(&msg->psm);
+  // grasp_type
+  rosidl_runtime_c__String__fini(&msg->grasp_type);
 }
 
 bool
@@ -35,8 +52,16 @@ auto_suture_interfaces__srv__FindGraspPosition_Request__are_equal(const auto_sut
   if (!lhs || !rhs) {
     return false;
   }
-  // structure_needs_at_least_one_member
-  if (lhs->structure_needs_at_least_one_member != rhs->structure_needs_at_least_one_member) {
+  // psm
+  if (!rosidl_runtime_c__String__are_equal(
+      &(lhs->psm), &(rhs->psm)))
+  {
+    return false;
+  }
+  // grasp_type
+  if (!rosidl_runtime_c__String__are_equal(
+      &(lhs->grasp_type), &(rhs->grasp_type)))
+  {
     return false;
   }
   return true;
@@ -50,8 +75,18 @@ auto_suture_interfaces__srv__FindGraspPosition_Request__copy(
   if (!input || !output) {
     return false;
   }
-  // structure_needs_at_least_one_member
-  output->structure_needs_at_least_one_member = input->structure_needs_at_least_one_member;
+  // psm
+  if (!rosidl_runtime_c__String__copy(
+      &(input->psm), &(output->psm)))
+  {
+    return false;
+  }
+  // grasp_type
+  if (!rosidl_runtime_c__String__copy(
+      &(input->grasp_type), &(output->grasp_type)))
+  {
+    return false;
+  }
   return true;
 }
 
@@ -244,6 +279,9 @@ auto_suture_interfaces__srv__FindGraspPosition_Request__Sequence__copy(
 // Include directives for member types
 // Member `grasp_pose`
 #include "geometry_msgs/msg/detail/pose_stamped__functions.h"
+// Member `message`
+// already included above
+// #include "rosidl_runtime_c/string_functions.h"
 
 bool
 auto_suture_interfaces__srv__FindGraspPosition_Response__init(auto_suture_interfaces__srv__FindGraspPosition_Response * msg)
@@ -253,6 +291,12 @@ auto_suture_interfaces__srv__FindGraspPosition_Response__init(auto_suture_interf
   }
   // grasp_pose
   if (!geometry_msgs__msg__PoseStamped__init(&msg->grasp_pose)) {
+    auto_suture_interfaces__srv__FindGraspPosition_Response__fini(msg);
+    return false;
+  }
+  // success
+  // message
+  if (!rosidl_runtime_c__String__init(&msg->message)) {
     auto_suture_interfaces__srv__FindGraspPosition_Response__fini(msg);
     return false;
   }
@@ -267,6 +311,9 @@ auto_suture_interfaces__srv__FindGraspPosition_Response__fini(auto_suture_interf
   }
   // grasp_pose
   geometry_msgs__msg__PoseStamped__fini(&msg->grasp_pose);
+  // success
+  // message
+  rosidl_runtime_c__String__fini(&msg->message);
 }
 
 bool
@@ -278,6 +325,16 @@ auto_suture_interfaces__srv__FindGraspPosition_Response__are_equal(const auto_su
   // grasp_pose
   if (!geometry_msgs__msg__PoseStamped__are_equal(
       &(lhs->grasp_pose), &(rhs->grasp_pose)))
+  {
+    return false;
+  }
+  // success
+  if (lhs->success != rhs->success) {
+    return false;
+  }
+  // message
+  if (!rosidl_runtime_c__String__are_equal(
+      &(lhs->message), &(rhs->message)))
   {
     return false;
   }
@@ -295,6 +352,14 @@ auto_suture_interfaces__srv__FindGraspPosition_Response__copy(
   // grasp_pose
   if (!geometry_msgs__msg__PoseStamped__copy(
       &(input->grasp_pose), &(output->grasp_pose)))
+  {
+    return false;
+  }
+  // success
+  output->success = input->success;
+  // message
+  if (!rosidl_runtime_c__String__copy(
+      &(input->message), &(output->message)))
   {
     return false;
   }

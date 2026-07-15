@@ -66,7 +66,7 @@ include CMakeFiles/auto_suture_interfaces.dir/compiler_depend.make
 # Include the progress variables for this target.
 include CMakeFiles/auto_suture_interfaces.dir/progress.make
 
-CMakeFiles/auto_suture_interfaces: /home/jazmin/auto_suture/src/auto_suture_interfaces/srv/FindGraspPosition.srv
+CMakeFiles/auto_suture_interfaces: /home/jazmin/auto_suture/src/auto_suture_interfaces/srv/FindGraspPose.srv
 CMakeFiles/auto_suture_interfaces: /opt/ros/jazzy/share/geometry_msgs/msg/Accel.idl
 CMakeFiles/auto_suture_interfaces: /opt/ros/jazzy/share/geometry_msgs/msg/AccelStamped.idl
 CMakeFiles/auto_suture_interfaces: /opt/ros/jazzy/share/geometry_msgs/msg/AccelWithCovariance.idl

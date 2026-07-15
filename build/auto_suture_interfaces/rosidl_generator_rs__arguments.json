@@ -3,10 +3,10 @@
   "output_dir": "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_rs/auto_suture_interfaces",
   "template_dir": "/opt/ros/jazzy/share/rosidl_generator_rs/cmake/../resource",
   "idl_tuples": [
-    "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces:srv/FindGraspPosition.idl"
+    "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces:srv/FindGraspPose.idl"
   ],
   "ros_interface_files": [
-    "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces/srv/FindGraspPosition.idl"
+    "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces/srv/FindGraspPose.idl"
   ],
   "ros_interface_dependencies": [
     "geometry_msgs:/opt/ros/jazzy/share/geometry_msgs/msg/Accel.idl",
@@ -89,8 +89,8 @@
     "/opt/ros/jazzy/share/rosidl_generator_rs/cmake/../resource/templates/msg_rmw.rs.em",
     "/opt/ros/jazzy/share/rosidl_generator_rs/cmake/../resource/templates/srv_idiomatic.rs.em",
     "/opt/ros/jazzy/share/rosidl_generator_rs/cmake/../resource/templates/srv_rmw.rs.em",
-    "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces/srv/FindGraspPosition.idl",
-    "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces/srv/FindGraspPosition.idl",
+    "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces/srv/FindGraspPose.idl",
+    "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces/srv/FindGraspPose.idl",
     "/opt/ros/jazzy/share/geometry_msgs/msg/Accel.idl",
     "/opt/ros/jazzy/share/geometry_msgs/msg/AccelStamped.idl",
     "/opt/ros/jazzy/share/geometry_msgs/msg/AccelWithCovariance.idl",

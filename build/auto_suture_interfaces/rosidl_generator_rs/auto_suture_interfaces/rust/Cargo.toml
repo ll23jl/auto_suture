@@ -10,12 +10,12 @@ serde-big-array = { version = "0.5.1", optional = true }
 
 # ROS Dependencies
 std_msgs = "*"
-builtin_interfaces = "*"
-geometry_msgs = "*"
 service_msgs = "*"
+geometry_msgs = "*"
+builtin_interfaces = "*"
 
 [features]
-serde = ['dep:serde', 'dep:serde-big-array', 'rosidl_runtime_rs/serde', 'std_msgs/serde', 'builtin_interfaces/serde', 'geometry_msgs/serde', 'service_msgs/serde']
+serde = ['dep:serde', 'dep:serde-big-array', 'rosidl_runtime_rs/serde', 'std_msgs/serde', 'service_msgs/serde', 'geometry_msgs/serde', 'builtin_interfaces/serde']
 
 [package.metadata.ros-env]
 include = true

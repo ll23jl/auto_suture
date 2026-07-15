@@ -84,8 +84,8 @@ rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: /opt/ros/jazzy/share
 rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: /opt/ros/jazzy/share/rosidl_generator_rs/resource/templates/msg_rmw.rs.em
 rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: /opt/ros/jazzy/share/rosidl_generator_rs/resource/templates/srv_idiomatic.rs.em
 rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: /opt/ros/jazzy/share/rosidl_generator_rs/resource/templates/srv_rmw.rs.em
-rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: rosidl_adapter/auto_suture_interfaces/srv/FindGraspPosition.idl
-rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: rosidl_adapter/auto_suture_interfaces/srv/FindGraspPosition.idl
+rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: rosidl_adapter/auto_suture_interfaces/srv/FindGraspPose.idl
+rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: rosidl_adapter/auto_suture_interfaces/srv/FindGraspPose.idl
 rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: /opt/ros/jazzy/share/geometry_msgs/msg/Accel.idl
 rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: /opt/ros/jazzy/share/geometry_msgs/msg/AccelStamped.idl
 rosidl_generator_rs/auto_suture_interfaces/rust/src/lib.rs: /opt/ros/jazzy/share/geometry_msgs/msg/AccelWithCovariance.idl

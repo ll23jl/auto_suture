@@ -15,8 +15,8 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_c.c" "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
   "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_introspection_c.c" "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
   "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/__init__.py" "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
-  "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position.py" "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
-  "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c" "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
+  "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose.py" "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
+  "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c" "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
   )
 
 

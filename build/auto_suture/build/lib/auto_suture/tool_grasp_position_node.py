@@ -1,51 +1,45 @@
+
+# Node that takes needle pose in the world frame 
+# and calculates the correct pose for the tool to grasp the needle
+# Has multiple configurations depending on which psm is being used (psm1 or psm2) 
+# and which side of the needle is being grasped (grip or tip)
+# -----------------------------------------------------------------------
+
+# Imports
+
 import rclpy
 from rclpy.node import Node
-
 from geometry_msgs.msg import PoseStamped
-from auto_suture_interfaces.srv import FindGraspPosition
-
+from auto_suture_interfaces.srv import FindGraspPose
 from PyKDL import Frame, Rotation, Vector
 
-
-class ToolGraspPosition(Node):
+# Define node
+class ToolGraspPose(Node):
 
     def __init__(self):
-        super().__init__('tool_grasp_position',automatically_declare_parameters_from_overrides=True)
+        super().__init__('tool_grasp_pose',automatically_declare_parameters_from_overrides=True)
 
+        # Initialize variable to store latest needle pose
         self.latest_needle_pose = None
 
-        # Parameters selecting which grasp offset to use
-        self.declare_parameter('psm')
-        self.declare_parameter('grasp_type')
 
-        self.psm = self.get_parameter('psm').value
-        self.grasp_type = self.get_parameter('grasp_type').value
-
-        self.get_logger().info(
-            f"Using offset: {self.psm} {self.grasp_type}"
-        )
-
-
-        # Subscribe to needle position
+        # Subscriber to needle position
         self.subscription = self.create_subscription(
             PoseStamped,
-            '/needle_position',
+            '/needle_pose_in_world_frame',
             self.state_callback,
             10
         )
 
-
         # Service to calculate grasp pose
         self.srv = self.create_service(
-            FindGraspPosition,
-            'find_grasp_position',
-            self.find_grasp_position_callback
+            FindGraspPose,
+            'find_grasp_pose',
+            self.find_grasp_pose_callback
         )
 
 
-    # ---------------------------------------------------------
-    # Store latest needle pose
-    # ---------------------------------------------------------
+    # Callback function for storing the latest needle pose
     def state_callback(self, msg):
 
         self.latest_needle_pose = msg
@@ -58,16 +52,10 @@ class ToolGraspPosition(Node):
         )
 
 
-    # ---------------------------------------------------------
-    # Load grasp offset from YAML parameters
-    # ---------------------------------------------------------
-    def get_grasp_offset(self):
+    # function for choosing the correct grasp offset for scenario
+    def get_grasp_offset(self, psm, grasp_type):
 
-        prefix = (
-            f'grasp_offsets.'
-            f'{self.psm}.'
-            f'{self.grasp_type}'
-        )
+        prefix = f'grasp_offsets.{psm}.{grasp_type}'
 
 
         x = self.get_parameter(
@@ -110,22 +98,27 @@ class ToolGraspPosition(Node):
         )
 
 
-    # ---------------------------------------------------------
-    # Calculate grasp position service callback
-    # ---------------------------------------------------------
-    def find_grasp_position_callback(self, request, response):
+    # Service callback function to calculate grasp position
+    def find_grasp_pose_callback(self, request, response):
 
+        # Check there is actually a pose stored
         if self.latest_needle_pose is None:
 
             self.get_logger().warn(
                 "No needle pose received yet"
             )
 
+            response.success = False
+            response.message = "No needle pose received yet"
+
             return response
 
 
         # Get selected grasp offset
-        offset = self.get_grasp_offset()
+        offset = self.get_grasp_offset(
+            request.psm,
+            request.grasp_type
+        )
 
 
         # Convert needle PoseStamped to PyKDL Frame
@@ -168,8 +161,9 @@ class ToolGraspPosition(Node):
         grasp_pose.pose.orientation.z = qz
         grasp_pose.pose.orientation.w = qw
 
-
         response.grasp_pose = grasp_pose
+        response.success = True
+        response.message = "Grasp pose calculated successfully"
 
         return response
 
@@ -179,7 +173,7 @@ def main(args=None):
 
     rclpy.init(args=args)
 
-    node = ToolGraspPosition()
+    node = ToolGraspPose()
 
     rclpy.spin(node)
 

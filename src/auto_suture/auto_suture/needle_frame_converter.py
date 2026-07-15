@@ -47,7 +47,7 @@ class NeedleFrameConverter(Node):
         # Publisher for needle pose in camera frame
         self.publisher_ = self.create_publisher(
             PoseStamped,
-            '/vision/needle_pose',
+            '/needle_pose_in_camera_frame',
             10
         )
 
@@ -108,14 +108,18 @@ class NeedleFrameConverter(Node):
 
         pose.header.frame_id = "camera"
 
+        pose.header.stamp = self.get_clock().now().to_msg()
+
         pose.pose.position.x = T_needle_camera.p.x()
         pose.pose.position.y = T_needle_camera.p.y()
         pose.pose.position.z = T_needle_camera.p.z()
 
-        pose.pose.orientation.x = T_needle_camera.M.GetQuaternion().x()
-        pose.pose.orientation.y = T_needle_camera.M.GetQuaternion().y()
-        pose.pose.orientation.z = T_needle_camera.M.GetQuaternion().z()
-        pose.pose.orientation.w = T_needle_camera.M.GetQuaternion().w()
+        qx, qy, qz, qw = T_needle_camera.M.GetQuaternion()
+
+        pose.pose.orientation.x = qx
+        pose.pose.orientation.y = qy
+        pose.pose.orientation.z = qz
+        pose.pose.orientation.w = qw
 
         self.publisher_.publish(pose)
 

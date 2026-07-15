@@ -11,10 +11,10 @@ auto_suture_interfaces__srv__FindGraspPosition__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x2e, 0x12, 0xb3, 0x1d, 0xfb, 0x22, 0x47, 0xcb,
-      0x01, 0x72, 0x63, 0x74, 0x0f, 0xe6, 0x56, 0x59,
-      0x09, 0x2b, 0x4a, 0x7f, 0xb7, 0x13, 0x59, 0x8e,
-      0x79, 0xeb, 0x68, 0xd6, 0xe2, 0x3d, 0x37, 0x5e,
+      0x0d, 0xab, 0x60, 0xb0, 0x81, 0x6b, 0xf6, 0xc3,
+      0xfa, 0xb7, 0x20, 0x5a, 0xd6, 0x04, 0x0f, 0x50,
+      0x2c, 0x33, 0xfd, 0x3f, 0x14, 0x62, 0x4d, 0xc0,
+      0xd3, 0x95, 0xc3, 0x1f, 0x67, 0xda, 0xce, 0x1d,
     }};
   return &hash;
 }
@@ -26,10 +26,10 @@ auto_suture_interfaces__srv__FindGraspPosition_Request__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x75, 0xc3, 0x86, 0xf8, 0x42, 0x29, 0x6f, 0x04,
-      0x7f, 0x32, 0x11, 0x17, 0x8d, 0x61, 0x23, 0x6a,
-      0x7b, 0x78, 0x36, 0x14, 0xdb, 0x6f, 0xb8, 0x78,
-      0x8b, 0xfb, 0x7e, 0x25, 0x26, 0xa6, 0x1d, 0x45,
+      0x7c, 0x12, 0x5c, 0x2e, 0x96, 0x10, 0xe6, 0xbc,
+      0x71, 0x66, 0x87, 0xf3, 0xd5, 0x45, 0xd4, 0x3a,
+      0x04, 0x0c, 0x86, 0xe1, 0xdc, 0xac, 0xdc, 0x77,
+      0xc7, 0x1c, 0x7e, 0x32, 0xc5, 0xe8, 0xba, 0x42,
     }};
   return &hash;
 }
@@ -41,10 +41,10 @@ auto_suture_interfaces__srv__FindGraspPosition_Response__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x86, 0xc0, 0x58, 0x8a, 0x88, 0x83, 0xc7, 0x33,
-      0xe1, 0xe2, 0xc7, 0xe4, 0x6d, 0x05, 0x14, 0x41,
-      0x28, 0x6f, 0x4d, 0x1c, 0xa2, 0x5f, 0xda, 0xd4,
-      0xa3, 0xe8, 0x95, 0x42, 0x68, 0xeb, 0x08, 0x4f,
+      0x26, 0xf4, 0x30, 0x36, 0x4c, 0x65, 0x67, 0x41,
+      0x80, 0x91, 0x02, 0x25, 0x8b, 0xfb, 0x56, 0xae,
+      0x79, 0xea, 0xbf, 0x3b, 0xa3, 0x8d, 0x70, 0xcf,
+      0xee, 0x4a, 0x22, 0x15, 0x49, 0xce, 0xb2, 0xc3,
     }};
   return &hash;
 }
@@ -56,10 +56,10 @@ auto_suture_interfaces__srv__FindGraspPosition_Event__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x9a, 0x76, 0x82, 0x19, 0xed, 0x50, 0x97, 0xe6,
-      0x51, 0xc1, 0xdb, 0x00, 0x48, 0xdd, 0xc5, 0x1d,
-      0x04, 0x74, 0x6a, 0x8e, 0x78, 0xfb, 0x87, 0x2b,
-      0x83, 0x20, 0xdd, 0x4c, 0x5e, 0xbb, 0x27, 0x0c,
+      0xa0, 0x97, 0x90, 0x51, 0xbd, 0x08, 0x66, 0x3c,
+      0x63, 0x73, 0x6b, 0xde, 0x7d, 0xf9, 0x2a, 0xc5,
+      0x72, 0x44, 0xdf, 0x55, 0xd4, 0xb0, 0x48, 0xfa,
+      0x12, 0x29, 0xe8, 0x65, 0xd9, 0x85, 0x69, 0xd6,
     }};
   return &hash;
 }
@@ -68,13 +68,13 @@ auto_suture_interfaces__srv__FindGraspPosition_Event__get_type_hash(
 #include <string.h>
 
 // Include directives for referenced types
-#include "geometry_msgs/msg/detail/pose__functions.h"
-#include "service_msgs/msg/detail/service_event_info__functions.h"
 #include "geometry_msgs/msg/detail/point__functions.h"
-#include "geometry_msgs/msg/detail/pose_stamped__functions.h"
-#include "builtin_interfaces/msg/detail/time__functions.h"
 #include "std_msgs/msg/detail/header__functions.h"
 #include "geometry_msgs/msg/detail/quaternion__functions.h"
+#include "geometry_msgs/msg/detail/pose_stamped__functions.h"
+#include "service_msgs/msg/detail/service_event_info__functions.h"
+#include "builtin_interfaces/msg/detail/time__functions.h"
+#include "geometry_msgs/msg/detail/pose__functions.h"
 
 // Hashes for external referenced types
 #ifndef NDEBUG
@@ -251,13 +251,24 @@ auto_suture_interfaces__srv__FindGraspPosition__get_type_description(
   return &description;
 }
 // Define type names, field names, and default values
-static char auto_suture_interfaces__srv__FindGraspPosition_Request__FIELD_NAME__structure_needs_at_least_one_member[] = "structure_needs_at_least_one_member";
+static char auto_suture_interfaces__srv__FindGraspPosition_Request__FIELD_NAME__psm[] = "psm";
+static char auto_suture_interfaces__srv__FindGraspPosition_Request__FIELD_NAME__grasp_type[] = "grasp_type";
 
 static rosidl_runtime_c__type_description__Field auto_suture_interfaces__srv__FindGraspPosition_Request__FIELDS[] = {
   {
-    {auto_suture_interfaces__srv__FindGraspPosition_Request__FIELD_NAME__structure_needs_at_least_one_member, 35, 35},
+    {auto_suture_interfaces__srv__FindGraspPosition_Request__FIELD_NAME__psm, 3, 3},
     {
-      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8,
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING,
+      0,
+      0,
+      {NULL, 0, 0},
+    },
+    {NULL, 0, 0},
+  },
+  {
+    {auto_suture_interfaces__srv__FindGraspPosition_Request__FIELD_NAME__grasp_type, 10, 10},
+    {
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING,
       0,
       0,
       {NULL, 0, 0},
@@ -275,7 +286,7 @@ auto_suture_interfaces__srv__FindGraspPosition_Request__get_type_description(
   static const rosidl_runtime_c__type_description__TypeDescription description = {
     {
       {auto_suture_interfaces__srv__FindGraspPosition_Request__TYPE_NAME, 52, 52},
-      {auto_suture_interfaces__srv__FindGraspPosition_Request__FIELDS, 1, 1},
+      {auto_suture_interfaces__srv__FindGraspPosition_Request__FIELDS, 2, 2},
     },
     {NULL, 0, 0},
   };
@@ -286,6 +297,8 @@ auto_suture_interfaces__srv__FindGraspPosition_Request__get_type_description(
 }
 // Define type names, field names, and default values
 static char auto_suture_interfaces__srv__FindGraspPosition_Response__FIELD_NAME__grasp_pose[] = "grasp_pose";
+static char auto_suture_interfaces__srv__FindGraspPosition_Response__FIELD_NAME__success[] = "success";
+static char auto_suture_interfaces__srv__FindGraspPosition_Response__FIELD_NAME__message[] = "message";
 
 static rosidl_runtime_c__type_description__Field auto_suture_interfaces__srv__FindGraspPosition_Response__FIELDS[] = {
   {
@@ -295,6 +308,26 @@ static rosidl_runtime_c__type_description__Field auto_suture_interfaces__srv__Fi
       0,
       0,
       {geometry_msgs__msg__PoseStamped__TYPE_NAME, 29, 29},
+    },
+    {NULL, 0, 0},
+  },
+  {
+    {auto_suture_interfaces__srv__FindGraspPosition_Response__FIELD_NAME__success, 7, 7},
+    {
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN,
+      0,
+      0,
+      {NULL, 0, 0},
+    },
+    {NULL, 0, 0},
+  },
+  {
+    {auto_suture_interfaces__srv__FindGraspPosition_Response__FIELD_NAME__message, 7, 7},
+    {
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING,
+      0,
+      0,
+      {NULL, 0, 0},
     },
     {NULL, 0, 0},
   },
@@ -336,7 +369,7 @@ auto_suture_interfaces__srv__FindGraspPosition_Response__get_type_description(
   static const rosidl_runtime_c__type_description__TypeDescription description = {
     {
       {auto_suture_interfaces__srv__FindGraspPosition_Response__TYPE_NAME, 53, 53},
-      {auto_suture_interfaces__srv__FindGraspPosition_Response__FIELDS, 1, 1},
+      {auto_suture_interfaces__srv__FindGraspPosition_Response__FIELDS, 3, 3},
     },
     {auto_suture_interfaces__srv__FindGraspPosition_Response__REFERENCED_TYPE_DESCRIPTIONS, 6, 6},
   };
@@ -470,8 +503,12 @@ auto_suture_interfaces__srv__FindGraspPosition_Event__get_type_description(
 }
 
 static char toplevel_type_raw_source[] =
+  "string psm\n"
+  "string grasp_type\n"
   "---\n"
-  "geometry_msgs/PoseStamped grasp_pose";
+  "geometry_msgs/PoseStamped grasp_pose\n"
+  "bool success\n"
+  "string message";
 
 static char srv_encoding[] = "srv";
 static char implicit_encoding[] = "implicit";
@@ -486,7 +523,7 @@ auto_suture_interfaces__srv__FindGraspPosition__get_individual_type_description_
   static const rosidl_runtime_c__type_description__TypeSource source = {
     {auto_suture_interfaces__srv__FindGraspPosition__TYPE_NAME, 44, 44},
     {srv_encoding, 3, 3},
-    {toplevel_type_raw_source, 40, 40},
+    {toplevel_type_raw_source, 97, 97},
   };
   return &source;
 }

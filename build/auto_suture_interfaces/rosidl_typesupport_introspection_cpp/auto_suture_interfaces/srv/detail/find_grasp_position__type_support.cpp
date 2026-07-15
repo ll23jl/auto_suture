@@ -38,17 +38,35 @@ void FindGraspPosition_Request_fini_function(void * message_memory)
   typed_message->~FindGraspPosition_Request();
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPosition_Request_message_member_array[1] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPosition_Request_message_member_array[2] = {
   {
-    "structure_needs_at_least_one_member",  // name
-    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_UINT8,  // type
+    "psm",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_STRING,  // type
     0,  // upper bound of string
     nullptr,  // members of sub message
     false,  // is key
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(auto_suture_interfaces::srv::FindGraspPosition_Request, structure_needs_at_least_one_member),  // bytes offset in struct
+    offsetof(auto_suture_interfaces::srv::FindGraspPosition_Request, psm),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
+    "grasp_type",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_STRING,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    false,  // is key
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(auto_suture_interfaces::srv::FindGraspPosition_Request, grasp_type),  // bytes offset in struct
     nullptr,  // default value
     nullptr,  // size() function pointer
     nullptr,  // get_const(index) function pointer
@@ -62,7 +80,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPosi
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers FindGraspPosition_Request_message_members = {
   "auto_suture_interfaces::srv",  // message namespace
   "FindGraspPosition_Request",  // message name
-  1,  // number of fields
+  2,  // number of fields
   sizeof(auto_suture_interfaces::srv::FindGraspPosition_Request),
   false,  // has_any_key_member_
   FindGraspPosition_Request_message_member_array,  // message members
@@ -164,7 +182,7 @@ void FindGraspPosition_Response_fini_function(void * message_memory)
   typed_message->~FindGraspPosition_Response();
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPosition_Response_message_member_array[1] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPosition_Response_message_member_array[3] = {
   {
     "grasp_pose",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
@@ -182,13 +200,49 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPosi
     nullptr,  // fetch(index, &value) function pointer
     nullptr,  // assign(index, value) function pointer
     nullptr  // resize(index) function pointer
+  },
+  {
+    "success",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_BOOLEAN,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    false,  // is key
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(auto_suture_interfaces::srv::FindGraspPosition_Response, success),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
+    "message",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_STRING,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    false,  // is key
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(auto_suture_interfaces::srv::FindGraspPosition_Response, message),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
   }
 };
 
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers FindGraspPosition_Response_message_members = {
   "auto_suture_interfaces::srv",  // message namespace
   "FindGraspPosition_Response",  // message name
-  1,  // number of fields
+  3,  // number of fields
   sizeof(auto_suture_interfaces::srv::FindGraspPosition_Response),
   false,  // has_any_key_member_
   FindGraspPosition_Response_message_member_array,  // message members

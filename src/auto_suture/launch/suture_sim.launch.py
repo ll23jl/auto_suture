@@ -1,6 +1,8 @@
 from launch import LaunchDescription
 from launch.actions import ExecuteProcess, TimerAction
 from launch_ros.actions import Node
+from ament_index_python.packages import get_package_share_directory
+
 import os
 
 
@@ -55,18 +57,21 @@ def generate_launch_description():
         output="screen"
     )
 
-    # Tool grasp position node
-    tool_grasp_position = Node(
+    pkg_path = get_package_share_directory('auto_suture')
+
+    grasp_config = os.path.join(
+        pkg_path,
+        'config',
+        'grasp_offsets.yaml'
+    )
+
+
+    # Tool grasp pose node
+    tool_grasp_pose = Node(
         package="auto_suture",
-        executable="tool_grasp_position",
-        name="tool_grasp_position",
-        parameters=[
-            'config/grasp_offsets.yaml',
-            {
-                'psm': 'psm1',
-                'grasp_type': 'grip'
-            }
-        ],
+        executable="tool_grasp_pose",
+        name="tool_grasp_pose",
+        parameters=[grasp_config],
         output="screen"
     )
     
@@ -74,6 +79,7 @@ def generate_launch_description():
     return LaunchDescription([
         simulation,
         crtk,
+        needle_frame_converter,
         needle_position,
-        tool_grasp_position
+        tool_grasp_pose
     ])

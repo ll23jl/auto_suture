@@ -27,17 +27,45 @@ inline void to_flow_style_yaml(
   const FindGraspPosition_Request & msg,
   std::ostream & out)
 {
-  (void)msg;
-  out << "null";
+  out << "{";
+  // member: psm
+  {
+    out << "psm: ";
+    rosidl_generator_traits::value_to_yaml(msg.psm, out);
+    out << ", ";
+  }
+
+  // member: grasp_type
+  {
+    out << "grasp_type: ";
+    rosidl_generator_traits::value_to_yaml(msg.grasp_type, out);
+  }
+  out << "}";
 }  // NOLINT(readability/fn_size)
 
 inline void to_block_style_yaml(
   const FindGraspPosition_Request & msg,
   std::ostream & out, size_t indentation = 0)
 {
-  (void)msg;
-  (void)indentation;
-  out << "null\n";
+  // member: psm
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "psm: ";
+    rosidl_generator_traits::value_to_yaml(msg.psm, out);
+    out << "\n";
+  }
+
+  // member: grasp_type
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "grasp_type: ";
+    rosidl_generator_traits::value_to_yaml(msg.grasp_type, out);
+    out << "\n";
+  }
 }  // NOLINT(readability/fn_size)
 
 inline std::string to_yaml(const FindGraspPosition_Request & msg, bool use_flow_style = false)
@@ -86,11 +114,11 @@ inline const char * name<auto_suture_interfaces::srv::FindGraspPosition_Request>
 
 template<>
 struct has_fixed_size<auto_suture_interfaces::srv::FindGraspPosition_Request>
-  : std::integral_constant<bool, true> {};
+  : std::integral_constant<bool, false> {};
 
 template<>
 struct has_bounded_size<auto_suture_interfaces::srv::FindGraspPosition_Request>
-  : std::integral_constant<bool, true> {};
+  : std::integral_constant<bool, false> {};
 
 template<>
 struct is_message<auto_suture_interfaces::srv::FindGraspPosition_Request>
@@ -117,6 +145,20 @@ inline void to_flow_style_yaml(
   {
     out << "grasp_pose: ";
     to_flow_style_yaml(msg.grasp_pose, out);
+    out << ", ";
+  }
+
+  // member: success
+  {
+    out << "success: ";
+    rosidl_generator_traits::value_to_yaml(msg.success, out);
+    out << ", ";
+  }
+
+  // member: message
+  {
+    out << "message: ";
+    rosidl_generator_traits::value_to_yaml(msg.message, out);
   }
   out << "}";
 }  // NOLINT(readability/fn_size)
@@ -132,6 +174,26 @@ inline void to_block_style_yaml(
     }
     out << "grasp_pose:\n";
     to_block_style_yaml(msg.grasp_pose, out, indentation + 2);
+  }
+
+  // member: success
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "success: ";
+    rosidl_generator_traits::value_to_yaml(msg.success, out);
+    out << "\n";
+  }
+
+  // member: message
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "message: ";
+    rosidl_generator_traits::value_to_yaml(msg.message, out);
+    out << "\n";
   }
 }  // NOLINT(readability/fn_size)
 
@@ -181,11 +243,11 @@ inline const char * name<auto_suture_interfaces::srv::FindGraspPosition_Response
 
 template<>
 struct has_fixed_size<auto_suture_interfaces::srv::FindGraspPosition_Response>
-  : std::integral_constant<bool, has_fixed_size<geometry_msgs::msg::PoseStamped>::value> {};
+  : std::integral_constant<bool, false> {};
 
 template<>
 struct has_bounded_size<auto_suture_interfaces::srv::FindGraspPosition_Response>
-  : std::integral_constant<bool, has_bounded_size<geometry_msgs::msg::PoseStamped>::value> {};
+  : std::integral_constant<bool, false> {};
 
 template<>
 struct is_message<auto_suture_interfaces::srv::FindGraspPosition_Response>

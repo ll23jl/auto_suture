@@ -5,4 +5,5 @@ auto_suture_interfaces.egg-info/SOURCES.txt
 auto_suture_interfaces.egg-info/dependency_links.txt
 auto_suture_interfaces.egg-info/top_level.txt
 auto_suture_interfaces/srv/__init__.py
+auto_suture_interfaces/srv/_find_grasp_pose.py
 auto_suture_interfaces/srv/_find_grasp_position.py

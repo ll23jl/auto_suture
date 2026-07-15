@@ -81,6 +81,7 @@ CMakeFiles/auto_suture_interfaces__rosidl_typesupport_introspection_c.dir/rosidl
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/detail/point__struct.h \
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__struct.h \
  /opt/ros/jazzy/include/service_msgs/service_msgs/msg/detail/service_event_info__struct.h \
+ /opt/ros/jazzy/include/rosidl_runtime_c/rosidl_runtime_c/string_functions.h \
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/pose_stamped.h \
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/detail/pose_stamped__functions.h \
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/rosidl_generator_c__visibility_control.h \

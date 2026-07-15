@@ -12,6 +12,26 @@
             "nested_type_name": "geometry_msgs/msg/PoseStamped"
           },
           "default_value": ""
+        },
+        {
+          "name": "success",
+          "type": {
+            "type_id": 15,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "message",
+          "type": {
+            "type_id": 17,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
         }
       ]
     },
@@ -201,7 +221,7 @@
   "type_hashes": [
     {
       "type_name": "auto_suture_interfaces/srv/FindGraspPosition_Response",
-      "hash_string": "RIHS01_86c0588a8883c733e1e2c7e46d051441286f4d1ca25fdad4a3e8954268eb084f"
+      "hash_string": "RIHS01_26f430364c656741809102258bfb56ae79eabf3ba38d70cfee4a221549ceb2c3"
     },
     {
       "type_name": "builtin_interfaces/msg/Time",

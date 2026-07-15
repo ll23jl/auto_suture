@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/auto_suture_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.c.o"
-  "CMakeFiles/auto_suture_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.c.o.d"
+  "CMakeFiles/auto_suture_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_pose__type_support.c.o"
+  "CMakeFiles/auto_suture_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_pose__type_support.c.o.d"
   "libauto_suture_interfaces__rosidl_typesupport_introspection_c.pdb"
   "libauto_suture_interfaces__rosidl_typesupport_introspection_c.so"
-  "rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_position__rosidl_typesupport_introspection_c.h"
-  "rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.c"
+  "rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_pose__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_pose__type_support.c"
 )
 
 # Per-language clean rules from dependency scanning.

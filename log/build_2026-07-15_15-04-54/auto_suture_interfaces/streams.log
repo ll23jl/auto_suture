@@ -1,0 +1,230 @@
+[0.011s] Invoking command in '/home/jazmin/auto_suture/build/auto_suture_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jazmin/auto_suture/install/auto_suture:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jazmin/auto_suture/build/auto_suture_interfaces -- -j16 -l16
+[0.037s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.117s] -- Found rosidl_default_generators: 1.6.1 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)
+[0.120s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.145s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.167s] -- Found rosidl_adapter: 4.6.9 (/opt/ros/jazzy/share/rosidl_adapter/cmake)
+[0.169s] -- Found geometry_msgs: 5.3.8 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[0.401s] -- Found ament_cmake_ros: 0.12.1 (/opt/ros/jazzy/share/ament_cmake_ros/cmake)
+[0.527s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.702s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.705s] -- Found python_cmake_module: 0.11.1 (/opt/ros/jazzy/share/python_cmake_module/cmake)
+[0.881s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed 
+[0.940s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.941s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[0.951s] -- Added test 'lint_cmake' to check CMake code style
+[0.952s] -- Added test 'xmllint' to check XML markup files
+[0.953s] -- Configuring done (0.9s)
+[0.979s] -- Generating done (0.0s)
+[0.987s] -- Build files have been written to: /home/jazmin/auto_suture/build/auto_suture_interfaces
+[1.031s] [  2%] [34m[1mGenerating type hashes for ROS interfaces[0m
+[1.035s] [  5%] [34m[1mGenerating Rust code for ROS interfaces[0m
+[1.046s] [  5%] Built target ament_cmake_python_copy_auto_suture_interfaces
+[1.187s] [  5%] Built target auto_suture_interfaces__rosidl_generator_type_description
+[1.216s] [  8%] [34m[1mGenerating C code for ROS interfaces[0m
+[1.243s] [  8%] Built target auto_suture_interfaces__rs
+[1.244s] [ 11%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[1.245s] running egg_info
+[1.265s] writing auto_suture_interfaces.egg-info/PKG-INFO
+[1.265s] writing dependency_links to auto_suture_interfaces.egg-info/dependency_links.txt
+[1.265s] writing top-level names to auto_suture_interfaces.egg-info/top_level.txt
+[1.325s] reading manifest file 'auto_suture_interfaces.egg-info/SOURCES.txt'
+[1.325s] writing manifest file 'auto_suture_interfaces.egg-info/SOURCES.txt'
+[1.348s] [ 11%] Built target ament_cmake_python_build_auto_suture_interfaces_egg
+[1.467s] [ 11%] Built target auto_suture_interfaces__cpp
+[1.495s] [ 14%] [32mBuilding C object CMakeFiles/auto_suture_interfaces__rosidl_generator_c.dir/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_position__description.c.o[0m
+[1.495s] [ 17%] [32mBuilding C object CMakeFiles/auto_suture_interfaces__rosidl_generator_c.dir/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_position__functions.c.o[0m
+[1.496s] [ 20%] [32mBuilding C object CMakeFiles/auto_suture_interfaces__rosidl_generator_c.dir/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.c.o[0m
+[1.581s] [ 22%] [32m[1mLinking C shared library libauto_suture_interfaces__rosidl_generator_c.so[0m
+[1.622s] [ 22%] Built target auto_suture_interfaces__rosidl_generator_c
+[1.632s] [ 40%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[1.632s] [ 40%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[1.632s] [ 40%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.633s] [ 40%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[1.633s] [ 40%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[1.634s] [ 40%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.829s] [ 45%] [32mBuilding CXX object CMakeFiles/auto_suture_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/auto_suture_interfaces/srv/find_grasp_position__type_support.cpp.o[0m
+[1.829s] [ 45%] [32mBuilding CXX object CMakeFiles/auto_suture_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/auto_suture_interfaces/srv/find_grasp_position__type_support.cpp.o[0m
+[1.861s] [ 51%] [32mBuilding C object CMakeFiles/auto_suture_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.c.o[0m
+[1.861s] [ 51%] [32mBuilding CXX object CMakeFiles/auto_suture_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.cpp.o[0m
+[1.880s] [ 54%] [32mBuilding CXX object CMakeFiles/auto_suture_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/auto_suture_interfaces/srv/detail/dds_fastrtps/find_grasp_position__type_support.cpp.o[0m
+[1.888s] [ 57%] [32m[1mLinking CXX shared library libauto_suture_interfaces__rosidl_typesupport_c.so[0m
+[1.889s] [ 60%] [32mBuilding CXX object CMakeFiles/auto_suture_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/auto_suture_interfaces/srv/detail/find_grasp_position__type_support_c.cpp.o[0m
+[1.898s] [ 62%] [32m[1mLinking C shared library libauto_suture_interfaces__rosidl_typesupport_introspection_c.so[0m
+[1.934s] [ 62%] Built target auto_suture_interfaces__rosidl_typesupport_c
+[1.935s] [ 62%] Built target auto_suture_interfaces__rosidl_typesupport_introspection_c
+[2.256s] [ 65%] [32m[1mLinking CXX shared library libauto_suture_interfaces__rosidl_typesupport_cpp.so[0m
+[2.303s] [ 68%] [32m[1mLinking CXX shared library libauto_suture_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[2.348s] [ 68%] Built target auto_suture_interfaces__rosidl_typesupport_cpp
+[2.385s] [ 68%] Built target auto_suture_interfaces__rosidl_typesupport_introspection_cpp
+[2.396s] [ 71%] [32m[1mLinking CXX shared library libauto_suture_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[2.476s] [ 71%] Built target auto_suture_interfaces__rosidl_typesupport_fastrtps_c
+[2.487s] [ 74%] [32m[1mLinking CXX shared library libauto_suture_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[2.545s] [ 74%] Built target auto_suture_interfaces__rosidl_typesupport_fastrtps_cpp
+[2.563s] [ 74%] Built target auto_suture_interfaces
+[2.581s] [ 77%] [34m[1mGenerating Python code for ROS interfaces[0m
+[2.810s] [ 77%] Built target auto_suture_interfaces__py
+[2.834s] [ 80%] [32mBuilding C object CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o[0m
+[2.949s] [ 82%] [32m[1mLinking C shared library libauto_suture_interfaces__rosidl_generator_py.so[0m
+[2.990s] [ 82%] Built target auto_suture_interfaces__rosidl_generator_py
+[3.020s] [ 91%] [32mBuilding C object CMakeFiles/auto_suture_interfaces_s__rosidl_typesupport_introspection_c.dir/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[3.020s] [ 91%] [32mBuilding C object CMakeFiles/auto_suture_interfaces_s__rosidl_typesupport_c.dir/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[3.020s] [ 91%] [32mBuilding C object CMakeFiles/auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c.dir/rosidl_generator_py/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[3.132s] [ 94%] [32m[1mLinking C shared module rosidl_generator_py/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_c.so[0m
+[3.142s] [ 97%] [32m[1mLinking C shared module rosidl_generator_py/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_introspection_c.so[0m
+[3.145s] [100%] [32m[1mLinking C shared module rosidl_generator_py/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c.so[0m
+[3.178s] [100%] Built target auto_suture_interfaces_s__rosidl_typesupport_c
+[3.180s] [100%] Built target auto_suture_interfaces_s__rosidl_typesupport_introspection_c
+[3.181s] [100%] Built target auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c
+[3.193s] Invoked command in '/home/jazmin/auto_suture/build/auto_suture_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jazmin/auto_suture/install/auto_suture:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jazmin/auto_suture/build/auto_suture_interfaces -- -j16 -l16
+[3.201s] Invoking command in '/home/jazmin/auto_suture/build/auto_suture_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jazmin/auto_suture/install/auto_suture:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jazmin/auto_suture/build/auto_suture_interfaces
+[3.211s] -- Install configuration: ""
+[3.211s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/rosidl_interfaces/auto_suture_interfaces
+[3.211s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/srv/FindGraspPosition.json
+[3.211s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces
+[3.211s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv
+[3.211s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail
+[3.211s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__description.c
+[3.211s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__functions.c
+[3.212s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__struct.h
+[3.212s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.h
+[3.212s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.c
+[3.212s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__functions.h
+[3.212s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/find_grasp_position.h
+[3.212s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg
+[3.212s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg/rosidl_generator_c__visibility_control.h
+[3.212s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/library_path.sh
+[3.212s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/library_path.dsv
+[3.213s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_generator_c.so
+[3.213s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_generator_c.so" to ""
+[3.213s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces
+[3.213s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv
+[3.213s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail
+[3.213s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__rosidl_typesupport_fastrtps_c.h
+[3.213s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg
+[3.213s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[3.214s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_fastrtps_c.so
+[3.214s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[3.214s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces
+[3.214s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv
+[3.214s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail
+[3.214s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__rosidl_typesupport_introspection_c.h
+[3.214s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.c
+[3.214s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg
+[3.215s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[3.215s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_introspection_c.so
+[3.215s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[3.215s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_c.so
+[3.215s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_c.so" to ""
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail
+[3.216s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.hpp
+[3.216s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__traits.hpp
+[3.216s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__builder.hpp
+[3.216s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__struct.hpp
+[3.216s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/find_grasp_position.hpp
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg
+[3.216s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/dds_fastrtps
+[3.216s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__rosidl_typesupport_fastrtps_cpp.hpp
+[3.216s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg
+[3.217s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[3.217s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[3.217s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[3.217s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces
+[3.217s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv
+[3.217s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail
+[3.217s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__rosidl_typesupport_introspection_cpp.hpp
+[3.217s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/include/auto_suture_interfaces/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.cpp
+[3.218s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_introspection_cpp.so
+[3.218s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[3.218s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_cpp.so
+[3.218s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_typesupport_cpp.so" to ""
+[3.219s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/pythonpath.sh
+[3.219s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/pythonpath.dsv
+[3.219s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces-0.0.0-py3.12.egg-info
+[3.219s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces-0.0.0-py3.12.egg-info/dependency_links.txt
+[3.219s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces-0.0.0-py3.12.egg-info/PKG-INFO
+[3.219s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces-0.0.0-py3.12.egg-info/top_level.txt
+[3.219s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces-0.0.0-py3.12.egg-info/SOURCES.txt
+[3.219s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces
+[3.219s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/srv
+[3.219s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/srv/_find_grasp_position_s.c
+[3.219s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/srv/__init__.py
+[3.219s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/srv/_find_grasp_position.py
+[3.219s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_introspection_c.so
+[3.220s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/__init__.py
+[3.220s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[3.220s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_c.c
+[3.220s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/_auto_suture_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[3.220s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_c.so
+[3.220s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c.so
+[3.246s] Listing '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces'...
+[3.246s] Compiling '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/__init__.py'...
+[3.246s] Listing '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/srv'...
+[3.246s] Compiling '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/srv/__init__.py'...
+[3.247s] Compiling '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/srv/_find_grasp_position.py'...
+[3.250s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c.so
+[3.250s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c.so" to ""
+[3.251s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_introspection_c.so
+[3.251s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_introspection_c.so" to ""
+[3.251s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_c.so
+[3.252s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages/auto_suture_interfaces/auto_suture_interfaces_s__rosidl_typesupport_c.so" to ""
+[3.252s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_generator_py.so
+[3.252s] -- Set non-toolchain portion of runtime path of "/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/libauto_suture_interfaces__rosidl_generator_py.so" to ""
+[3.253s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/rust_packages/auto_suture_interfaces
+[3.253s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/rust
+[3.253s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/rust/build.rs
+[3.253s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/rust/src
+[3.253s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/rust/src/srv
+[3.253s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/rust/src/srv/rmw.rs
+[3.253s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/rust/src/srv.rs
+[3.253s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/rust/src/lib.rs
+[3.253s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/rust/Cargo.toml
+[3.253s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/srv/FindGraspPosition.idl
+[3.254s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/srv/FindGraspPosition.srv
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/package_run_dependencies/auto_suture_interfaces
+[3.254s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/parent_prefix_path/auto_suture_interfaces
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/ament_prefix_path.sh
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/ament_prefix_path.dsv
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/path.sh
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/environment/path.dsv
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.bash
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.sh
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.zsh
+[3.254s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/local_setup.dsv
+[3.255s] -- Installing: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.dsv
+[3.256s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/ament_index/resource_index/packages/auto_suture_interfaces
+[3.257s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_generator_cExport.cmake
+[3.257s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_generator_cExport-noconfig.cmake
+[3.258s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[3.259s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[3.259s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[3.259s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[3.260s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfaces__rosidl_typesupport_cExport.cmake
+[3.260s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[3.261s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_generator_cppExport.cmake
+[3.261s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[3.262s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[3.262s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[3.263s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[3.263s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfaces__rosidl_typesupport_cppExport.cmake
+[3.263s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[3.264s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_generator_pyExport.cmake
+[3.264s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/export_auto_suture_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/rosidl_cmake-extras.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/rosidl_cmake_aggregate_target-extras.cmake
+[3.265s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfacesConfig.cmake
+[3.266s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/cmake/auto_suture_interfacesConfig-version.cmake
+[3.266s] -- Up-to-date: /home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.xml
+[3.268s] Invoked command in '/home/jazmin/auto_suture/build/auto_suture_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jazmin/auto_suture/install/auto_suture:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jazmin/auto_suture/build/auto_suture_interfaces

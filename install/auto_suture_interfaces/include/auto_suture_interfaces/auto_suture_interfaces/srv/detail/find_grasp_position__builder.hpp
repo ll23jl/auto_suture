@@ -21,6 +21,42 @@ namespace auto_suture_interfaces
 namespace srv
 {
 
+namespace builder
+{
+
+class Init_FindGraspPosition_Request_grasp_type
+{
+public:
+  explicit Init_FindGraspPosition_Request_grasp_type(::auto_suture_interfaces::srv::FindGraspPosition_Request & msg)
+  : msg_(msg)
+  {}
+  ::auto_suture_interfaces::srv::FindGraspPosition_Request grasp_type(::auto_suture_interfaces::srv::FindGraspPosition_Request::_grasp_type_type arg)
+  {
+    msg_.grasp_type = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::auto_suture_interfaces::srv::FindGraspPosition_Request msg_;
+};
+
+class Init_FindGraspPosition_Request_psm
+{
+public:
+  Init_FindGraspPosition_Request_psm()
+  : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
+  {}
+  Init_FindGraspPosition_Request_grasp_type psm(::auto_suture_interfaces::srv::FindGraspPosition_Request::_psm_type arg)
+  {
+    msg_.psm = std::move(arg);
+    return Init_FindGraspPosition_Request_grasp_type(msg_);
+  }
+
+private:
+  ::auto_suture_interfaces::srv::FindGraspPosition_Request msg_;
+};
+
+}  // namespace builder
 
 }  // namespace srv
 
@@ -31,7 +67,7 @@ template<>
 inline
 auto build<::auto_suture_interfaces::srv::FindGraspPosition_Request>()
 {
-  return ::auto_suture_interfaces::srv::FindGraspPosition_Request(rosidl_runtime_cpp::MessageInitialization::ZERO);
+  return auto_suture_interfaces::srv::builder::Init_FindGraspPosition_Request_psm();
 }
 
 }  // namespace auto_suture_interfaces
@@ -46,16 +82,48 @@ namespace srv
 namespace builder
 {
 
+class Init_FindGraspPosition_Response_message
+{
+public:
+  explicit Init_FindGraspPosition_Response_message(::auto_suture_interfaces::srv::FindGraspPosition_Response & msg)
+  : msg_(msg)
+  {}
+  ::auto_suture_interfaces::srv::FindGraspPosition_Response message(::auto_suture_interfaces::srv::FindGraspPosition_Response::_message_type arg)
+  {
+    msg_.message = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::auto_suture_interfaces::srv::FindGraspPosition_Response msg_;
+};
+
+class Init_FindGraspPosition_Response_success
+{
+public:
+  explicit Init_FindGraspPosition_Response_success(::auto_suture_interfaces::srv::FindGraspPosition_Response & msg)
+  : msg_(msg)
+  {}
+  Init_FindGraspPosition_Response_message success(::auto_suture_interfaces::srv::FindGraspPosition_Response::_success_type arg)
+  {
+    msg_.success = std::move(arg);
+    return Init_FindGraspPosition_Response_message(msg_);
+  }
+
+private:
+  ::auto_suture_interfaces::srv::FindGraspPosition_Response msg_;
+};
+
 class Init_FindGraspPosition_Response_grasp_pose
 {
 public:
   Init_FindGraspPosition_Response_grasp_pose()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  ::auto_suture_interfaces::srv::FindGraspPosition_Response grasp_pose(::auto_suture_interfaces::srv::FindGraspPosition_Response::_grasp_pose_type arg)
+  Init_FindGraspPosition_Response_success grasp_pose(::auto_suture_interfaces::srv::FindGraspPosition_Response::_grasp_pose_type arg)
   {
     msg_.grasp_pose = std::move(arg);
-    return std::move(msg_);
+    return Init_FindGraspPosition_Response_success(msg_);
   }
 
 private:

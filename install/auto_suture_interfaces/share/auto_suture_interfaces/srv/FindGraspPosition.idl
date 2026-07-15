@@ -7,10 +7,16 @@
 module auto_suture_interfaces {
   module srv {
     struct FindGraspPosition_Request {
-      uint8 structure_needs_at_least_one_member;
+      string psm;
+
+      string grasp_type;
     };
     struct FindGraspPosition_Response {
       geometry_msgs::msg::PoseStamped grasp_pose;
+
+      boolean success;
+
+      string message;
     };
   };
 };

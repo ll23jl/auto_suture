@@ -229,9 +229,9 @@ CMakeFiles/auto_suture_interfaces_s__rosidl_typesupport_introspection_c.dir/rosi
  /opt/ros/jazzy/include/rosidl_typesupport_interface/rosidl_typesupport_interface/macros.h \
  /opt/ros/jazzy/include/rosidl_runtime_c/rosidl_runtime_c/service_type_support_struct.h \
  /opt/ros/jazzy/include/rosidl_runtime_c/rosidl_runtime_c/action_type_support_struct.h \
- /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_position__type_support.h \
+ /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_pose__type_support.h \
  /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_c/auto_suture_interfaces/msg/rosidl_generator_c__visibility_control.h \
- /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_position__struct.h \
+ /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_pose__struct.h \
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/detail/pose_stamped__struct.h \
  /opt/ros/jazzy/include/std_msgs/std_msgs/msg/detail/header__struct.h \
  /opt/ros/jazzy/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h \
@@ -239,4 +239,4 @@ CMakeFiles/auto_suture_interfaces_s__rosidl_typesupport_introspection_c.dir/rosi
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/detail/point__struct.h \
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__struct.h \
  /opt/ros/jazzy/include/service_msgs/service_msgs/msg/detail/service_event_info__struct.h \
- /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_position__functions.h
+ /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_c/auto_suture_interfaces/srv/detail/find_grasp_pose__functions.h

@@ -12,7 +12,7 @@ setup.py
 auto_suture/__init__.py
 auto_suture/needle_frame_converter.py
 auto_suture/needle_position_node.py
-auto_suture/tool_grasp_position_node.py
+auto_suture/tool_grasp_pose_node.py
 config/grasp_offsets.yaml
 launch/suture_sim.launch.py
 resource/auto_suture

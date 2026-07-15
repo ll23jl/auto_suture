@@ -4,9 +4,19 @@
       "type_name": "auto_suture_interfaces/srv/FindGraspPosition_Request",
       "fields": [
         {
-          "name": "structure_needs_at_least_one_member",
+          "name": "psm",
           "type": {
-            "type_id": 3,
+            "type_id": 17,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "grasp_type",
+          "type": {
+            "type_id": 17,
             "capacity": 0,
             "string_capacity": 0,
             "nested_type_name": ""
@@ -20,7 +30,7 @@
   "type_hashes": [
     {
       "type_name": "auto_suture_interfaces/srv/FindGraspPosition_Request",
-      "hash_string": "RIHS01_75c386f842296f047f3211178d61236a7b783614db6fb8788bfb7e2526a61d45"
+      "hash_string": "RIHS01_7c125c2e9610e6bc716687f3d545d43a040c86e1dcacdc77c71c7e32c5e8ba42"
     }
   ]
 }

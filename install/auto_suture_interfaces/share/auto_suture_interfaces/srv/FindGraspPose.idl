@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from auto_suture_interfaces/srv/FindGraspPose.srv
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/PoseStamped.idl"
+
+module auto_suture_interfaces {
+  module srv {
+    struct FindGraspPose_Request {
+      string psm;
+
+      string grasp_type;
+    };
+    struct FindGraspPose_Response {
+      geometry_msgs::msg::PoseStamped grasp_pose;
+
+      boolean success;
+
+      string message;
+    };
+  };
+};

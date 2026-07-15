@@ -12,6 +12,8 @@ ros_python_check_fields = getenv('ROS_PYTHON_CHECK_FIELDS', default='')
 
 # Import statements for member types
 
+import builtins  # noqa: E402, I100
+
 import rosidl_parser.definition  # noqa: E402, I100
 
 
@@ -60,15 +62,21 @@ class FindGraspPosition_Request(metaclass=Metaclass_FindGraspPosition_Request):
     """Message class 'FindGraspPosition_Request'."""
 
     __slots__ = [
+        '_psm',
+        '_grasp_type',
         '_check_fields',
     ]
 
     _fields_and_field_types = {
+        'psm': 'string',
+        'grasp_type': 'string',
     }
 
     # This attribute is used to store an rosidl_parser.definition variable
     # related to the data type of each of the components the message.
     SLOT_TYPES = (
+        rosidl_parser.definition.UnboundedString(),  # noqa: E501
+        rosidl_parser.definition.UnboundedString(),  # noqa: E501
     )
 
     def __init__(self, **kwargs):
@@ -80,6 +88,8 @@ class FindGraspPosition_Request(metaclass=Metaclass_FindGraspPosition_Request):
             assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
                 'Invalid arguments passed to constructor: %s' % \
                 ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
+        self.psm = kwargs.get('psm', str())
+        self.grasp_type = kwargs.get('grasp_type', str())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -111,6 +121,10 @@ class FindGraspPosition_Request(metaclass=Metaclass_FindGraspPosition_Request):
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
+        if self.psm != other.psm:
+            return False
+        if self.grasp_type != other.grasp_type:
+            return False
         return True
 
     @classmethod
@@ -118,10 +132,37 @@ class FindGraspPosition_Request(metaclass=Metaclass_FindGraspPosition_Request):
         from copy import copy
         return copy(cls._fields_and_field_types)
 
+    @builtins.property
+    def psm(self):
+        """Message field 'psm'."""
+        return self._psm
+
+    @psm.setter
+    def psm(self, value):
+        if self._check_fields:
+            assert \
+                isinstance(value, str), \
+                "The 'psm' field must be of type 'str'"
+        self._psm = value
+
+    @builtins.property
+    def grasp_type(self):
+        """Message field 'grasp_type'."""
+        return self._grasp_type
+
+    @grasp_type.setter
+    def grasp_type(self, value):
+        if self._check_fields:
+            assert \
+                isinstance(value, str), \
+                "The 'grasp_type' field must be of type 'str'"
+        self._grasp_type = value
+
 
 # Import statements for member types
 
-import builtins  # noqa: E402, I100
+# already imported above
+# import builtins
 
 # already imported above
 # import rosidl_parser.definition
@@ -177,17 +218,23 @@ class FindGraspPosition_Response(metaclass=Metaclass_FindGraspPosition_Response)
 
     __slots__ = [
         '_grasp_pose',
+        '_success',
+        '_message',
         '_check_fields',
     ]
 
     _fields_and_field_types = {
         'grasp_pose': 'geometry_msgs/PoseStamped',
+        'success': 'boolean',
+        'message': 'string',
     }
 
     # This attribute is used to store an rosidl_parser.definition variable
     # related to the data type of each of the components the message.
     SLOT_TYPES = (
         rosidl_parser.definition.NamespacedType(['geometry_msgs', 'msg'], 'PoseStamped'),  # noqa: E501
+        rosidl_parser.definition.BasicType('boolean'),  # noqa: E501
+        rosidl_parser.definition.UnboundedString(),  # noqa: E501
     )
 
     def __init__(self, **kwargs):
@@ -201,6 +248,8 @@ class FindGraspPosition_Response(metaclass=Metaclass_FindGraspPosition_Response)
                 ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
         from geometry_msgs.msg import PoseStamped
         self.grasp_pose = kwargs.get('grasp_pose', PoseStamped())
+        self.success = kwargs.get('success', bool())
+        self.message = kwargs.get('message', str())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -234,6 +283,10 @@ class FindGraspPosition_Response(metaclass=Metaclass_FindGraspPosition_Response)
             return False
         if self.grasp_pose != other.grasp_pose:
             return False
+        if self.success != other.success:
+            return False
+        if self.message != other.message:
+            return False
         return True
 
     @classmethod
@@ -254,6 +307,32 @@ class FindGraspPosition_Response(metaclass=Metaclass_FindGraspPosition_Response)
                 isinstance(value, PoseStamped), \
                 "The 'grasp_pose' field must be a sub message of type 'PoseStamped'"
         self._grasp_pose = value
+
+    @builtins.property
+    def success(self):
+        """Message field 'success'."""
+        return self._success
+
+    @success.setter
+    def success(self, value):
+        if self._check_fields:
+            assert \
+                isinstance(value, bool), \
+                "The 'success' field must be of type 'bool'"
+        self._success = value
+
+    @builtins.property
+    def message(self):
+        """Message field 'message'."""
+        return self._message
+
+    @message.setter
+    def message(self, value):
+        if self._check_fields:
+            assert \
+                isinstance(value, str), \
+                "The 'message' field must be of type 'str'"
+        self._message = value
 
 
 # Import statements for member types

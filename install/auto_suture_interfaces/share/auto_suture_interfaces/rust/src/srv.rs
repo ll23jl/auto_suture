@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 
 
-// Corresponds to auto_suture_interfaces__srv__FindGraspPosition_Request
+// Corresponds to auto_suture_interfaces__srv__FindGraspPose_Request
 
 // This struct is not documented.
 #[allow(missing_docs)]
@@ -12,45 +12,53 @@ use serde::{Deserialize, Serialize};
 #[allow(non_camel_case_types)]
 #[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
 #[derive(Clone, Debug, PartialEq, PartialOrd)]
-pub struct FindGraspPosition_Request {
+pub struct FindGraspPose_Request {
 
     // This member is not documented.
     #[allow(missing_docs)]
-    pub structure_needs_at_least_one_member: u8,
+    pub psm: std::string::String,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub grasp_type: std::string::String,
 
 }
 
 
 
-impl Default for FindGraspPosition_Request {
+impl Default for FindGraspPose_Request {
   fn default() -> Self {
-    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::srv::rmw::FindGraspPosition_Request::default())
+    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::srv::rmw::FindGraspPose_Request::default())
   }
 }
 
-impl rosidl_runtime_rs::Message for FindGraspPosition_Request {
-  type RmwMsg = super::srv::rmw::FindGraspPosition_Request;
+impl rosidl_runtime_rs::Message for FindGraspPose_Request {
+  type RmwMsg = super::srv::rmw::FindGraspPose_Request;
 
   fn into_rmw_message(msg_cow: std::borrow::Cow<'_, Self>) -> std::borrow::Cow<'_, Self::RmwMsg> {
     match msg_cow {
       std::borrow::Cow::Owned(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
-        structure_needs_at_least_one_member: msg.structure_needs_at_least_one_member,
+        psm: msg.psm.as_str().into(),
+        grasp_type: msg.grasp_type.as_str().into(),
       }),
       std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
-      structure_needs_at_least_one_member: msg.structure_needs_at_least_one_member,
+        psm: msg.psm.as_str().into(),
+        grasp_type: msg.grasp_type.as_str().into(),
       })
     }
   }
 
   fn from_rmw_message(msg: Self::RmwMsg) -> Self {
     Self {
-      structure_needs_at_least_one_member: msg.structure_needs_at_least_one_member,
+      psm: msg.psm.to_string(),
+      grasp_type: msg.grasp_type.to_string(),
     }
   }
 }
 
 
-// Corresponds to auto_suture_interfaces__srv__FindGraspPosition_Response
+// Corresponds to auto_suture_interfaces__srv__FindGraspPose_Response
 
 // This struct is not documented.
 #[allow(missing_docs)]
@@ -58,32 +66,46 @@ impl rosidl_runtime_rs::Message for FindGraspPosition_Request {
 #[allow(non_camel_case_types)]
 #[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
 #[derive(Clone, Debug, PartialEq, PartialOrd)]
-pub struct FindGraspPosition_Response {
+pub struct FindGraspPose_Response {
 
     // This member is not documented.
     #[allow(missing_docs)]
     pub grasp_pose: geometry_msgs::msg::PoseStamped,
 
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub success: bool,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
+    pub message: std::string::String,
+
 }
 
 
 
-impl Default for FindGraspPosition_Response {
+impl Default for FindGraspPose_Response {
   fn default() -> Self {
-    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::srv::rmw::FindGraspPosition_Response::default())
+    <Self as rosidl_runtime_rs::Message>::from_rmw_message(super::srv::rmw::FindGraspPose_Response::default())
   }
 }
 
-impl rosidl_runtime_rs::Message for FindGraspPosition_Response {
-  type RmwMsg = super::srv::rmw::FindGraspPosition_Response;
+impl rosidl_runtime_rs::Message for FindGraspPose_Response {
+  type RmwMsg = super::srv::rmw::FindGraspPose_Response;
 
   fn into_rmw_message(msg_cow: std::borrow::Cow<'_, Self>) -> std::borrow::Cow<'_, Self::RmwMsg> {
     match msg_cow {
       std::borrow::Cow::Owned(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
         grasp_pose: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Owned(msg.grasp_pose)).into_owned(),
+        success: msg.success,
+        message: msg.message.as_str().into(),
       }),
       std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
         grasp_pose: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Borrowed(&msg.grasp_pose)).into_owned(),
+      success: msg.success,
+        message: msg.message.as_str().into(),
       })
     }
   }
@@ -91,6 +113,8 @@ impl rosidl_runtime_rs::Message for FindGraspPosition_Response {
   fn from_rmw_message(msg: Self::RmwMsg) -> Self {
     Self {
       grasp_pose: geometry_msgs::msg::PoseStamped::from_rmw_message(msg.grasp_pose),
+      success: msg.success,
+      message: msg.message.to_string(),
     }
   }
 }
@@ -102,20 +126,20 @@ impl rosidl_runtime_rs::Message for FindGraspPosition_Response {
 
 #[link(name = "auto_suture_interfaces__rosidl_typesupport_c")]
 extern "C" {
-    fn rosidl_typesupport_c__get_service_type_support_handle__auto_suture_interfaces__srv__FindGraspPosition() -> *const std::ffi::c_void;
+    fn rosidl_typesupport_c__get_service_type_support_handle__auto_suture_interfaces__srv__FindGraspPose() -> *const std::ffi::c_void;
 }
 
-// Corresponds to auto_suture_interfaces__srv__FindGraspPosition
+// Corresponds to auto_suture_interfaces__srv__FindGraspPose
 #[allow(missing_docs, non_camel_case_types)]
-pub struct FindGraspPosition;
+pub struct FindGraspPose;
 
-impl rosidl_runtime_rs::Service for FindGraspPosition {
-    type Request = FindGraspPosition_Request;
-    type Response = FindGraspPosition_Response;
+impl rosidl_runtime_rs::Service for FindGraspPose {
+    type Request = FindGraspPose_Request;
+    type Response = FindGraspPose_Response;
 
     fn get_type_support() -> *const std::ffi::c_void {
         // SAFETY: No preconditions for this function.
-        unsafe { rosidl_typesupport_c__get_service_type_support_handle__auto_suture_interfaces__srv__FindGraspPosition() }
+        unsafe { rosidl_typesupport_c__get_service_type_support_handle__auto_suture_interfaces__srv__FindGraspPose() }
     }
 }
 

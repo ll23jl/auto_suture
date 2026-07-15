@@ -36,6 +36,8 @@ extern "C"
 {
 #endif
 
+#include "rosidl_runtime_c/string.h"  // grasp_type, psm
+#include "rosidl_runtime_c/string_functions.h"  // grasp_type, psm
 
 // forward declare type support functions
 
@@ -48,9 +50,32 @@ bool cdr_serialize_auto_suture_interfaces__srv__FindGraspPosition_Request(
   const auto_suture_interfaces__srv__FindGraspPosition_Request * ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
-  // Field name: structure_needs_at_least_one_member
+  // Field name: psm
   {
-    cdr << ros_message->structure_needs_at_least_one_member;
+    const rosidl_runtime_c__String * str = &ros_message->psm;
+    if (str->capacity == 0 || str->capacity <= str->size) {
+      fprintf(stderr, "string capacity not greater than size\n");
+      return false;
+    }
+    if (str->data[str->size] != '\0') {
+      fprintf(stderr, "string not null-terminated\n");
+      return false;
+    }
+    cdr << str->data;
+  }
+
+  // Field name: grasp_type
+  {
+    const rosidl_runtime_c__String * str = &ros_message->grasp_type;
+    if (str->capacity == 0 || str->capacity <= str->size) {
+      fprintf(stderr, "string capacity not greater than size\n");
+      return false;
+    }
+    if (str->data[str->size] != '\0') {
+      fprintf(stderr, "string not null-terminated\n");
+      return false;
+    }
+    cdr << str->data;
   }
 
   return true;
@@ -61,9 +86,36 @@ bool cdr_deserialize_auto_suture_interfaces__srv__FindGraspPosition_Request(
   eprosima::fastcdr::Cdr & cdr,
   auto_suture_interfaces__srv__FindGraspPosition_Request * ros_message)
 {
-  // Field name: structure_needs_at_least_one_member
+  // Field name: psm
   {
-    cdr >> ros_message->structure_needs_at_least_one_member;
+    std::string tmp;
+    cdr >> tmp;
+    if (!ros_message->psm.data) {
+      rosidl_runtime_c__String__init(&ros_message->psm);
+    }
+    bool succeeded = rosidl_runtime_c__String__assign(
+      &ros_message->psm,
+      tmp.c_str());
+    if (!succeeded) {
+      fprintf(stderr, "failed to assign string into field 'psm'\n");
+      return false;
+    }
+  }
+
+  // Field name: grasp_type
+  {
+    std::string tmp;
+    cdr >> tmp;
+    if (!ros_message->grasp_type.data) {
+      rosidl_runtime_c__String__init(&ros_message->grasp_type);
+    }
+    bool succeeded = rosidl_runtime_c__String__assign(
+      &ros_message->grasp_type,
+      tmp.c_str());
+    if (!succeeded) {
+      fprintf(stderr, "failed to assign string into field 'grasp_type'\n");
+      return false;
+    }
   }
 
   return true;
@@ -84,12 +136,15 @@ size_t get_serialized_size_auto_suture_interfaces__srv__FindGraspPosition_Reques
   (void)padding;
   (void)wchar_size;
 
-  // Field name: structure_needs_at_least_one_member
-  {
-    size_t item_size = sizeof(ros_message->structure_needs_at_least_one_member);
-    current_alignment += item_size +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
-  }
+  // Field name: psm
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message->psm.size + 1);
+
+  // Field name: grasp_type
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message->grasp_type.size + 1);
 
   return current_alignment - initial_alignment;
 }
@@ -113,11 +168,28 @@ size_t max_serialized_size_auto_suture_interfaces__srv__FindGraspPosition_Reques
   full_bounded = true;
   is_plain = true;
 
-  // Field name: structure_needs_at_least_one_member
+  // Field name: psm
   {
     size_t array_size = 1;
-    last_member_size = array_size * sizeof(uint8_t);
-    current_alignment += array_size * sizeof(uint8_t);
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
+  }
+
+  // Field name: grasp_type
+  {
+    size_t array_size = 1;
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
   }
 
 
@@ -129,7 +201,7 @@ size_t max_serialized_size_auto_suture_interfaces__srv__FindGraspPosition_Reques
     using DataType = auto_suture_interfaces__srv__FindGraspPosition_Request;
     is_plain =
       (
-      offsetof(DataType, structure_needs_at_least_one_member) +
+      offsetof(DataType, grasp_type) +
       last_member_size
       ) == ret_val;
   }
@@ -141,9 +213,32 @@ bool cdr_serialize_key_auto_suture_interfaces__srv__FindGraspPosition_Request(
   const auto_suture_interfaces__srv__FindGraspPosition_Request * ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
-  // Field name: structure_needs_at_least_one_member
+  // Field name: psm
   {
-    cdr << ros_message->structure_needs_at_least_one_member;
+    const rosidl_runtime_c__String * str = &ros_message->psm;
+    if (str->capacity == 0 || str->capacity <= str->size) {
+      fprintf(stderr, "string capacity not greater than size\n");
+      return false;
+    }
+    if (str->data[str->size] != '\0') {
+      fprintf(stderr, "string not null-terminated\n");
+      return false;
+    }
+    cdr << str->data;
+  }
+
+  // Field name: grasp_type
+  {
+    const rosidl_runtime_c__String * str = &ros_message->grasp_type;
+    if (str->capacity == 0 || str->capacity <= str->size) {
+      fprintf(stderr, "string capacity not greater than size\n");
+      return false;
+    }
+    if (str->data[str->size] != '\0') {
+      fprintf(stderr, "string not null-terminated\n");
+      return false;
+    }
+    cdr << str->data;
   }
 
   return true;
@@ -164,12 +259,15 @@ size_t get_serialized_size_key_auto_suture_interfaces__srv__FindGraspPosition_Re
   (void)padding;
   (void)wchar_size;
 
-  // Field name: structure_needs_at_least_one_member
-  {
-    size_t item_size = sizeof(ros_message->structure_needs_at_least_one_member);
-    current_alignment += item_size +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
-  }
+  // Field name: psm
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message->psm.size + 1);
+
+  // Field name: grasp_type
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message->grasp_type.size + 1);
 
   return current_alignment - initial_alignment;
 }
@@ -191,11 +289,28 @@ size_t max_serialized_size_key_auto_suture_interfaces__srv__FindGraspPosition_Re
 
   full_bounded = true;
   is_plain = true;
-  // Field name: structure_needs_at_least_one_member
+  // Field name: psm
   {
     size_t array_size = 1;
-    last_member_size = array_size * sizeof(uint8_t);
-    current_alignment += array_size * sizeof(uint8_t);
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
+  }
+
+  // Field name: grasp_type
+  {
+    size_t array_size = 1;
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
   }
 
   size_t ret_val = current_alignment - initial_alignment;
@@ -206,7 +321,7 @@ size_t max_serialized_size_key_auto_suture_interfaces__srv__FindGraspPosition_Re
     using DataType = auto_suture_interfaces__srv__FindGraspPosition_Request;
     is_plain =
       (
-      offsetof(DataType, structure_needs_at_least_one_member) +
+      offsetof(DataType, grasp_type) +
       last_member_size
       ) == ret_val;
   }
@@ -336,6 +451,10 @@ extern "C"
 #endif
 
 #include "geometry_msgs/msg/detail/pose_stamped__functions.h"  // grasp_pose
+// already included above
+// #include "rosidl_runtime_c/string.h"  // message
+// already included above
+// #include "rosidl_runtime_c/string_functions.h"  // message
 
 // forward declare type support functions
 
@@ -395,6 +514,25 @@ bool cdr_serialize_auto_suture_interfaces__srv__FindGraspPosition_Response(
       &ros_message->grasp_pose, cdr);
   }
 
+  // Field name: success
+  {
+    cdr << (ros_message->success ? true : false);
+  }
+
+  // Field name: message
+  {
+    const rosidl_runtime_c__String * str = &ros_message->message;
+    if (str->capacity == 0 || str->capacity <= str->size) {
+      fprintf(stderr, "string capacity not greater than size\n");
+      return false;
+    }
+    if (str->data[str->size] != '\0') {
+      fprintf(stderr, "string not null-terminated\n");
+      return false;
+    }
+    cdr << str->data;
+  }
+
   return true;
 }
 
@@ -406,6 +544,29 @@ bool cdr_deserialize_auto_suture_interfaces__srv__FindGraspPosition_Response(
   // Field name: grasp_pose
   {
     cdr_deserialize_geometry_msgs__msg__PoseStamped(cdr, &ros_message->grasp_pose);
+  }
+
+  // Field name: success
+  {
+    uint8_t tmp;
+    cdr >> tmp;
+    ros_message->success = tmp ? true : false;
+  }
+
+  // Field name: message
+  {
+    std::string tmp;
+    cdr >> tmp;
+    if (!ros_message->message.data) {
+      rosidl_runtime_c__String__init(&ros_message->message);
+    }
+    bool succeeded = rosidl_runtime_c__String__assign(
+      &ros_message->message,
+      tmp.c_str());
+    if (!succeeded) {
+      fprintf(stderr, "failed to assign string into field 'message'\n");
+      return false;
+    }
   }
 
   return true;
@@ -429,6 +590,18 @@ size_t get_serialized_size_auto_suture_interfaces__srv__FindGraspPosition_Respon
   // Field name: grasp_pose
   current_alignment += get_serialized_size_geometry_msgs__msg__PoseStamped(
     &(ros_message->grasp_pose), current_alignment);
+
+  // Field name: success
+  {
+    size_t item_size = sizeof(ros_message->success);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+
+  // Field name: message
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message->message.size + 1);
 
   return current_alignment - initial_alignment;
 }
@@ -470,6 +643,25 @@ size_t max_serialized_size_auto_suture_interfaces__srv__FindGraspPosition_Respon
     }
   }
 
+  // Field name: success
+  {
+    size_t array_size = 1;
+    last_member_size = array_size * sizeof(uint8_t);
+    current_alignment += array_size * sizeof(uint8_t);
+  }
+
+  // Field name: message
+  {
+    size_t array_size = 1;
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
+  }
+
 
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
@@ -479,7 +671,7 @@ size_t max_serialized_size_auto_suture_interfaces__srv__FindGraspPosition_Respon
     using DataType = auto_suture_interfaces__srv__FindGraspPosition_Response;
     is_plain =
       (
-      offsetof(DataType, grasp_pose) +
+      offsetof(DataType, message) +
       last_member_size
       ) == ret_val;
   }
@@ -495,6 +687,25 @@ bool cdr_serialize_key_auto_suture_interfaces__srv__FindGraspPosition_Response(
   {
     cdr_serialize_key_geometry_msgs__msg__PoseStamped(
       &ros_message->grasp_pose, cdr);
+  }
+
+  // Field name: success
+  {
+    cdr << (ros_message->success ? true : false);
+  }
+
+  // Field name: message
+  {
+    const rosidl_runtime_c__String * str = &ros_message->message;
+    if (str->capacity == 0 || str->capacity <= str->size) {
+      fprintf(stderr, "string capacity not greater than size\n");
+      return false;
+    }
+    if (str->data[str->size] != '\0') {
+      fprintf(stderr, "string not null-terminated\n");
+      return false;
+    }
+    cdr << str->data;
   }
 
   return true;
@@ -518,6 +729,18 @@ size_t get_serialized_size_key_auto_suture_interfaces__srv__FindGraspPosition_Re
   // Field name: grasp_pose
   current_alignment += get_serialized_size_key_geometry_msgs__msg__PoseStamped(
     &(ros_message->grasp_pose), current_alignment);
+
+  // Field name: success
+  {
+    size_t item_size = sizeof(ros_message->success);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+
+  // Field name: message
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message->message.size + 1);
 
   return current_alignment - initial_alignment;
 }
@@ -557,6 +780,25 @@ size_t max_serialized_size_key_auto_suture_interfaces__srv__FindGraspPosition_Re
     }
   }
 
+  // Field name: success
+  {
+    size_t array_size = 1;
+    last_member_size = array_size * sizeof(uint8_t);
+    current_alignment += array_size * sizeof(uint8_t);
+  }
+
+  // Field name: message
+  {
+    size_t array_size = 1;
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
+  }
+
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
     // All members are plain, and type is not empty.
@@ -565,7 +807,7 @@ size_t max_serialized_size_key_auto_suture_interfaces__srv__FindGraspPosition_Re
     using DataType = auto_suture_interfaces__srv__FindGraspPosition_Response;
     is_plain =
       (
-      offsetof(DataType, grasp_pose) +
+      offsetof(DataType, message) +
       last_member_size
       ) == ret_val;
   }

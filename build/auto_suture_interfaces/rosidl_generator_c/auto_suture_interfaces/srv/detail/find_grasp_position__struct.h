@@ -20,10 +20,16 @@ extern "C"
 
 // Constants defined in the message
 
+// Include directives for member types
+// Member 'psm'
+// Member 'grasp_type'
+#include "rosidl_runtime_c/string.h"
+
 /// Struct defined in srv/FindGraspPosition in the package auto_suture_interfaces.
 typedef struct auto_suture_interfaces__srv__FindGraspPosition_Request
 {
-  uint8_t structure_needs_at_least_one_member;
+  rosidl_runtime_c__String psm;
+  rosidl_runtime_c__String grasp_type;
 } auto_suture_interfaces__srv__FindGraspPosition_Request;
 
 // Struct for a sequence of auto_suture_interfaces__srv__FindGraspPosition_Request.
@@ -41,11 +47,16 @@ typedef struct auto_suture_interfaces__srv__FindGraspPosition_Request__Sequence
 // Include directives for member types
 // Member 'grasp_pose'
 #include "geometry_msgs/msg/detail/pose_stamped__struct.h"
+// Member 'message'
+// already included above
+// #include "rosidl_runtime_c/string.h"
 
 /// Struct defined in srv/FindGraspPosition in the package auto_suture_interfaces.
 typedef struct auto_suture_interfaces__srv__FindGraspPosition_Response
 {
   geometry_msgs__msg__PoseStamped grasp_pose;
+  bool success;
+  rosidl_runtime_c__String message;
 } auto_suture_interfaces__srv__FindGraspPosition_Response;
 
 // Struct for a sequence of auto_suture_interfaces__srv__FindGraspPosition_Response.

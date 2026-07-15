@@ -47,7 +47,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/auto_suture_interfaces/srv" TYPE FILE FILES "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_type_description/auto_suture_interfaces/srv/FindGraspPosition.json")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/auto_suture_interfaces/srv" TYPE FILE FILES "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_type_description/auto_suture_interfaces/srv/FindGraspPose.json")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -371,11 +371,11 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/auto_suture_interfaces/srv" TYPE FILE FILES "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces/srv/FindGraspPosition.idl")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/auto_suture_interfaces/srv" TYPE FILE FILES "/home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_adapter/auto_suture_interfaces/srv/FindGraspPose.idl")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/auto_suture_interfaces/srv" TYPE FILE FILES "/home/jazmin/auto_suture/src/auto_suture_interfaces/srv/FindGraspPosition.srv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/auto_suture_interfaces/srv" TYPE FILE FILES "/home/jazmin/auto_suture/src/auto_suture_interfaces/srv/FindGraspPose.srv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)

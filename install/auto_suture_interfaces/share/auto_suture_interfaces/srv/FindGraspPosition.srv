@@ -1,2 +1,6 @@
+string psm
+string grasp_type
 ---
 geometry_msgs/PoseStamped grasp_pose
+bool success
+string message

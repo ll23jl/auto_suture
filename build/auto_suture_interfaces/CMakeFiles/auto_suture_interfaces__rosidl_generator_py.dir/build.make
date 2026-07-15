@@ -69,28 +69,28 @@ include CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/flags.make
 
-CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o: CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/flags.make
-CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o: rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c
-CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o: CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o -MF CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o.d -o CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o -c /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c
+CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o: CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/flags.make
+CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o: rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c
+CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o: CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/jazmin/auto_suture/build/auto_suture_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o -MF CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o.d -o CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o -c /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c
 
-CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c > CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.i
+CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c > CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.i
 
-CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c -o CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.s
+CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c -o CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.s
 
 # Object files for target auto_suture_interfaces__rosidl_generator_py
 auto_suture_interfaces__rosidl_generator_py_OBJECTS = \
-"CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o"
+"CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o"
 
 # External object files for target auto_suture_interfaces__rosidl_generator_py
 auto_suture_interfaces__rosidl_generator_py_EXTERNAL_OBJECTS =
 
-libauto_suture_interfaces__rosidl_generator_py.so: CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_position_s.c.o
+libauto_suture_interfaces__rosidl_generator_py.so: CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/rosidl_generator_py/auto_suture_interfaces/srv/_find_grasp_pose_s.c.o
 libauto_suture_interfaces__rosidl_generator_py.so: CMakeFiles/auto_suture_interfaces__rosidl_generator_py.dir/build.make
 libauto_suture_interfaces__rosidl_generator_py.so: libauto_suture_interfaces__rosidl_typesupport_c.so
 libauto_suture_interfaces__rosidl_generator_py.so: /opt/ros/jazzy/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_c.so

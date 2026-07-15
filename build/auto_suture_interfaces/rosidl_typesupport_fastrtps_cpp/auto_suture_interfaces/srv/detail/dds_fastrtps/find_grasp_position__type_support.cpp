@@ -36,8 +36,11 @@ cdr_serialize(
   const auto_suture_interfaces::srv::FindGraspPosition_Request & ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
-  // Member: structure_needs_at_least_one_member
-  cdr << ros_message.structure_needs_at_least_one_member;
+  // Member: psm
+  cdr << ros_message.psm;
+
+  // Member: grasp_type
+  cdr << ros_message.grasp_type;
 
   return true;
 }
@@ -48,8 +51,11 @@ cdr_deserialize(
   eprosima::fastcdr::Cdr & cdr,
   auto_suture_interfaces::srv::FindGraspPosition_Request & ros_message)
 {
-  // Member: structure_needs_at_least_one_member
-  cdr >> ros_message.structure_needs_at_least_one_member;
+  // Member: psm
+  cdr >> ros_message.psm;
+
+  // Member: grasp_type
+  cdr >> ros_message.grasp_type;
 
   return true;
 }  // NOLINT(readability/fn_size)
@@ -68,12 +74,15 @@ get_serialized_size(
   (void)padding;
   (void)wchar_size;
 
-  // Member: structure_needs_at_least_one_member
-  {
-    size_t item_size = sizeof(ros_message.structure_needs_at_least_one_member);
-    current_alignment += item_size +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
-  }
+  // Member: psm
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message.psm.size() + 1);
+
+  // Member: grasp_type
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message.grasp_type.size() + 1);
 
   return current_alignment - initial_alignment;
 }
@@ -98,11 +107,27 @@ max_serialized_size_FindGraspPosition_Request(
   full_bounded = true;
   is_plain = true;
 
-  // Member: structure_needs_at_least_one_member
+  // Member: psm
   {
     size_t array_size = 1;
-    last_member_size = array_size * sizeof(uint8_t);
-    current_alignment += array_size * sizeof(uint8_t);
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
+  }
+  // Member: grasp_type
+  {
+    size_t array_size = 1;
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
   }
 
   size_t ret_val = current_alignment - initial_alignment;
@@ -113,7 +138,7 @@ max_serialized_size_FindGraspPosition_Request(
     using DataType = auto_suture_interfaces::srv::FindGraspPosition_Request;
     is_plain =
       (
-      offsetof(DataType, structure_needs_at_least_one_member) +
+      offsetof(DataType, grasp_type) +
       last_member_size
       ) == ret_val;
   }
@@ -127,8 +152,11 @@ cdr_serialize_key(
   const auto_suture_interfaces::srv::FindGraspPosition_Request & ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
-  // Member: structure_needs_at_least_one_member
-  cdr << ros_message.structure_needs_at_least_one_member;
+  // Member: psm
+  cdr << ros_message.psm;
+
+  // Member: grasp_type
+  cdr << ros_message.grasp_type;
 
   return true;
 }
@@ -146,12 +174,15 @@ get_serialized_size_key(
   (void)padding;
   (void)wchar_size;
 
-  // Member: structure_needs_at_least_one_member
-  {
-    size_t item_size = sizeof(ros_message.structure_needs_at_least_one_member);
-    current_alignment += item_size +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
-  }
+  // Member: psm
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message.psm.size() + 1);
+
+  // Member: grasp_type
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message.grasp_type.size() + 1);
 
   return current_alignment - initial_alignment;
 }
@@ -175,11 +206,28 @@ max_serialized_size_key_FindGraspPosition_Request(
   full_bounded = true;
   is_plain = true;
 
-  // Member: structure_needs_at_least_one_member
+  // Member: psm
   {
     size_t array_size = 1;
-    last_member_size = array_size * sizeof(uint8_t);
-    current_alignment += array_size * sizeof(uint8_t);
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
+  }
+
+  // Member: grasp_type
+  {
+    size_t array_size = 1;
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
   }
 
   size_t ret_val = current_alignment - initial_alignment;
@@ -190,7 +238,7 @@ max_serialized_size_key_FindGraspPosition_Request(
     using DataType = auto_suture_interfaces::srv::FindGraspPosition_Request;
     is_plain =
       (
-      offsetof(DataType, structure_needs_at_least_one_member) +
+      offsetof(DataType, grasp_type) +
       last_member_size
       ) == ret_val;
   }
@@ -376,6 +424,12 @@ cdr_serialize(
     ros_message.grasp_pose,
     cdr);
 
+  // Member: success
+  cdr << (ros_message.success ? true : false);
+
+  // Member: message
+  cdr << ros_message.message;
+
   return true;
 }
 
@@ -388,6 +442,16 @@ cdr_deserialize(
   // Member: grasp_pose
   geometry_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
     cdr, ros_message.grasp_pose);
+
+  // Member: success
+  {
+    uint8_t tmp;
+    cdr >> tmp;
+    ros_message.success = tmp ? true : false;
+  }
+
+  // Member: message
+  cdr >> ros_message.message;
 
   return true;
 }  // NOLINT(readability/fn_size)
@@ -410,6 +474,18 @@ get_serialized_size(
   current_alignment +=
     geometry_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
     ros_message.grasp_pose, current_alignment);
+
+  // Member: success
+  {
+    size_t item_size = sizeof(ros_message.success);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+
+  // Member: message
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message.message.size() + 1);
 
   return current_alignment - initial_alignment;
 }
@@ -450,6 +526,23 @@ max_serialized_size_FindGraspPosition_Response(
       is_plain &= inner_is_plain;
     }
   }
+  // Member: success
+  {
+    size_t array_size = 1;
+    last_member_size = array_size * sizeof(uint8_t);
+    current_alignment += array_size * sizeof(uint8_t);
+  }
+  // Member: message
+  {
+    size_t array_size = 1;
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
+  }
 
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
@@ -459,7 +552,7 @@ max_serialized_size_FindGraspPosition_Response(
     using DataType = auto_suture_interfaces::srv::FindGraspPosition_Response;
     is_plain =
       (
-      offsetof(DataType, grasp_pose) +
+      offsetof(DataType, message) +
       last_member_size
       ) == ret_val;
   }
@@ -477,6 +570,12 @@ cdr_serialize_key(
   geometry_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize_key(
     ros_message.grasp_pose,
     cdr);
+
+  // Member: success
+  cdr << (ros_message.success ? true : false);
+
+  // Member: message
+  cdr << ros_message.message;
 
   return true;
 }
@@ -498,6 +597,18 @@ get_serialized_size_key(
   current_alignment +=
     geometry_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size_key(
     ros_message.grasp_pose, current_alignment);
+
+  // Member: success
+  {
+    size_t item_size = sizeof(ros_message.success);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+
+  // Member: message
+  current_alignment += padding +
+    eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+    (ros_message.message.size() + 1);
 
   return current_alignment - initial_alignment;
 }
@@ -538,6 +649,25 @@ max_serialized_size_key_FindGraspPosition_Response(
     }
   }
 
+  // Member: success
+  {
+    size_t array_size = 1;
+    last_member_size = array_size * sizeof(uint8_t);
+    current_alignment += array_size * sizeof(uint8_t);
+  }
+
+  // Member: message
+  {
+    size_t array_size = 1;
+    full_bounded = false;
+    is_plain = false;
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += padding +
+        eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
+        1;
+    }
+  }
+
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
     // All members are plain, and type is not empty.
@@ -546,7 +676,7 @@ max_serialized_size_key_FindGraspPosition_Response(
     using DataType = auto_suture_interfaces::srv::FindGraspPosition_Response;
     is_plain =
       (
-      offsetof(DataType, grasp_pose) +
+      offsetof(DataType, message) +
       last_member_size
       ) == ret_val;
   }

@@ -235,6 +235,7 @@ CMakeFiles/auto_suture_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_type
  /usr/include/c++/13/stdlib.h \
  /opt/ros/jazzy/include/rosidl_runtime_c/rosidl_runtime_c/action_type_support_struct.h \
  /home/jazmin/auto_suture/build/auto_suture_interfaces/rosidl_generator_c/auto_suture_interfaces/msg/rosidl_generator_c__visibility_control.h \
+ /opt/ros/jazzy/include/rosidl_runtime_c/rosidl_runtime_c/string_functions.h \
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/detail/pose_stamped__functions.h \
  /opt/ros/jazzy/include/geometry_msgs/geometry_msgs/msg/rosidl_generator_c__visibility_control.h \
  /opt/ros/jazzy/include/service_msgs/service_msgs/msg/detail/service_event_info__functions.h \

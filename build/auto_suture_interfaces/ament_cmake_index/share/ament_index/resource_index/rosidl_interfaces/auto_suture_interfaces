@@ -1,2 +1,2 @@
-srv/FindGraspPosition.idl
-srv/FindGraspPosition.srv
+srv/FindGraspPose.idl
+srv/FindGraspPose.srv

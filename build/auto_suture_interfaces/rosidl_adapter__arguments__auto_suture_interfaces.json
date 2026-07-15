@@ -1,6 +1,6 @@
 {
   "package_name": "auto_suture_interfaces",
   "non_idl_tuples": [
-    "/home/jazmin/auto_suture/src/auto_suture_interfaces:srv/FindGraspPosition.srv"
+    "/home/jazmin/auto_suture/src/auto_suture_interfaces:srv/FindGraspPose.srv"
   ]
 }
