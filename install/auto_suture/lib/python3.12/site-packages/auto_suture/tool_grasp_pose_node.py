@@ -31,7 +31,7 @@ class ToolGraspPose(Node):
             10
         )
 
-        # Service to calculate grasp pose
+        # Service Server to calculate grasp pose
         self.srv = self.create_service(
             FindGraspPose,
             'find_grasp_pose',
@@ -141,6 +141,7 @@ class ToolGraspPose(Node):
         # Apply offset:
         # T_tool = T_needle * T_offset
         tool_frame = needle_frame * offset
+        #tool_frame = needle_frame
 
 
         # Convert PyKDL Frame back to PoseStamped

@@ -57,6 +57,14 @@ def generate_launch_description():
         output="screen"
     )
 
+    # Move to grasp node
+    move_to_grasp = Node(
+        package="auto_suture",
+        executable="move_to_grasp",
+        name="move_to_grasp",
+        output="screen"
+    )
+
     pkg_path = get_package_share_directory('auto_suture')
 
     grasp_config = os.path.join(

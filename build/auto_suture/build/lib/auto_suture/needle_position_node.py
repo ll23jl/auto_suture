@@ -1,7 +1,7 @@
 
 # Node that converts needle pose in the camera frame into the world frame
-# Subscribes to needle pose and camera pose data given by ECM
-# Transforms from the camera frame into the world frame
+# Subscribes to needle pose (in camera frame) and camera pose data given by ECM
+# Transforms needle pose into the world frame
 # Publishes needle pose in the world frame as PoseStamped
 # -----------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ class NeedlePosition(Node):
         self.camera_pose = msg.pose
         self.calculate_transform()
 
-    # Function that transforms the needle position into the world frame
+    # Function that transforms the needle pose into the world frame
     def calculate_transform(self):
 
         if self.needle_pose is None or self.camera_pose is None:

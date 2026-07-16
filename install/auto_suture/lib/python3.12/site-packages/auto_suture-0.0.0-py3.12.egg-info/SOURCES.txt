@@ -10,6 +10,7 @@ setup.py
 ../../build/auto_suture/auto_suture.egg-info/top_level.txt
 ../../build/auto_suture/auto_suture.egg-info/zip-safe
 auto_suture/__init__.py
+auto_suture/move_to_grasp_node.py
 auto_suture/needle_frame_converter.py
 auto_suture/needle_position_node.py
 auto_suture/tool_grasp_pose_node.py
