@@ -1,0 +1,28 @@
+[0.569s] Invoking command in '/home/jazmin/auto_suture/src/auto_suture': AMENT_PREFIX_PATH=/home/jazmin/auto_suture/install/auto_suture_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jazmin/auto_suture/install/auto_suture_interfaces:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jazmin/auto_suture/install/auto_suture_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jazmin/auto_suture/build/auto_suture/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/auto_suture build --build-base /home/jazmin/auto_suture/build/auto_suture/build install --record /home/jazmin/auto_suture/build/auto_suture/install.log --install-scripts $base/lib/auto_suture --single-version-externally-managed install_data
+[0.704s] running egg_info
+[0.712s] writing ../../build/auto_suture/auto_suture.egg-info/PKG-INFO
+[0.713s] writing dependency_links to ../../build/auto_suture/auto_suture.egg-info/dependency_links.txt
+[0.713s] writing entry points to ../../build/auto_suture/auto_suture.egg-info/entry_points.txt
+[0.713s] writing requirements to ../../build/auto_suture/auto_suture.egg-info/requires.txt
+[0.713s] writing top-level names to ../../build/auto_suture/auto_suture.egg-info/top_level.txt
+[0.731s] reading manifest file '../../build/auto_suture/auto_suture.egg-info/SOURCES.txt'
+[0.731s] adding license file 'LICENSE'
+[0.732s] writing manifest file '../../build/auto_suture/auto_suture.egg-info/SOURCES.txt'
+[0.732s] running build
+[0.732s] running build_py
+[0.732s] copying auto_suture/tool_grasp_pose_node.py -> /home/jazmin/auto_suture/build/auto_suture/build/lib/auto_suture
+[0.732s] running install
+[0.735s] running install_lib
+[0.756s] copying /home/jazmin/auto_suture/build/auto_suture/build/lib/auto_suture/tool_grasp_pose_node.py -> /home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture
+[0.756s] byte-compiling /home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture/tool_grasp_pose_node.py to tool_grasp_pose_node.cpython-312.pyc
+[0.757s] running install_data
+[0.757s] running install_egg_info
+[0.766s] removing '/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture-0.0.0-py3.12.egg-info' (and everything under it)
+[0.767s] Copying ../../build/auto_suture/auto_suture.egg-info to /home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture-0.0.0-py3.12.egg-info
+[0.767s] running install_scripts
+[0.836s] Installing move_to_grasp script to /home/jazmin/auto_suture/install/auto_suture/lib/auto_suture
+[0.836s] Installing needle_frame_converter script to /home/jazmin/auto_suture/install/auto_suture/lib/auto_suture
+[0.836s] Installing needle_position script to /home/jazmin/auto_suture/install/auto_suture/lib/auto_suture
+[0.836s] Installing tool_grasp_pose script to /home/jazmin/auto_suture/install/auto_suture/lib/auto_suture
+[0.836s] writing list of installed files to '/home/jazmin/auto_suture/build/auto_suture/install.log'
+[0.855s] Invoked command in '/home/jazmin/auto_suture/src/auto_suture' returned '0': AMENT_PREFIX_PATH=/home/jazmin/auto_suture/install/auto_suture_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jazmin/auto_suture/install/auto_suture_interfaces:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jazmin/auto_suture/install/auto_suture_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jazmin/auto_suture/build/auto_suture/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/auto_suture build --build-base /home/jazmin/auto_suture/build/auto_suture/build install --record /home/jazmin/auto_suture/build/auto_suture/install.log --install-scripts $base/lib/auto_suture --single-version-externally-managed install_data

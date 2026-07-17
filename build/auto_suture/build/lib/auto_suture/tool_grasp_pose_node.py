@@ -10,7 +10,9 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
+from ambf_msgs.msg import RigidBodyState
 from auto_suture_interfaces.srv import FindGraspPose
+from utility.transform_functions import pose_to_pykdl
 from PyKDL import Frame, Rotation, Vector
 
 # Define node
@@ -19,15 +21,24 @@ class ToolGraspPose(Node):
     def __init__(self):
         super().__init__('tool_grasp_pose',automatically_declare_parameters_from_overrides=True)
 
-        # Initialize variable to store latest needle pose
+        # Initialize variable to store latest poses
         self.latest_needle_pose = None
+        self.latest_base_pose = None
 
 
         # Subscriber to needle pose
         self.subscription = self.create_subscription(
             PoseStamped,
             '/needle_pose_in_world_frame',
-            self.state_callback,
+            self.needle_state_callback,
+            10
+        )
+
+        # Subscriber to baselink frame state
+        self.subscription = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/psm2/baselink/State',
+            self.baselink_state_callback,
             10
         )
 
@@ -40,7 +51,7 @@ class ToolGraspPose(Node):
 
 
     # Callback function for storing the latest needle pose
-    def state_callback(self, msg):
+    def needle_state_callback(self, msg):
 
         self.latest_needle_pose = msg
 
@@ -48,7 +59,18 @@ class ToolGraspPose(Node):
             f"Updated needle pose: "
             f"{msg.pose.position.x}, "
             f"{msg.pose.position.y}, "
-            f"{msg.pose.position.z}"
+            f"{msg.pose.position.z} "
+        )
+    # Call function for storing the latest baselink pose (should not change)
+    def baselink_state_callback(self, msg):
+
+        self.latest_base_pose = msg.pose
+
+        self.get_logger().debug(
+            f"Updated baselink pose: "
+            f"{msg.pose.position.x}, "
+            f"{msg.pose.position.y}, "
+            f"{msg.pose.position.z} "
         )
 
 
@@ -113,6 +135,18 @@ class ToolGraspPose(Node):
 
             return response
 
+        # Check there is actually a pose stored
+        if self.latest_base_pose is None:
+
+            self.get_logger().warn(
+                "No base pose received yet"
+            )
+
+            response.success = False
+            response.message = "No base pose received yet"
+
+            return response
+
 
         # Get selected grasp offset
         offset = self.get_grasp_offset(
@@ -121,27 +155,15 @@ class ToolGraspPose(Node):
         )
 
 
-        # Convert needle PoseStamped to PyKDL Frame
-        needle_frame = Frame(
-            Rotation.Quaternion(
-                self.latest_needle_pose.pose.orientation.x,
-                self.latest_needle_pose.pose.orientation.y,
-                self.latest_needle_pose.pose.orientation.z,
-                self.latest_needle_pose.pose.orientation.w
-            ),
+        # Convert needle Pose(Stamped) to PyKDL Frame
+        needle_frame = pose_to_pykdl(self.latest_needle_pose.pose)
+        base_frame = pose_to_pykdl(self.latest_base_pose)
 
-            Vector(
-                self.latest_needle_pose.pose.position.x,
-                self.latest_needle_pose.pose.position.y,
-                self.latest_needle_pose.pose.position.z
-            )
-        )
-
+        # Convert to baselink frame:
+        needle_in_base = base_frame.Inverse() * needle_frame
 
         # Apply offset:
-        # T_tool = T_needle * T_offset
-        tool_frame = needle_frame * offset
-        #tool_frame = needle_frame
+        tool_frame = needle_in_base * offset
 
 
         # Convert PyKDL Frame back to PoseStamped

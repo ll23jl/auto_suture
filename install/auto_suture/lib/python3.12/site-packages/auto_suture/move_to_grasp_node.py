@@ -11,6 +11,7 @@ class MoveToGrasp(Node):
     def __init__(self):
         super().__init__('move_to_grasp')
 
+        # Service Client to find grasp pose
         self.cli = self.create_client(
             FindGraspPose,
             'find_grasp_pose'
@@ -23,13 +24,14 @@ class MoveToGrasp(Node):
 
         self.req = FindGraspPose.Request()
 
+        # publisher to move the arm
         self.publisher_ = self.create_publisher(
             PoseStamped,
             '/CRTK/psm2/move_cp',
             10
         )
 
-
+    # function that sends request for grasp position with given parameters (psm and grasp type)
     def send_request(self, psm, grasp_type):
         self.req.psm = psm
         self.req.grasp_type = grasp_type
@@ -55,6 +57,7 @@ def main():
 
     rclpy.spin_until_future_complete(node, future)
 
+    # store response
     response = future.result()
 
     if response.success:
@@ -62,6 +65,7 @@ def main():
             f'Grasp position returned:\n{response.grasp_pose}'
         )
 
+        # send grasp pose to robot
         node.publisher_.publish(response.grasp_pose)
 
     else:

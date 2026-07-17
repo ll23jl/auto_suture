@@ -42,6 +42,8 @@ class NeedlePosition(Node):
             10
         )
 
+        # Subscriber to
+
         # Publisher for needle pose in world frame
         self.publisher_ = self.create_publisher(
             PoseStamped,
