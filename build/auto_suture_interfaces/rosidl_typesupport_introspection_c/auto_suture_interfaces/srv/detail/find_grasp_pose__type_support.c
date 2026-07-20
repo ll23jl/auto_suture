@@ -130,8 +130,10 @@ ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspecti
 
 // Include directives for member types
 // Member `grasp_pose`
+// Member `approach_pose`
 #include "geometry_msgs/msg/pose_stamped.h"
 // Member `grasp_pose`
+// Member `approach_pose`
 #include "geometry_msgs/msg/detail/pose_stamped__rosidl_typesupport_introspection_c.h"
 // Member `message`
 // already included above
@@ -156,7 +158,7 @@ void auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_int
   auto_suture_interfaces__srv__FindGraspPose_Response__fini(message_memory);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_introspection_c__FindGraspPose_Response_message_member_array[3] = {
+static rosidl_typesupport_introspection_c__MessageMember auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_introspection_c__FindGraspPose_Response_message_member_array[4] = {
   {
     "grasp_pose",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
@@ -167,6 +169,24 @@ static rosidl_typesupport_introspection_c__MessageMember auto_suture_interfaces_
     0,  // array size
     false,  // is upper bound
     offsetof(auto_suture_interfaces__srv__FindGraspPose_Response, grasp_pose),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
+    "approach_pose",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message (initialized later)
+    false,  // is key
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(auto_suture_interfaces__srv__FindGraspPose_Response, approach_pose),  // bytes offset in struct
     NULL,  // default value
     NULL,  // size() function pointer
     NULL,  // get_const(index) function pointer
@@ -216,7 +236,7 @@ static rosidl_typesupport_introspection_c__MessageMember auto_suture_interfaces_
 static const rosidl_typesupport_introspection_c__MessageMembers auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_introspection_c__FindGraspPose_Response_message_members = {
   "auto_suture_interfaces__srv",  // message namespace
   "FindGraspPose_Response",  // message name
-  3,  // number of fields
+  4,  // number of fields
   sizeof(auto_suture_interfaces__srv__FindGraspPose_Response),
   false,  // has_any_key_member_
   auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_introspection_c__FindGraspPose_Response_message_member_array,  // message members
@@ -239,6 +259,8 @@ ROSIDL_TYPESUPPORT_INTROSPECTION_C_EXPORT_auto_suture_interfaces
 const rosidl_message_type_support_t *
 ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, auto_suture_interfaces, srv, FindGraspPose_Response)() {
   auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_introspection_c__FindGraspPose_Response_message_member_array[0].members_ =
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, geometry_msgs, msg, PoseStamped)();
+  auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_introspection_c__FindGraspPose_Response_message_member_array[1].members_ =
     ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, geometry_msgs, msg, PoseStamped)();
   if (!auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_introspection_c__FindGraspPose_Response_message_type_support_handle.typesupport_identifier) {
     auto_suture_interfaces__srv__FindGraspPose_Response__rosidl_typesupport_introspection_c__FindGraspPose_Response_message_type_support_handle.typesupport_identifier =

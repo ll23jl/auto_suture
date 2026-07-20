@@ -402,6 +402,8 @@ max_serialized_size_key_PoseStamped(
 }  // namespace msg
 }  // namespace geometry_msgs
 
+// functions for geometry_msgs::msg::PoseStamped already declared above
+
 
 namespace auto_suture_interfaces
 {
@@ -424,6 +426,11 @@ cdr_serialize(
     ros_message.grasp_pose,
     cdr);
 
+  // Member: approach_pose
+  geometry_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.approach_pose,
+    cdr);
+
   // Member: success
   cdr << (ros_message.success ? true : false);
 
@@ -442,6 +449,10 @@ cdr_deserialize(
   // Member: grasp_pose
   geometry_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
     cdr, ros_message.grasp_pose);
+
+  // Member: approach_pose
+  geometry_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.approach_pose);
 
   // Member: success
   {
@@ -474,6 +485,11 @@ get_serialized_size(
   current_alignment +=
     geometry_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
     ros_message.grasp_pose, current_alignment);
+
+  // Member: approach_pose
+  current_alignment +=
+    geometry_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.approach_pose, current_alignment);
 
   // Member: success
   {
@@ -511,6 +527,22 @@ max_serialized_size_FindGraspPose_Response(
   is_plain = true;
 
   // Member: grasp_pose
+  {
+    size_t array_size = 1;
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size =
+        geometry_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_PoseStamped(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+  // Member: approach_pose
   {
     size_t array_size = 1;
     last_member_size = 0;
@@ -571,6 +603,11 @@ cdr_serialize_key(
     ros_message.grasp_pose,
     cdr);
 
+  // Member: approach_pose
+  geometry_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize_key(
+    ros_message.approach_pose,
+    cdr);
+
   // Member: success
   cdr << (ros_message.success ? true : false);
 
@@ -597,6 +634,11 @@ get_serialized_size_key(
   current_alignment +=
     geometry_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size_key(
     ros_message.grasp_pose, current_alignment);
+
+  // Member: approach_pose
+  current_alignment +=
+    geometry_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size_key(
+    ros_message.approach_pose, current_alignment);
 
   // Member: success
   {
@@ -633,6 +675,23 @@ max_serialized_size_key_FindGraspPose_Response(
   is_plain = true;
 
   // Member: grasp_pose
+  {
+    size_t array_size = 1;
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size =
+        geometry_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_key_PoseStamped(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+
+  // Member: approach_pose
   {
     size_t array_size = 1;
     last_member_size = 0;

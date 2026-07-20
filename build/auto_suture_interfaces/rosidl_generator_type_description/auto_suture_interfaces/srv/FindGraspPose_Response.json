@@ -14,6 +14,16 @@
           "default_value": ""
         },
         {
+          "name": "approach_pose",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "geometry_msgs/msg/PoseStamped"
+          },
+          "default_value": ""
+        },
+        {
           "name": "success",
           "type": {
             "type_id": 15,
@@ -221,7 +231,7 @@
   "type_hashes": [
     {
       "type_name": "auto_suture_interfaces/srv/FindGraspPose_Response",
-      "hash_string": "RIHS01_a2be72a588b3e798cee3fee48a425f6ff764e7b4fe78e8200c8a7a20ff87c7c6"
+      "hash_string": "RIHS01_d522a3b44996ece4c92c2ddf294f18fa4aa41656b0fd74567056428179e2c693"
     },
     {
       "type_name": "builtin_interfaces/msg/Time",

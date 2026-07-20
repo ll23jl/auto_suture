@@ -182,7 +182,7 @@ void FindGraspPose_Response_fini_function(void * message_memory)
   typed_message->~FindGraspPose_Response();
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPose_Response_message_member_array[3] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPose_Response_message_member_array[4] = {
   {
     "grasp_pose",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
@@ -193,6 +193,24 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPose
     0,  // array size
     false,  // is upper bound
     offsetof(auto_suture_interfaces::srv::FindGraspPose_Response, grasp_pose),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
+    "approach_pose",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<geometry_msgs::msg::PoseStamped>(),  // members of sub message
+    false,  // is key
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(auto_suture_interfaces::srv::FindGraspPose_Response, approach_pose),  // bytes offset in struct
     nullptr,  // default value
     nullptr,  // size() function pointer
     nullptr,  // get_const(index) function pointer
@@ -242,7 +260,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember FindGraspPose
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers FindGraspPose_Response_message_members = {
   "auto_suture_interfaces::srv",  // message namespace
   "FindGraspPose_Response",  // message name
-  3,  // number of fields
+  4,  // number of fields
   sizeof(auto_suture_interfaces::srv::FindGraspPose_Response),
   false,  // has_any_key_member_
   FindGraspPose_Response_message_member_array,  // message members

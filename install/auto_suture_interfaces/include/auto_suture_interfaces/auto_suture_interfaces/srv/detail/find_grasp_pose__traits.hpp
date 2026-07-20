@@ -128,6 +128,7 @@ struct is_message<auto_suture_interfaces::srv::FindGraspPose_Request>
 
 // Include directives for member types
 // Member 'grasp_pose'
+// Member 'approach_pose'
 #include "geometry_msgs/msg/detail/pose_stamped__traits.hpp"
 
 namespace auto_suture_interfaces
@@ -145,6 +146,13 @@ inline void to_flow_style_yaml(
   {
     out << "grasp_pose: ";
     to_flow_style_yaml(msg.grasp_pose, out);
+    out << ", ";
+  }
+
+  // member: approach_pose
+  {
+    out << "approach_pose: ";
+    to_flow_style_yaml(msg.approach_pose, out);
     out << ", ";
   }
 
@@ -174,6 +182,15 @@ inline void to_block_style_yaml(
     }
     out << "grasp_pose:\n";
     to_block_style_yaml(msg.grasp_pose, out, indentation + 2);
+  }
+
+  // member: approach_pose
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "approach_pose:\n";
+    to_block_style_yaml(msg.approach_pose, out, indentation + 2);
   }
 
   // member: success

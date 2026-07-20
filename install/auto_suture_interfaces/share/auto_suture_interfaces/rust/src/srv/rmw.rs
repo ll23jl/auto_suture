@@ -115,6 +115,11 @@ pub struct FindGraspPose_Response {
 
     // This member is not documented.
     #[allow(missing_docs)]
+    pub approach_pose: geometry_msgs::msg::rmw::PoseStamped,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
     pub success: bool,
 
 

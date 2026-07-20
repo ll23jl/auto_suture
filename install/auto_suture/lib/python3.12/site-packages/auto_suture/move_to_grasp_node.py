@@ -1,9 +1,11 @@
 import sys
 import rclpy
 from rclpy.node import Node
+import time
 
 from auto_suture_interfaces.srv import FindGraspPose
 from geometry_msgs.msg import PoseStamped
+from sensor_msgs.msg import JointState
 
 
 class MoveToGrasp(Node):
@@ -25,17 +27,27 @@ class MoveToGrasp(Node):
         self.req = FindGraspPose.Request()
 
         # publisher to move the arm
-        self.publisher_ = self.create_publisher(
+        self.arm_pub = self.create_publisher(
             PoseStamped,
             '/CRTK/psm2/move_cp',
             10
         )
 
+        # publisher to move jaw
+        self.jaw_pub = self.create_publisher(
+            JointState,
+            '/CRTK/psm2/jaw/servo_jp',
+            10
+        )
+
     # function that sends request for grasp position with given parameters (psm and grasp type)
     def send_request(self, psm, grasp_type):
-        self.req.psm = psm
-        self.req.grasp_type = grasp_type
-        return self.cli.call_async(self.req)
+
+        req = FindGraspPose.Request()
+        req.psm = psm
+        req.grasp_type = grasp_type
+
+        return self.cli.call_async(req)
 
 
 def main():
@@ -62,11 +74,36 @@ def main():
 
     if response.success:
         node.get_logger().info(
+            f'Approach position returned:\n{response.approach_pose}'
+        )
+
+        # send approach pose to robot
+        node.arm_pub.publish(response.approach_pose)
+
+        # wait
+        for _ in range(10):
+            rclpy.spin_once(node, timeout_sec=0.1) 
+
+        node.get_logger().info(
             f'Grasp position returned:\n{response.grasp_pose}'
         )
 
         # send grasp pose to robot
-        node.publisher_.publish(response.grasp_pose)
+        node.arm_pub.publish(response.grasp_pose)
+
+        # wait
+        for _ in range(10):
+            rclpy.spin_once(node, timeout_sec=0.1) 
+
+        # close jaws
+        jaw_pos = JointState()
+        jaw_pos.header.stamp = node.get_clock().now().to_msg()
+        jaw_pos.name = ["jaw"]
+        jaw_pos.position = [0.0]
+
+        node.jaw_pub.publish(jaw_pos)
+        
+        node.get_logger().info("Closing jaws")
 
     else:
         node.get_logger().error(

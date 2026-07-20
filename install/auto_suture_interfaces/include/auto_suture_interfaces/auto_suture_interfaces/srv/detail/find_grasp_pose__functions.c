@@ -278,6 +278,7 @@ auto_suture_interfaces__srv__FindGraspPose_Request__Sequence__copy(
 
 // Include directives for member types
 // Member `grasp_pose`
+// Member `approach_pose`
 #include "geometry_msgs/msg/detail/pose_stamped__functions.h"
 // Member `message`
 // already included above
@@ -291,6 +292,11 @@ auto_suture_interfaces__srv__FindGraspPose_Response__init(auto_suture_interfaces
   }
   // grasp_pose
   if (!geometry_msgs__msg__PoseStamped__init(&msg->grasp_pose)) {
+    auto_suture_interfaces__srv__FindGraspPose_Response__fini(msg);
+    return false;
+  }
+  // approach_pose
+  if (!geometry_msgs__msg__PoseStamped__init(&msg->approach_pose)) {
     auto_suture_interfaces__srv__FindGraspPose_Response__fini(msg);
     return false;
   }
@@ -311,6 +317,8 @@ auto_suture_interfaces__srv__FindGraspPose_Response__fini(auto_suture_interfaces
   }
   // grasp_pose
   geometry_msgs__msg__PoseStamped__fini(&msg->grasp_pose);
+  // approach_pose
+  geometry_msgs__msg__PoseStamped__fini(&msg->approach_pose);
   // success
   // message
   rosidl_runtime_c__String__fini(&msg->message);
@@ -325,6 +333,12 @@ auto_suture_interfaces__srv__FindGraspPose_Response__are_equal(const auto_suture
   // grasp_pose
   if (!geometry_msgs__msg__PoseStamped__are_equal(
       &(lhs->grasp_pose), &(rhs->grasp_pose)))
+  {
+    return false;
+  }
+  // approach_pose
+  if (!geometry_msgs__msg__PoseStamped__are_equal(
+      &(lhs->approach_pose), &(rhs->approach_pose)))
   {
     return false;
   }
@@ -352,6 +366,12 @@ auto_suture_interfaces__srv__FindGraspPose_Response__copy(
   // grasp_pose
   if (!geometry_msgs__msg__PoseStamped__copy(
       &(input->grasp_pose), &(output->grasp_pose)))
+  {
+    return false;
+  }
+  // approach_pose
+  if (!geometry_msgs__msg__PoseStamped__copy(
+      &(input->approach_pose), &(output->approach_pose)))
   {
     return false;
   }

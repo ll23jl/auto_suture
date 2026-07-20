@@ -4,9 +4,9 @@
 
 #include <string.h>
 
-#include "rosidl_typesupport_interface/macros.h"
-#include "auto_suture_interfaces/srv/detail/find_grasp_pose__struct.h"
 #include "auto_suture_interfaces/srv/detail/find_grasp_pose__functions.h"
+#include "auto_suture_interfaces/srv/detail/find_grasp_pose__struct.h"
+#include "rosidl_typesupport_interface/macros.h"
 #include "auto_suture_interfaces/srv/detail/find_grasp_pose__type_support.h"
 
 #ifdef __cplusplus

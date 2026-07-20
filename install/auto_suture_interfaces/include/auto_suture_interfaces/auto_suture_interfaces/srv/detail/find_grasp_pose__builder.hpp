@@ -114,16 +114,32 @@ private:
   ::auto_suture_interfaces::srv::FindGraspPose_Response msg_;
 };
 
+class Init_FindGraspPose_Response_approach_pose
+{
+public:
+  explicit Init_FindGraspPose_Response_approach_pose(::auto_suture_interfaces::srv::FindGraspPose_Response & msg)
+  : msg_(msg)
+  {}
+  Init_FindGraspPose_Response_success approach_pose(::auto_suture_interfaces::srv::FindGraspPose_Response::_approach_pose_type arg)
+  {
+    msg_.approach_pose = std::move(arg);
+    return Init_FindGraspPose_Response_success(msg_);
+  }
+
+private:
+  ::auto_suture_interfaces::srv::FindGraspPose_Response msg_;
+};
+
 class Init_FindGraspPose_Response_grasp_pose
 {
 public:
   Init_FindGraspPose_Response_grasp_pose()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  Init_FindGraspPose_Response_success grasp_pose(::auto_suture_interfaces::srv::FindGraspPose_Response::_grasp_pose_type arg)
+  Init_FindGraspPose_Response_approach_pose grasp_pose(::auto_suture_interfaces::srv::FindGraspPose_Response::_grasp_pose_type arg)
   {
     msg_.grasp_pose = std::move(arg);
-    return Init_FindGraspPose_Response_success(msg_);
+    return Init_FindGraspPose_Response_approach_pose(msg_);
   }
 
 private:

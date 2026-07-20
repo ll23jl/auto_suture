@@ -150,6 +150,7 @@ using FindGraspPose_Request =
 
 // Include directives for member types
 // Member 'grasp_pose'
+// Member 'approach_pose'
 #include "geometry_msgs/msg/detail/pose_stamped__struct.hpp"
 
 #ifndef _WIN32
@@ -171,7 +172,8 @@ struct FindGraspPose_Response_
   using Type = FindGraspPose_Response_<ContainerAllocator>;
 
   explicit FindGraspPose_Response_(rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
-  : grasp_pose(_init)
+  : grasp_pose(_init),
+    approach_pose(_init)
   {
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
@@ -183,6 +185,7 @@ struct FindGraspPose_Response_
 
   explicit FindGraspPose_Response_(const ContainerAllocator & _alloc, rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
   : grasp_pose(_alloc, _init),
+    approach_pose(_alloc, _init),
     message(_alloc)
   {
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
@@ -197,6 +200,9 @@ struct FindGraspPose_Response_
   using _grasp_pose_type =
     geometry_msgs::msg::PoseStamped_<ContainerAllocator>;
   _grasp_pose_type grasp_pose;
+  using _approach_pose_type =
+    geometry_msgs::msg::PoseStamped_<ContainerAllocator>;
+  _approach_pose_type approach_pose;
   using _success_type =
     bool;
   _success_type success;
@@ -209,6 +215,12 @@ struct FindGraspPose_Response_
     const geometry_msgs::msg::PoseStamped_<ContainerAllocator> & _arg)
   {
     this->grasp_pose = _arg;
+    return *this;
+  }
+  Type & set__approach_pose(
+    const geometry_msgs::msg::PoseStamped_<ContainerAllocator> & _arg)
+  {
+    this->approach_pose = _arg;
     return *this;
   }
   Type & set__success(
@@ -267,6 +279,9 @@ struct FindGraspPose_Response_
   bool operator==(const FindGraspPose_Response_ & other) const
   {
     if (this->grasp_pose != other.grasp_pose) {
+      return false;
+    }
+    if (this->approach_pose != other.approach_pose) {
       return false;
     }
     if (this->success != other.success) {

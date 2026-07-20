@@ -167,6 +167,10 @@ ROSIDL_GENERATOR_C_IMPORT
 bool geometry_msgs__msg__pose_stamped__convert_from_py(PyObject * _pymsg, void * _ros_message);
 ROSIDL_GENERATOR_C_IMPORT
 PyObject * geometry_msgs__msg__pose_stamped__convert_to_py(void * raw_ros_message);
+ROSIDL_GENERATOR_C_IMPORT
+bool geometry_msgs__msg__pose_stamped__convert_from_py(PyObject * _pymsg, void * _ros_message);
+ROSIDL_GENERATOR_C_IMPORT
+PyObject * geometry_msgs__msg__pose_stamped__convert_to_py(void * raw_ros_message);
 
 ROSIDL_GENERATOR_C_EXPORT
 bool auto_suture_interfaces__srv__find_grasp_pose__response__convert_from_py(PyObject * _pymsg, void * _ros_message)
@@ -207,6 +211,17 @@ bool auto_suture_interfaces__srv__find_grasp_pose__response__convert_from_py(PyO
       return false;
     }
     if (!geometry_msgs__msg__pose_stamped__convert_from_py(field, &ros_message->grasp_pose)) {
+      Py_DECREF(field);
+      return false;
+    }
+    Py_DECREF(field);
+  }
+  {  // approach_pose
+    PyObject * field = PyObject_GetAttrString(_pymsg, "approach_pose");
+    if (!field) {
+      return false;
+    }
+    if (!geometry_msgs__msg__pose_stamped__convert_from_py(field, &ros_message->approach_pose)) {
       Py_DECREF(field);
       return false;
     }
@@ -266,6 +281,20 @@ PyObject * auto_suture_interfaces__srv__find_grasp_pose__response__convert_to_py
     }
     {
       int rc = PyObject_SetAttrString(_pymessage, "grasp_pose", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // approach_pose
+    PyObject * field = NULL;
+    field = geometry_msgs__msg__pose_stamped__convert_to_py(&ros_message->approach_pose);
+    if (!field) {
+      return NULL;
+    }
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "approach_pose", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

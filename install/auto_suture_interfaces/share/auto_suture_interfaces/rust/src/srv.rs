@@ -75,6 +75,11 @@ pub struct FindGraspPose_Response {
 
     // This member is not documented.
     #[allow(missing_docs)]
+    pub approach_pose: geometry_msgs::msg::PoseStamped,
+
+
+    // This member is not documented.
+    #[allow(missing_docs)]
     pub success: bool,
 
 
@@ -99,11 +104,13 @@ impl rosidl_runtime_rs::Message for FindGraspPose_Response {
     match msg_cow {
       std::borrow::Cow::Owned(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
         grasp_pose: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Owned(msg.grasp_pose)).into_owned(),
+        approach_pose: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Owned(msg.approach_pose)).into_owned(),
         success: msg.success,
         message: msg.message.as_str().into(),
       }),
       std::borrow::Cow::Borrowed(msg) => std::borrow::Cow::Owned(Self::RmwMsg {
         grasp_pose: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Borrowed(&msg.grasp_pose)).into_owned(),
+        approach_pose: geometry_msgs::msg::PoseStamped::into_rmw_message(std::borrow::Cow::Borrowed(&msg.approach_pose)).into_owned(),
       success: msg.success,
         message: msg.message.as_str().into(),
       })
@@ -113,6 +120,7 @@ impl rosidl_runtime_rs::Message for FindGraspPose_Response {
   fn from_rmw_message(msg: Self::RmwMsg) -> Self {
     Self {
       grasp_pose: geometry_msgs::msg::PoseStamped::from_rmw_message(msg.grasp_pose),
+      approach_pose: geometry_msgs::msg::PoseStamped::from_rmw_message(msg.approach_pose),
       success: msg.success,
       message: msg.message.to_string(),
     }

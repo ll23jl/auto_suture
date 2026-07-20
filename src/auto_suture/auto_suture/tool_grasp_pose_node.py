@@ -164,18 +164,29 @@ class ToolGraspPose(Node):
 
         # Apply offset:
         tool_frame = needle_in_base * offset
+        
+        # Set frame of approach:
+        # 10mm 'above' needle 
+        approach_offset = Frame(
+            Rotation.Identity(),
+            Vector(0,0,0.005)
+        )
+
+        approach_in_world = needle_frame * approach_offset * offset
+
+        approach_frame = base_frame.Inverse() * approach_in_world
 
 
         # Convert PyKDL Frame back to PoseStamped
+
+        # Grasp pose:
         grasp_pose = PoseStamped()
 
-        grasp_pose.header = self.latest_needle_pose.header
-
+        grasp_pose.header.frame_id = "psm2/baselink"
 
         grasp_pose.pose.position.x = tool_frame.p.x()
         grasp_pose.pose.position.y = tool_frame.p.y()
         grasp_pose.pose.position.z = tool_frame.p.z()
-
 
         qx, qy, qz, qw = tool_frame.M.GetQuaternion()
 
@@ -185,8 +196,30 @@ class ToolGraspPose(Node):
         grasp_pose.pose.orientation.w = qw
 
         response.grasp_pose = grasp_pose
+
+        # Approach pose:
+        approach_pose = PoseStamped()
+
+        approach_pose.header.frame_id = "psm2/baselink"
+
+        approach_pose.pose.position.x = approach_frame.p.x()
+        approach_pose.pose.position.y = approach_frame.p.y()
+        approach_pose.pose.position.z = approach_frame.p.z()
+
+        qx, qy, qz, qw = approach_frame.M.GetQuaternion()
+
+        approach_pose.pose.orientation.x = qx
+        approach_pose.pose.orientation.y = qy
+        approach_pose.pose.orientation.z = qz
+        approach_pose.pose.orientation.w = qw
+
+        response.approach_pose = approach_pose
+
+
         response.success = True
         response.message = "Grasp pose calculated successfully"
+
+        
 
         return response
 

@@ -46,6 +46,7 @@ typedef struct auto_suture_interfaces__srv__FindGraspPose_Request__Sequence
 
 // Include directives for member types
 // Member 'grasp_pose'
+// Member 'approach_pose'
 #include "geometry_msgs/msg/detail/pose_stamped__struct.h"
 // Member 'message'
 // already included above
@@ -55,6 +56,7 @@ typedef struct auto_suture_interfaces__srv__FindGraspPose_Request__Sequence
 typedef struct auto_suture_interfaces__srv__FindGraspPose_Response
 {
   geometry_msgs__msg__PoseStamped grasp_pose;
+  geometry_msgs__msg__PoseStamped approach_pose;
   bool success;
   rosidl_runtime_c__String message;
 } auto_suture_interfaces__srv__FindGraspPose_Response;

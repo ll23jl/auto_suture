@@ -218,6 +218,7 @@ class FindGraspPose_Response(metaclass=Metaclass_FindGraspPose_Response):
 
     __slots__ = [
         '_grasp_pose',
+        '_approach_pose',
         '_success',
         '_message',
         '_check_fields',
@@ -225,6 +226,7 @@ class FindGraspPose_Response(metaclass=Metaclass_FindGraspPose_Response):
 
     _fields_and_field_types = {
         'grasp_pose': 'geometry_msgs/PoseStamped',
+        'approach_pose': 'geometry_msgs/PoseStamped',
         'success': 'boolean',
         'message': 'string',
     }
@@ -232,6 +234,7 @@ class FindGraspPose_Response(metaclass=Metaclass_FindGraspPose_Response):
     # This attribute is used to store an rosidl_parser.definition variable
     # related to the data type of each of the components the message.
     SLOT_TYPES = (
+        rosidl_parser.definition.NamespacedType(['geometry_msgs', 'msg'], 'PoseStamped'),  # noqa: E501
         rosidl_parser.definition.NamespacedType(['geometry_msgs', 'msg'], 'PoseStamped'),  # noqa: E501
         rosidl_parser.definition.BasicType('boolean'),  # noqa: E501
         rosidl_parser.definition.UnboundedString(),  # noqa: E501
@@ -248,6 +251,8 @@ class FindGraspPose_Response(metaclass=Metaclass_FindGraspPose_Response):
                 ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
         from geometry_msgs.msg import PoseStamped
         self.grasp_pose = kwargs.get('grasp_pose', PoseStamped())
+        from geometry_msgs.msg import PoseStamped
+        self.approach_pose = kwargs.get('approach_pose', PoseStamped())
         self.success = kwargs.get('success', bool())
         self.message = kwargs.get('message', str())
 
@@ -283,6 +288,8 @@ class FindGraspPose_Response(metaclass=Metaclass_FindGraspPose_Response):
             return False
         if self.grasp_pose != other.grasp_pose:
             return False
+        if self.approach_pose != other.approach_pose:
+            return False
         if self.success != other.success:
             return False
         if self.message != other.message:
@@ -307,6 +314,20 @@ class FindGraspPose_Response(metaclass=Metaclass_FindGraspPose_Response):
                 isinstance(value, PoseStamped), \
                 "The 'grasp_pose' field must be a sub message of type 'PoseStamped'"
         self._grasp_pose = value
+
+    @builtins.property
+    def approach_pose(self):
+        """Message field 'approach_pose'."""
+        return self._approach_pose
+
+    @approach_pose.setter
+    def approach_pose(self, value):
+        if self._check_fields:
+            from geometry_msgs.msg import PoseStamped
+            assert \
+                isinstance(value, PoseStamped), \
+                "The 'approach_pose' field must be a sub message of type 'PoseStamped'"
+        self._approach_pose = value
 
     @builtins.property
     def success(self):

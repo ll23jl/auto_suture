@@ -450,7 +450,7 @@ extern "C"
 {
 #endif
 
-#include "geometry_msgs/msg/detail/pose_stamped__functions.h"  // grasp_pose
+#include "geometry_msgs/msg/detail/pose_stamped__functions.h"  // approach_pose, grasp_pose
 // already included above
 // #include "rosidl_runtime_c/string.h"  // message
 // already included above
@@ -514,6 +514,12 @@ bool cdr_serialize_auto_suture_interfaces__srv__FindGraspPose_Response(
       &ros_message->grasp_pose, cdr);
   }
 
+  // Field name: approach_pose
+  {
+    cdr_serialize_geometry_msgs__msg__PoseStamped(
+      &ros_message->approach_pose, cdr);
+  }
+
   // Field name: success
   {
     cdr << (ros_message->success ? true : false);
@@ -544,6 +550,11 @@ bool cdr_deserialize_auto_suture_interfaces__srv__FindGraspPose_Response(
   // Field name: grasp_pose
   {
     cdr_deserialize_geometry_msgs__msg__PoseStamped(cdr, &ros_message->grasp_pose);
+  }
+
+  // Field name: approach_pose
+  {
+    cdr_deserialize_geometry_msgs__msg__PoseStamped(cdr, &ros_message->approach_pose);
   }
 
   // Field name: success
@@ -591,6 +602,10 @@ size_t get_serialized_size_auto_suture_interfaces__srv__FindGraspPose_Response(
   current_alignment += get_serialized_size_geometry_msgs__msg__PoseStamped(
     &(ros_message->grasp_pose), current_alignment);
 
+  // Field name: approach_pose
+  current_alignment += get_serialized_size_geometry_msgs__msg__PoseStamped(
+    &(ros_message->approach_pose), current_alignment);
+
   // Field name: success
   {
     size_t item_size = sizeof(ros_message->success);
@@ -626,6 +641,24 @@ size_t max_serialized_size_auto_suture_interfaces__srv__FindGraspPose_Response(
   is_plain = true;
 
   // Field name: grasp_pose
+  {
+    size_t array_size = 1;
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size;
+      inner_size =
+        max_serialized_size_geometry_msgs__msg__PoseStamped(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+
+  // Field name: approach_pose
   {
     size_t array_size = 1;
     last_member_size = 0;
@@ -689,6 +722,12 @@ bool cdr_serialize_key_auto_suture_interfaces__srv__FindGraspPose_Response(
       &ros_message->grasp_pose, cdr);
   }
 
+  // Field name: approach_pose
+  {
+    cdr_serialize_key_geometry_msgs__msg__PoseStamped(
+      &ros_message->approach_pose, cdr);
+  }
+
   // Field name: success
   {
     cdr << (ros_message->success ? true : false);
@@ -730,6 +769,10 @@ size_t get_serialized_size_key_auto_suture_interfaces__srv__FindGraspPose_Respon
   current_alignment += get_serialized_size_key_geometry_msgs__msg__PoseStamped(
     &(ros_message->grasp_pose), current_alignment);
 
+  // Field name: approach_pose
+  current_alignment += get_serialized_size_key_geometry_msgs__msg__PoseStamped(
+    &(ros_message->approach_pose), current_alignment);
+
   // Field name: success
   {
     size_t item_size = sizeof(ros_message->success);
@@ -763,6 +806,24 @@ size_t max_serialized_size_key_auto_suture_interfaces__srv__FindGraspPose_Respon
   full_bounded = true;
   is_plain = true;
   // Field name: grasp_pose
+  {
+    size_t array_size = 1;
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size;
+      inner_size =
+        max_serialized_size_key_geometry_msgs__msg__PoseStamped(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+
+  // Field name: approach_pose
   {
     size_t array_size = 1;
     last_member_size = 0;

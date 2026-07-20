@@ -110,6 +110,16 @@
             "default_value": ""
           },
           {
+            "name": "approach_pose",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "geometry_msgs/msg/PoseStamped"
+            },
+            "default_value": ""
+          },
+          {
             "name": "success",
             "type": {
               "type_id": 15,
@@ -361,11 +371,11 @@
   "type_hashes": [
     {
       "type_name": "auto_suture_interfaces/srv/FindGraspPose",
-      "hash_string": "RIHS01_3ba37df856fd83fc67479bf3ed79037a2661a565a9deaf551628c36a82d2b63b"
+      "hash_string": "RIHS01_2ec917200d5f5953d8c3cecbc3ce3fd116c49a04690f48571217f5434c77be4b"
     },
     {
       "type_name": "auto_suture_interfaces/srv/FindGraspPose_Event",
-      "hash_string": "RIHS01_4536dcf758e91f5aaead7ea4ba60f1cb40c95eabc508759329e92d5cae6e4ae2"
+      "hash_string": "RIHS01_4c02b173bc9bbcca0edd222b24719cd8a4990c4ca5b80a5246ae71fb317f1c8b"
     },
     {
       "type_name": "auto_suture_interfaces/srv/FindGraspPose_Request",
@@ -373,7 +383,7 @@
     },
     {
       "type_name": "auto_suture_interfaces/srv/FindGraspPose_Response",
-      "hash_string": "RIHS01_a2be72a588b3e798cee3fee48a425f6ff764e7b4fe78e8200c8a7a20ff87c7c6"
+      "hash_string": "RIHS01_d522a3b44996ece4c92c2ddf294f18fa4aa41656b0fd74567056428179e2c693"
     },
     {
       "type_name": "builtin_interfaces/msg/Time",

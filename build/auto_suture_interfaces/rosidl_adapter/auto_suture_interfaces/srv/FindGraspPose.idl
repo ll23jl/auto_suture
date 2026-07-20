@@ -14,6 +14,8 @@ module auto_suture_interfaces {
     struct FindGraspPose_Response {
       geometry_msgs::msg::PoseStamped grasp_pose;
 
+      geometry_msgs::msg::PoseStamped approach_pose;
+
       boolean success;
 
       string message;
