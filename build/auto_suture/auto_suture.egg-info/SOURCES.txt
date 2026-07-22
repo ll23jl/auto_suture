@@ -22,3 +22,4 @@ test/test_flake8.py
 test/test_pep257.py
 utility/__init__.py
 utility/transform_functions.py
+utility/utilities.py

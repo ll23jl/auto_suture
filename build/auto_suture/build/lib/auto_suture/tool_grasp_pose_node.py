@@ -12,10 +12,11 @@ from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
 from ambf_msgs.msg import RigidBodyState
 from auto_suture_interfaces.srv import FindGraspPose
-from utility.transform_functions import pose_to_pykdl
+from utility.transform_functions import pose_to_pykdl, pykdl_to_pose
 from PyKDL import Frame, Rotation, Vector
 
-# Define node
+
+# ----- Define node -----
 class ToolGraspPose(Node):
 
     def __init__(self):
@@ -50,7 +51,7 @@ class ToolGraspPose(Node):
         )
 
 
-    # Callback function for storing the latest needle pose
+    # ----- Callback function for storing the latest needle pose -----
     def needle_state_callback(self, msg):
 
         self.latest_needle_pose = msg
@@ -61,7 +62,9 @@ class ToolGraspPose(Node):
             f"{msg.pose.position.y}, "
             f"{msg.pose.position.z} "
         )
-    # Call function for storing the latest baselink pose (should not change)
+
+
+    # ----- Callback function for storing the latest baselink pose (should not change) -----
     def baselink_state_callback(self, msg):
 
         self.latest_base_pose = msg.pose
@@ -74,7 +77,7 @@ class ToolGraspPose(Node):
         )
 
 
-    # function for choosing the correct grasp offset for scenario
+    # ----- Function for choosing the correct grasp offset for scenario -----
     def get_grasp_offset(self, psm, grasp_type):
 
         prefix = f'grasp_offsets.{psm}.{grasp_type}'
@@ -120,10 +123,13 @@ class ToolGraspPose(Node):
         )
 
 
-    # Service callback function to calculate grasp pose
+    # ----- Service callback function to calculate grasp pose -----
     def find_grasp_pose_callback(self, request, response):
 
-        # Check there is actually a pose stored
+
+        # ----- Check there is actually a pose stored -----
+
+
         if self.latest_needle_pose is None:
 
             self.get_logger().warn(
@@ -135,7 +141,10 @@ class ToolGraspPose(Node):
 
             return response
 
-        # Check there is actually a pose stored
+
+        # ----- Check there is actually a pose stored -----
+
+
         if self.latest_base_pose is None:
 
             self.get_logger().warn(
@@ -148,12 +157,13 @@ class ToolGraspPose(Node):
             return response
 
 
-        # Get selected grasp offset
+        # ----- Get selected grasp offset -----
+
+
         offset = self.get_grasp_offset(
             request.psm,
             request.grasp_type
         )
-
 
         # Convert needle Pose(Stamped) to PyKDL Frame
         needle_frame = pose_to_pykdl(self.latest_needle_pose.pose)
@@ -165,8 +175,10 @@ class ToolGraspPose(Node):
         # Apply offset:
         tool_frame = needle_in_base * offset
         
-        # Set frame of approach:
+
+        # ----- Set frame of approach: -----
         # 10mm 'above' needle 
+
         approach_offset = Frame(
             Rotation.Identity(),
             Vector(0,0,0.005)
@@ -177,49 +189,37 @@ class ToolGraspPose(Node):
         approach_frame = base_frame.Inverse() * approach_in_world
 
 
-        # Convert PyKDL Frame back to PoseStamped
+        # ------ Convert PyKDL Frame back to PoseStamped ------
 
-        # Grasp pose:
+
+        # ----- Grasp pose: -----
+
+
         grasp_pose = PoseStamped()
 
         grasp_pose.header.frame_id = "psm2/baselink"
 
-        grasp_pose.pose.position.x = tool_frame.p.x()
-        grasp_pose.pose.position.y = tool_frame.p.y()
-        grasp_pose.pose.position.z = tool_frame.p.z()
-
-        qx, qy, qz, qw = tool_frame.M.GetQuaternion()
-
-        grasp_pose.pose.orientation.x = qx
-        grasp_pose.pose.orientation.y = qy
-        grasp_pose.pose.orientation.z = qz
-        grasp_pose.pose.orientation.w = qw
+        grasp_pose.pose = pykdl_to_pose(tool_frame)
 
         response.grasp_pose = grasp_pose
 
-        # Approach pose:
+
+        # ----- Approach pose: -----
+
+
         approach_pose = PoseStamped()
 
         approach_pose.header.frame_id = "psm2/baselink"
 
-        approach_pose.pose.position.x = approach_frame.p.x()
-        approach_pose.pose.position.y = approach_frame.p.y()
-        approach_pose.pose.position.z = approach_frame.p.z()
-
-        qx, qy, qz, qw = approach_frame.M.GetQuaternion()
-
-        approach_pose.pose.orientation.x = qx
-        approach_pose.pose.orientation.y = qy
-        approach_pose.pose.orientation.z = qz
-        approach_pose.pose.orientation.w = qw
+        approach_pose.pose = pykdl_to_pose(approach_frame)
 
         response.approach_pose = approach_pose
 
-
         response.success = True
+
         response.message = "Grasp pose calculated successfully"
 
-        
+        # --------------------------
 
         return response
 

@@ -1,0 +1,209 @@
+[0.064s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.064s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x793f1b590a40>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x793f1b590440>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x793f1b590440>>, mixin_verb=('build',))
+[0.090s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.091s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.091s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.091s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.091s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.091s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.091s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/jazmin/auto_suture'
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.091s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.106s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extensions ['ignore', 'ignore_ament_install']
+[0.107s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extension 'ignore'
+[0.107s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extension 'ignore_ament_install'
+[0.107s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extensions ['colcon_pkg']
+[0.107s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extension 'colcon_pkg'
+[0.107s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extensions ['colcon_meta']
+[0.107s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extension 'colcon_meta'
+[0.107s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extensions ['ros']
+[0.107s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture) by extension 'ros'
+[0.108s] DEBUG:colcon.colcon_core.package_identification:Package 'src/auto_suture' with type 'ros.ament_python' and name 'auto_suture'
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extension 'ignore'
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extension 'ignore_ament_install'
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extensions ['colcon_pkg']
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extension 'colcon_pkg'
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extensions ['colcon_meta']
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extension 'colcon_meta'
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extensions ['ros']
+[0.108s] Level 1:colcon.colcon_core.package_identification:_identify(src/auto_suture_interfaces) by extension 'ros'
+[0.108s] DEBUG:colcon.colcon_core.package_identification:Package 'src/auto_suture_interfaces' with type 'ros.ament_cmake' and name 'auto_suture_interfaces'
+[0.108s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.108s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.109s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.109s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.109s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.121s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.121s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.122s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 2 installed packages in /home/jazmin/auto_suture/install
+[0.122s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 6 installed packages in /home/jazmin/ros_ambf_ws/install
+[0.123s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 287 installed packages in /opt/ros/jazzy
+[0.124s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'cmake_args' from command line to 'None'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'cmake_target' from command line to 'None'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'cmake_clean_cache' from command line to 'False'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'cmake_clean_first' from command line to 'False'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'cmake_force_configure' from command line to 'False'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'ament_cmake_args' from command line to 'None'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'catkin_cmake_args' from command line to 'None'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture_interfaces' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.147s] DEBUG:colcon.colcon_core.verb:Building package 'auto_suture_interfaces' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jazmin/auto_suture/build/auto_suture_interfaces', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jazmin/auto_suture/install/auto_suture_interfaces', 'merge_install': False, 'path': '/home/jazmin/auto_suture/src/auto_suture_interfaces', 'symlink_install': False, 'test_result_base': None}
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'cmake_args' from command line to 'None'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'cmake_target' from command line to 'None'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'cmake_clean_cache' from command line to 'False'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'cmake_clean_first' from command line to 'False'
+[0.147s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'cmake_force_configure' from command line to 'False'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'ament_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'catkin_cmake_args' from command line to 'None'
+[0.148s] Level 5:colcon.colcon_core.verb:set package 'auto_suture' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.148s] DEBUG:colcon.colcon_core.verb:Building package 'auto_suture' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jazmin/auto_suture/build/auto_suture', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jazmin/auto_suture/install/auto_suture', 'merge_install': False, 'path': '/home/jazmin/auto_suture/src/auto_suture', 'symlink_install': False, 'test_result_base': None}
+[0.148s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.148s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.148s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/jazmin/auto_suture/src/auto_suture_interfaces' with build type 'ament_cmake'
+[0.148s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/jazmin/auto_suture/src/auto_suture_interfaces'
+[0.150s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.150s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.150s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.158s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jazmin/auto_suture/build/auto_suture_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jazmin/auto_suture/install/auto_suture:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jazmin/auto_suture/build/auto_suture_interfaces -- -j16 -l16
+[0.423s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jazmin/auto_suture/build/auto_suture_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jazmin/auto_suture/install/auto_suture:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jazmin/auto_suture/build/auto_suture_interfaces -- -j16 -l16
+[0.433s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jazmin/auto_suture/build/auto_suture_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jazmin/auto_suture/install/auto_suture:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jazmin/auto_suture/build/auto_suture_interfaces
+[0.479s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(auto_suture_interfaces)
+[0.479s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jazmin/auto_suture/build/auto_suture_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/jazmin/auto_suture/install/auto_suture:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jazmin/auto_suture/build/auto_suture_interfaces
+[0.481s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces' for CMake module files
+[0.481s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces' for CMake config files
+[0.481s] Level 1:colcon.colcon_core.shell:create_environment_hook('auto_suture_interfaces', 'cmake_prefix_path')
+[0.481s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/cmake_prefix_path.ps1'
+[0.482s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/cmake_prefix_path.dsv'
+[0.482s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/cmake_prefix_path.sh'
+[0.482s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib'
+[0.482s] Level 1:colcon.colcon_core.shell:create_environment_hook('auto_suture_interfaces', 'ld_library_path_lib')
+[0.483s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/ld_library_path_lib.ps1'
+[0.483s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/ld_library_path_lib.dsv'
+[0.483s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/ld_library_path_lib.sh'
+[0.483s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/bin'
+[0.483s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/pkgconfig/auto_suture_interfaces.pc'
+[0.483s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages'
+[0.484s] Level 1:colcon.colcon_core.shell:create_environment_hook('auto_suture_interfaces', 'pythonpath')
+[0.484s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/pythonpath.ps1'
+[0.484s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/pythonpath.dsv'
+[0.484s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/pythonpath.sh'
+[0.485s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/bin'
+[0.485s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.ps1'
+[0.485s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.dsv'
+[0.486s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.sh'
+[0.486s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.bash'
+[0.486s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.zsh'
+[0.487s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jazmin/auto_suture/install/auto_suture_interfaces/share/colcon-core/packages/auto_suture_interfaces)
+[0.487s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(auto_suture_interfaces)
+[0.487s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces' for CMake module files
+[0.487s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces' for CMake config files
+[0.487s] Level 1:colcon.colcon_core.shell:create_environment_hook('auto_suture_interfaces', 'cmake_prefix_path')
+[0.488s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/cmake_prefix_path.ps1'
+[0.488s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/cmake_prefix_path.dsv'
+[0.488s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/cmake_prefix_path.sh'
+[0.488s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib'
+[0.488s] Level 1:colcon.colcon_core.shell:create_environment_hook('auto_suture_interfaces', 'ld_library_path_lib')
+[0.488s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/ld_library_path_lib.ps1'
+[0.489s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/ld_library_path_lib.dsv'
+[0.489s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/ld_library_path_lib.sh'
+[0.489s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/bin'
+[0.489s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/pkgconfig/auto_suture_interfaces.pc'
+[0.489s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages'
+[0.490s] Level 1:colcon.colcon_core.shell:create_environment_hook('auto_suture_interfaces', 'pythonpath')
+[0.490s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/pythonpath.ps1'
+[0.490s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/pythonpath.dsv'
+[0.490s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/hook/pythonpath.sh'
+[0.491s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture_interfaces/bin'
+[0.491s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.ps1'
+[0.491s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.dsv'
+[0.491s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.sh'
+[0.492s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.bash'
+[0.492s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture_interfaces/share/auto_suture_interfaces/package.zsh'
+[0.492s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jazmin/auto_suture/install/auto_suture_interfaces/share/colcon-core/packages/auto_suture_interfaces)
+[0.492s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/jazmin/auto_suture/src/auto_suture' with build type 'ament_python'
+[0.492s] Level 1:colcon.colcon_core.shell:create_environment_hook('auto_suture', 'ament_prefix_path')
+[0.492s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/hook/ament_prefix_path.ps1'
+[0.493s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/hook/ament_prefix_path.dsv'
+[0.493s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/hook/ament_prefix_path.sh'
+[0.493s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.493s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.624s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/jazmin/auto_suture/src/auto_suture'
+[0.624s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.624s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.958s] DEBUG:colcon.colcon_core.task.python.build:Available setuptools commands: extract_messages, bdist_rpm, upload, saveopts, develop, install, build_py, bdist_dumb, init_catalog, install_data, clean, build_scripts, install_headers, register, bdist_wheel, install_lib, dist_info, upload_docs, test, easy_install, install_egg_info, build_clib, check, bdist_egg, editable_wheel, update_catalog, alias, egg_info, compile_catalog, setopt, bdist, sdist, rotate, install_scripts, build, symlink_data, build_ext
+[0.960s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jazmin/auto_suture/src/auto_suture': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jazmin/auto_suture/build/auto_suture/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/ambf_client/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/tf_function/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/ambf_msgs/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/auto_suture build --build-base /home/jazmin/auto_suture/build/auto_suture/build install --record /home/jazmin/auto_suture/build/auto_suture/install.log --install-scripts $base/lib/auto_suture --single-version-externally-managed install_data
+[1.244s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture' for CMake module files
+[1.245s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jazmin/auto_suture/src/auto_suture' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jazmin/auto_suture/build/auto_suture/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/ambf_client/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/tf_function/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/ambf_msgs/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/auto_suture build --build-base /home/jazmin/auto_suture/build/auto_suture/build install --record /home/jazmin/auto_suture/build/auto_suture/install.log --install-scripts $base/lib/auto_suture --single-version-externally-managed install_data
+[1.245s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture' for CMake config files
+[1.246s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture/lib'
+[1.246s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture/bin'
+[1.246s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture/lib/pkgconfig/auto_suture.pc'
+[1.246s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages'
+[1.246s] Level 1:colcon.colcon_core.shell:create_environment_hook('auto_suture', 'pythonpath')
+[1.246s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/hook/pythonpath.ps1'
+[1.246s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/hook/pythonpath.dsv'
+[1.246s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/hook/pythonpath.sh'
+[1.247s] Level 1:colcon.colcon_core.environment:checking '/home/jazmin/auto_suture/install/auto_suture/bin'
+[1.247s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(auto_suture)
+[1.247s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/package.ps1'
+[1.247s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/package.dsv'
+[1.247s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/package.sh'
+[1.248s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/package.bash'
+[1.248s] INFO:colcon.colcon_core.shell:Creating package script '/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/package.zsh'
+[1.248s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jazmin/auto_suture/install/auto_suture/share/colcon-core/packages/auto_suture)
+[1.248s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.248s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.249s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.249s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.253s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.253s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.253s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.262s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.263s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jazmin/auto_suture/install/local_setup.ps1'
+[1.264s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jazmin/auto_suture/install/_local_setup_util_ps1.py'
+[1.264s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jazmin/auto_suture/install/setup.ps1'
+[1.265s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jazmin/auto_suture/install/local_setup.sh'
+[1.265s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jazmin/auto_suture/install/_local_setup_util_sh.py'
+[1.266s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jazmin/auto_suture/install/setup.sh'
+[1.266s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jazmin/auto_suture/install/local_setup.bash'
+[1.266s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jazmin/auto_suture/install/setup.bash'
+[1.267s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jazmin/auto_suture/install/local_setup.zsh'
+[1.267s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jazmin/auto_suture/install/setup.zsh'

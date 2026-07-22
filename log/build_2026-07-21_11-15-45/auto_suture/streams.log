@@ -1,0 +1,28 @@
+[0.567s] Invoking command in '/home/jazmin/auto_suture/src/auto_suture': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jazmin/auto_suture/build/auto_suture/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/ambf_client/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/tf_function/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/ambf_msgs/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/auto_suture build --build-base /home/jazmin/auto_suture/build/auto_suture/build install --record /home/jazmin/auto_suture/build/auto_suture/install.log --install-scripts $base/lib/auto_suture --single-version-externally-managed install_data
+[0.706s] running egg_info
+[0.714s] writing ../../build/auto_suture/auto_suture.egg-info/PKG-INFO
+[0.714s] writing dependency_links to ../../build/auto_suture/auto_suture.egg-info/dependency_links.txt
+[0.715s] writing entry points to ../../build/auto_suture/auto_suture.egg-info/entry_points.txt
+[0.715s] writing requirements to ../../build/auto_suture/auto_suture.egg-info/requires.txt
+[0.715s] writing top-level names to ../../build/auto_suture/auto_suture.egg-info/top_level.txt
+[0.732s] reading manifest file '../../build/auto_suture/auto_suture.egg-info/SOURCES.txt'
+[0.732s] adding license file 'LICENSE'
+[0.733s] writing manifest file '../../build/auto_suture/auto_suture.egg-info/SOURCES.txt'
+[0.733s] running build
+[0.733s] running build_py
+[0.733s] copying auto_suture/needle_position_node.py -> /home/jazmin/auto_suture/build/auto_suture/build/lib/auto_suture
+[0.733s] running install
+[0.737s] running install_lib
+[0.745s] copying /home/jazmin/auto_suture/build/auto_suture/build/lib/auto_suture/needle_position_node.py -> /home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture
+[0.746s] byte-compiling /home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture/needle_position_node.py to needle_position_node.cpython-312.pyc
+[0.746s] running install_data
+[0.747s] running install_egg_info
+[0.758s] removing '/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture-0.0.0-py3.12.egg-info' (and everything under it)
+[0.758s] Copying ../../build/auto_suture/auto_suture.egg-info to /home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture-0.0.0-py3.12.egg-info
+[0.759s] running install_scripts
+[0.826s] Installing move_to_grasp script to /home/jazmin/auto_suture/install/auto_suture/lib/auto_suture
+[0.826s] Installing needle_frame_converter script to /home/jazmin/auto_suture/install/auto_suture/lib/auto_suture
+[0.826s] Installing needle_position script to /home/jazmin/auto_suture/install/auto_suture/lib/auto_suture
+[0.827s] Installing tool_grasp_pose script to /home/jazmin/auto_suture/install/auto_suture/lib/auto_suture
+[0.827s] writing list of installed files to '/home/jazmin/auto_suture/build/auto_suture/install.log'
+[0.844s] Invoked command in '/home/jazmin/auto_suture/src/auto_suture' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/jazmin/auto_suture/build/auto_suture/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture_interfaces/lib/python3.12/site-packages:/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/ambf_client/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/tf_function/lib/python3.12/site-packages:/home/jazmin/ros_ambf_ws/install/ambf_msgs/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/auto_suture build --build-base /home/jazmin/auto_suture/build/auto_suture/build install --record /home/jazmin/auto_suture/build/auto_suture/install.log --install-scripts $base/lib/auto_suture --single-version-externally-managed install_data

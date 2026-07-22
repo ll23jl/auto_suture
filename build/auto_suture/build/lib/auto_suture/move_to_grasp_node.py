@@ -6,12 +6,17 @@ import time
 from auto_suture_interfaces.srv import FindGraspPose
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import JointState
+from utility.transform_functions import pose_to_pykdl, pykdl_to_pose, posestamped_to_pykdl, pykdl_to_posestamped
+from utility.utilities import cartesian_interpolate_step
 
 
+# ----- Define Node -----
 class MoveToGrasp(Node):
 
     def __init__(self):
         super().__init__('move_to_grasp')
+
+        self.arm_pose = None
 
         # Service Client to find grasp pose
         self.cli = self.create_client(
@@ -25,6 +30,15 @@ class MoveToGrasp(Node):
             )
 
         self.req = FindGraspPose.Request()
+
+
+        # subscriber to psm2 current pose
+        self.arm_meas = self.create_subscription(
+            PoseStamped,
+            '/CRTK/psm2/measured_cp',
+            self.arm_pos_callback,
+            10
+        )
 
         # publisher to move the arm
         self.arm_pub = self.create_publisher(
@@ -40,7 +54,7 @@ class MoveToGrasp(Node):
             10
         )
 
-    # function that sends request for grasp position with given parameters (psm and grasp type)
+    # ----- Function that sends request for grasp position with given parameters (psm and grasp type) -----
     def send_request(self, psm, grasp_type):
 
         req = FindGraspPose.Request()
@@ -48,6 +62,10 @@ class MoveToGrasp(Node):
         req.grasp_type = grasp_type
 
         return self.cli.call_async(req)
+    
+    # ----- Callback function that stores arm pose in baselink frame -----
+    def arm_pos_callback(self, msg):
+        self.arm_pose = msg.pose
 
 
 def main():
@@ -72,7 +90,13 @@ def main():
     # store response
     response = future.result()
 
+
+    # ----- Move the robot -----
+
     if response.success:
+
+        # ---------- Approach pose ----------
+
         node.get_logger().info(
             f'Approach position returned:\n{response.approach_pose}'
         )
@@ -83,6 +107,30 @@ def main():
         # wait
         for _ in range(10):
             rclpy.spin_once(node, timeout_sec=0.1) 
+
+
+
+        # ---------- While loop version ----------
+
+        
+
+            
+
+
+
+        # ---------- Open jaws ----------
+
+        jaw_pos = JointState()
+        jaw_pos.header.stamp = node.get_clock().now().to_msg()
+        jaw_pos.name = ["jaw"]
+        jaw_pos.position = [0.5]
+
+        node.jaw_pub.publish(jaw_pos)
+        
+        node.get_logger().info("Opening jaws")
+
+
+        # ---------- Grasp pose ----------
 
         node.get_logger().info(
             f'Grasp position returned:\n{response.grasp_pose}'
@@ -95,7 +143,8 @@ def main():
         for _ in range(10):
             rclpy.spin_once(node, timeout_sec=0.1) 
 
-        # close jaws
+        # ---------- Close jaws ----------
+
         jaw_pos = JointState()
         jaw_pos.header.stamp = node.get_clock().now().to_msg()
         jaw_pos.name = ["jaw"]
@@ -104,6 +153,20 @@ def main():
         node.jaw_pub.publish(jaw_pos)
         
         node.get_logger().info("Closing jaws")
+
+        # wait
+        for _ in range(10):
+            rclpy.spin_once(node, timeout_sec=0.1) 
+
+        # ---------- Pick up ----------
+        
+        # return to approach pose
+        node.arm_pub.publish(response.approach_pose)
+
+        # wait
+        for _ in range(10):
+            rclpy.spin_once(node, timeout_sec=0.1) 
+
 
     else:
         node.get_logger().error(
