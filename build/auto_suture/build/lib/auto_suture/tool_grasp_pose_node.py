@@ -181,7 +181,7 @@ class ToolGraspPose(Node):
 
         approach_offset = Frame(
             Rotation.Identity(),
-            Vector(0,0,0.005)
+            Vector(0,0,0.01)
         )
 
         approach_in_world = needle_frame * approach_offset * offset
