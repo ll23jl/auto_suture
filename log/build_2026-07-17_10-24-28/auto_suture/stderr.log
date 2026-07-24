@@ -1,5 +1,0 @@
-  File "/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/auto_suture/tool_grasp_pose_node.py", line 39
-    '/ambf/env/psm2/baselink/State'
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-SyntaxError: invalid syntax. Perhaps you forgot a comma?
-
