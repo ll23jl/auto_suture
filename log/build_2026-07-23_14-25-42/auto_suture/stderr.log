@@ -1,0 +1,5 @@
+  File "/home/jazmin/auto_suture/install/auto_suture/lib/python3.12/site-packages/utility/utilities.py", line 186
+    label="Translation Error"
+          
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+

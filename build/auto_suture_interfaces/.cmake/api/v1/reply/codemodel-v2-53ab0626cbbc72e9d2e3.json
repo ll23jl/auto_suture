@@ -1,0 +1,267 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-596fe2bf6805b181b818.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						15,
+						16,
+						17,
+						18,
+						19
+					]
+				},
+				{
+					"build" : "auto_suture_interfaces__py",
+					"jsonFile" : "directory-auto_suture_interfaces__py-042adba253c74fa2e779.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/jazmin/auto_suture/build/auto_suture_interfaces/auto_suture_interfaces__py",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "auto_suture_interfaces__rs",
+					"jsonFile" : "directory-auto_suture_interfaces__rs-0e8feb46fd555106a8b5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/jazmin/auto_suture/build/auto_suture_interfaces/auto_suture_interfaces__rs",
+					"targetIndexes" : 
+					[
+						14
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "auto_suture_interfaces",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_auto_suture_interfaces_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_auto_suture_interfaces_egg-faa9236ac140d73acf58.json",
+					"name" : "ament_cmake_python_build_auto_suture_interfaces_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_symlink_auto_suture_interfaces::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_symlink_auto_suture_interfaces-512ecd7d0001b3102070.json",
+					"name" : "ament_cmake_python_symlink_auto_suture_interfaces",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces-971e1905b38f337c8d7a.json",
+					"name" : "auto_suture_interfaces",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__cpp-f66a2cfa74392f3fb7a6.json",
+					"name" : "auto_suture_interfaces__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "auto_suture_interfaces__py::@225a62325a6dad44721c",
+					"jsonFile" : "target-auto_suture_interfaces__py-db53f522458c7fb6c1ed.json",
+					"name" : "auto_suture_interfaces__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_generator_c-2d1efbc7cbbf63b71a09.json",
+					"name" : "auto_suture_interfaces__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_generator_py-a058730f494a08b93ab8.json",
+					"name" : "auto_suture_interfaces__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_generator_type_description::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_generator_type_description-145aa4b59b08d53bd176.json",
+					"name" : "auto_suture_interfaces__rosidl_generator_type_description",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_typesupport_c-111560a9882f3ddc9ff1.json",
+					"name" : "auto_suture_interfaces__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_typesupport_cpp-7c326566a017b2b534ff.json",
+					"name" : "auto_suture_interfaces__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_typesupport_fastrtps_c-3263e99a616981d6e266.json",
+					"name" : "auto_suture_interfaces__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_typesupport_fastrtps_cpp-2975a26065674e745524.json",
+					"name" : "auto_suture_interfaces__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_typesupport_introspection_c-4adcbdb3650781abe724.json",
+					"name" : "auto_suture_interfaces__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces__rosidl_typesupport_introspection_cpp-956eab933216856f5dc4.json",
+					"name" : "auto_suture_interfaces__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "auto_suture_interfaces__rs::@fc022ca9587f8258f92e",
+					"jsonFile" : "target-auto_suture_interfaces__rs-f4cb12d1ede2e0c87028.json",
+					"name" : "auto_suture_interfaces__rs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces_s__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces_s__rosidl_typesupport_c-77c28bfce211d835db16.json",
+					"name" : "auto_suture_interfaces_s__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c-ef19bf75aeb11ad28515.json",
+					"name" : "auto_suture_interfaces_s__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces_s__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces_s__rosidl_typesupport_introspection_c-f67d118071064f2ef836.json",
+					"name" : "auto_suture_interfaces_s__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "auto_suture_interfaces_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-auto_suture_interfaces_uninstall-1e01a4c165e32da2aedd.json",
+					"name" : "auto_suture_interfaces_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-ee038a029a8af7115af3.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/jazmin/auto_suture/build/auto_suture_interfaces",
+		"source" : "/home/jazmin/auto_suture/src/auto_suture_interfaces"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

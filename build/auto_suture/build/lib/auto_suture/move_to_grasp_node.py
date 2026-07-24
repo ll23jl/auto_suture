@@ -1,3 +1,6 @@
+
+# ---------------------------------------- Imports ----------------------------------------
+
 import sys
 import rclpy
 from rclpy.node import Node
@@ -10,14 +13,14 @@ from auto_suture_interfaces.srv import FindGraspPose
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import JointState
 from utility.transform_functions import pose_to_pykdl, pykdl_to_pose, posestamped_to_pykdl, pykdl_to_posestamped
-from utility.utilities import cartesian_interpolate_step
+from utility.utilities import cartesian_interpolate_step, save_error_plot
 from ambf_msgs.msg import RigidBodyState
 
 
 
 # ---------------------------------------- Define Nodes ----------------------------------------
 
-# -------------------- Move to Grasp Node --------------------
+# ------------------------------ Move to Grasp Node ------------------------------
 
 class MoveToGrasp(Node):
     
@@ -120,7 +123,7 @@ class MoveToGrasp(Node):
         self.base_pose = msg.pose
 
 
-
+# --------------------------------------------------------------------------------------
 
 # ---------------------------------------- Main ----------------------------------------
 
@@ -146,13 +149,13 @@ def main():
     # store response
     response = future.result()
 
-
-    # ----- Move the robot -----
+    # ------------------------------------------------------------------------------------------------
+    # ---------------------------------------- Move the robot ----------------------------------------
 
     if response.success:
 
 
-        # ---------- Approach pose ----------
+        # ------------------------------ Approach pose ------------------------------
 
 
         # measure current pose (in baselink frame)
@@ -160,123 +163,9 @@ def main():
             move_to_grasp_node.get_logger().info("Waiting for current arm pose...")
             rclpy.spin_once(move_to_grasp_node, timeout_sec=0.1)
 
-        # set flag to false
-        done = False
 
-        # set target pose as pykdl (in baselink frame)
-        target_pose = posestamped_to_pykdl(response.approach_pose)
-        move_to_grasp_node.get_logger().info(f"Moving to pose:\n{target_pose}")
-
-        # current pose to pykdl
-        current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
-
-
-        # while loop for movement
-        while not done:
-
-            # current pose to pykdl
-            current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
-
-            # calculate step
-            T_delta, done, trans_error_mag, rot_error_mag = cartesian_interpolate_step(
-                current_pose,
-                target_pose
-            )
-
-            # create blank frame
-            next_step = Frame()
-
-            # new position and rotation
-            next_step.p = current_pose.p + T_delta.p
-            next_step.M = current_pose.M * T_delta.M
-
-            # convert to PoseStamped
-            next_pose = pykdl_to_posestamped(next_step, "psm2/baselink")
-
-            # send pose to robot
-            #move_to_grasp_node.get_logger().info(f"Next pose:\n{next_pose}")
-            move_to_grasp_node.arm_pub.publish(next_pose)
-
-            # spin
-            rclpy.spin_once(move_to_grasp_node, timeout_sec=0.001)
-            
-
-        # ---------- Open jaws ----------
-
-        move_to_grasp_node.set_jaw(0.5)
-
-        move_to_grasp_node.get_logger().info("Opening jaws")
-
-        # spin
-        rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
-
-
-        # ---------- Grasp pose ----------
-
-
-        # set flag to false
-        done = False
-
-        # set target pose as pykdl (in baselink frame)
-        target_pose = posestamped_to_pykdl(response.grasp_pose)
-        move_to_grasp_node.get_logger().info(f"Moving to pose:\n{target_pose}")
-
-        # current pose to pykdl
-        current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
-
-
-        # while loop for movement
-        while not done:
-
-            # current pose to pykdl
-            current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
-
-            # calculate step
-            T_delta, done, trans_error_mag, rot_error_mag = cartesian_interpolate_step(
-                current_pose,
-                target_pose
-            )
-
-            # create blank frame
-            next_step = Frame()
-
-            # new position and rotation
-            next_step.p = current_pose.p + T_delta.p
-            next_step.M = current_pose.M * T_delta.M
-
-            # convert to PoseStamped
-            next_pose = pykdl_to_posestamped(next_step, "psm2/baselink")
-
-            # send pose to robot
-            #move_to_grasp_node.get_logger().info(f"Next pose:\n{next_pose}")
-            move_to_grasp_node.arm_pub.publish(next_pose)
-
-            # spin
-            rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
-            
-
-
-        # wait
-        for _ in range(50):
-            rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
-
-        # ---------- Close jaws ----------
-
-        move_to_grasp_node.set_jaw(0.01)
-
-        move_to_grasp_node.get_logger().info("Closing jaws")
-
+        # -------------------- For plotting --------------------
         
-        # wait
-        for _ in range(50):
-            rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
-
-
-        # ---------- Pick up ----------
-        
-        # ----- For plotting -----
-            
-
         times = []
         trans_errors = []
         rot_errors = []
@@ -285,51 +174,38 @@ def main():
         previous_error = float("inf")
         moving_away_count = 0
 
-        # ------------------------
+        # -------------------------------------------------------
 
         # set flag to false
         done = False
 
+        # set target pose as pykdl (in baselink frame)
+        target_pose = posestamped_to_pykdl(response.approach_pose)
+        move_to_grasp_node.get_logger().info(f"\nMoving to approach pose:\n{target_pose}")
+
+        # current pose to pykdl
         current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
 
-        base_pose_in_world = pose_to_pykdl(move_to_grasp_node.base_pose)
 
-        current_pose_world = base_pose_in_world * current_pose
-
-        translation_offset = Vector(0.0, 0.0, 0.01)
-        rotation_offset = Rotation.RotZ(0.0)
-
-        offset = Frame(rotation_offset, translation_offset)
-
-        target_pose_world = current_pose_world * offset
-
-        target_pose = base_pose_in_world.Inverse() * target_pose_world
-
-
-        # print target pose
-        move_to_grasp_node.get_logger().info(f"Moving to pose:\n{target_pose}")
-
-
-        # while loop for movement
+        # ------------------------------ while loop for movement ------------------------------
         while not done:
-
 
             # current pose to pykdl
             current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
 
             # calculate step
-            T_delta, done, trans_error_mag, rot_error_mag = cartesian_interpolate_step(
+            T_delta, done, trans_error_mag, rot_error_mag, deadband, rot_deadband, max_translation, max_rotation = cartesian_interpolate_step(
                 current_pose,
                 target_pose
             )
 
-            # ----- For plotting -----
+            # -------------------- For plotting --------------------
             
             times.append(time.time() - start_time)
             trans_errors.append(trans_error_mag)
             rot_errors.append(rot_error_mag)
 
-            # ----- Debug -----
+            # -------------------- Debug --------------------
 
             # Has the translation error increased?
             if trans_error_mag >= previous_error:
@@ -347,6 +223,257 @@ def main():
 
                 # Error has increased for 50 consecutive iterations
                 if moving_away_count > 50:
+                    move_to_grasp_node.get_logger().error(
+                        "Controller diverging - aborting pickup."
+                    )
+                    break
+
+            # ------------------------------------------------
+
+            # create blank frame
+            next_step = Frame()
+
+            # new position and rotation
+            next_step.p = current_pose.p + T_delta.p
+            next_step.M = current_pose.M * T_delta.M
+
+            # convert to PoseStamped
+            next_pose = pykdl_to_posestamped(next_step, "psm2/baselink")
+
+            # send pose to robot
+            #move_to_grasp_node.get_logger().info(f"Next pose:\n{next_pose}")
+            move_to_grasp_node.arm_pub.publish(next_pose)
+
+            # spin
+            rclpy.spin_once(move_to_grasp_node, timeout_sec=0.001)
+
+        # --------------------------------------------------------------------------------
+
+        # -------------------- Plotting --------------------
+
+        filepath = save_error_plot(
+            step_name="Approach Pose",
+            times=times,
+            trans_errors=trans_errors,
+            rot_errors=rot_errors,
+            deadband=deadband,
+            rot_deadband=rot_deadband,
+            max_translation=max_translation,
+            max_rotation=max_rotation,
+            success=done
+        )
+
+        move_to_grasp_node.get_logger().info(f"Saved plot to {filepath}")
+
+        # -----------------------------------------------------------------------
+
+        # ------------------------------ Open jaws ------------------------------
+
+        move_to_grasp_node.set_jaw(0.5)
+
+        move_to_grasp_node.get_logger().info("\nOpening jaws")
+
+        # spin
+        rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
+
+
+        # ------------------------------ Grasp pose ------------------------------
+
+        # -------------------- For plotting --------------------
+            
+
+        times = []
+        trans_errors = []
+        rot_errors = []
+        start_time = time.time()
+
+        previous_error = float("inf")
+        moving_away_count = 0
+
+        # -----------------------------------------------------
+
+        # set flag to false
+        done = False
+
+        # set target pose as pykdl (in baselink frame)
+        target_pose = posestamped_to_pykdl(response.grasp_pose)
+        move_to_grasp_node.get_logger().info(f"\nMoving to grasp pose:\n{target_pose}")
+
+        # current pose to pykdl
+        current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
+
+
+        # ------------------------------ while loop for movement ------------------------------
+        while not done:
+
+            # current pose to pykdl
+            current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
+
+            # calculate step
+            T_delta, done, trans_error_mag, rot_error_mag, deadband, rot_deadband, max_translation, max_rotation = cartesian_interpolate_step(
+                current_pose,
+                target_pose
+            )
+
+            # -------------------- For plotting --------------------
+            
+            times.append(time.time() - start_time)
+            trans_errors.append(trans_error_mag)
+            rot_errors.append(rot_error_mag)
+
+            # -------------------- Debug --------------------
+
+            # Has the translation error increased?
+            if trans_error_mag >= previous_error:
+                moving_away_count += 1
+            else:
+                moving_away_count = 0
+
+            previous_error = trans_error_mag
+
+            #print("moving away count: \n")
+            #print(moving_away_count)
+
+            # Give it 10 s to settle before judging it
+            if time.time() - start_time > 10:
+
+                # Error has increased for 50 consecutive iterations
+                if moving_away_count > 50:
+                    move_to_grasp_node.get_logger().error(
+                        "Controller diverging - aborting pickup."
+                    )
+                    break
+
+            # ------------------------------------------------
+
+            # create blank frame
+            next_step = Frame()
+
+            # new position and rotation
+            next_step.p = current_pose.p + T_delta.p
+            next_step.M = current_pose.M * T_delta.M
+
+            # convert to PoseStamped
+            next_pose = pykdl_to_posestamped(next_step, "psm2/baselink")
+
+            # send pose to robot
+            #move_to_grasp_node.get_logger().info(f"Next pose:\n{next_pose}")
+            move_to_grasp_node.arm_pub.publish(next_pose)
+
+            # spin
+            rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
+        
+        # -------------------- Plotting --------------------
+
+        filepath = save_error_plot(
+            step_name="Grasp Pose",
+            times=times,
+            trans_errors=trans_errors,
+            rot_errors=rot_errors,
+            deadband=deadband,
+            rot_deadband=rot_deadband,
+            max_translation=max_translation,
+            max_rotation=max_rotation,
+            success=done
+        )
+
+        move_to_grasp_node.get_logger().info(f"Saved plot to {filepath}")
+
+        # --------------------------------------------------
+
+
+        # wait
+        for _ in range(50):
+            rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
+
+        # ------------------------------ Close jaws ------------------------------
+
+        move_to_grasp_node.set_jaw(0.0)
+
+        move_to_grasp_node.get_logger().info("\nClosing jaws")
+
+        
+        # wait
+        for _ in range(50):
+            rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
+
+
+        # ------------------------------ Pick up ------------------------------
+        
+        # -------------------- For plotting --------------------
+            
+
+        times = []
+        trans_errors = []
+        rot_errors = []
+        start_time = time.time()
+
+        previous_error = float("inf")
+        moving_away_count = 0
+
+        # --------------------------------------------------
+
+        # set flag to false
+        done = False
+
+        current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
+
+        base_pose_in_world = pose_to_pykdl(move_to_grasp_node.base_pose)
+
+        current_pose_world = base_pose_in_world * current_pose
+
+        translation_offset = Vector(0.0, 0.0, -0.05)
+        rotation_offset = Rotation.RotZ(0.0)
+
+        offset = Frame(rotation_offset, translation_offset)
+
+        target_pose_world = current_pose_world * offset
+
+        target_pose = base_pose_in_world.Inverse() * target_pose_world
+
+
+        # print target pose
+        move_to_grasp_node.get_logger().info(f"\nMoving to pose:\n{target_pose}")
+
+
+        # ------------------------------ while loop for movement ------------------------------
+        while not done:
+
+
+            # current pose to pykdl
+            current_pose = pose_to_pykdl(move_to_grasp_node.arm_pose)
+
+            # calculate step
+            T_delta, done, trans_error_mag, rot_error_mag, deadband, rot_deadband, max_translation, max_rotation = cartesian_interpolate_step(
+                current_pose,
+                target_pose
+            )
+
+            # -------------------- For plotting --------------------
+            
+            times.append(time.time() - start_time)
+            trans_errors.append(trans_error_mag)
+            rot_errors.append(rot_error_mag)
+
+            # -------------------- Debug --------------------
+
+            # Has the translation error increased?
+            if trans_error_mag >= previous_error:
+                moving_away_count += 1
+            else:
+                if moving_away_count > 0:
+                    moving_away_count -= 1
+
+            previous_error = trans_error_mag
+
+            print("moving away count: \n")
+            print(moving_away_count)
+
+            # Give it 10 s to settle before judging it
+            if time.time() - start_time > 10:
+
+                # Error has increased for 50 consecutive iterations
+                if moving_away_count > 20:
                     move_to_grasp_node.get_logger().error(
                         "Controller diverging - aborting pickup."
                     )
@@ -377,39 +504,23 @@ def main():
             for _ in range(10):
                 rclpy.spin_once(move_to_grasp_node, timeout_sec=0.01)
 
-            
+        # -------------------- Plotting --------------------
 
-        fig, ax1 = plt.subplots(figsize=(8,5))
-        ax2 = ax1.twinx()
-
-        line1 = ax1.plot(times, trans_errors, label="Translation Error", color="b")
-        line2 = ax2.plot(times, rot_errors, label="Rotation Error", color="r")
-
-        ax1.set_xlabel("Time (s)")
-        ax1.set_ylabel("Translation Error (m)")
-        ax2.set_ylabel("Rotation Error (rad)")
-        ax1.grid(True)
-
-        lines = line1 + line2
-        labels = [l.get_label() for l in lines]
-        ax1.legend(lines, labels)
-        
-
-        plt.title("Pick Up Needle Error")
-
-        fig.tight_layout()
-
-        filename = f"pick_up_needle_{datetime.now():%Y%m%d_%H%M%S}.png"
-
-        plt.savefig(
-            f"/home/jazmin/auto_suture/src/auto_suture/data/{filename}",
-            dpi=300,
-            bbox_inches="tight"
+        filepath = save_error_plot(
+            step_name="Pick Up Needle",
+            times=times,
+            trans_errors=trans_errors,
+            rot_errors=rot_errors,
+            deadband=deadband,
+            rot_deadband=rot_deadband,
+            max_translation=max_translation,
+            max_rotation=max_rotation,
+            success=done
         )
 
-        plt.close(fig)      
+        move_to_grasp_node.get_logger().info(f"Saved plot to {filepath}")
 
-
+        # --------------------------------------------------
 
 
     else:
