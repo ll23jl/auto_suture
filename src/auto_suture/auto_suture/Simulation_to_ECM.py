@@ -19,10 +19,10 @@ from utility.transform_functions import pose_to_pykdl, pykdl_to_pose
 
 
 # ----- Define node -----
-class NeedleFrameConverter(Node):
+class SimulationECM(Node):
 
     def __init__(self):
-        super().__init__('needle_frame_converter')
+        super().__init__('simulation_to_ecm')
         
         # Initialize variables to store needle and camera poses in world frame
         self.needle_pose = None
@@ -100,15 +100,16 @@ class NeedleFrameConverter(Node):
         self.publisher_.publish(pose)
 
 
+
 def main(args=None):
     rclpy.init(args=args)
 
-    needle_frame_converter = NeedleFrameConverter()
+    simulation_to_ecm = SimulationECM()
 
-    rclpy.spin(needle_frame_converter)
+    rclpy.spin(simulation_to_ecm)
 
     # Destroy the node explicitly
-    needle_frame_converter.destroy_node()
+    simulation_to_ecm.destroy_node()
     rclpy.shutdown()
 
 

@@ -1,4 +1,4 @@
-tool_grasp_pose:
+grasp_needle:
   ros__parameters:
     grasp_offsets:
       psm1:

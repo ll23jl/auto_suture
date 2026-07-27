@@ -17,10 +17,10 @@ from utility.transform_functions import pose_to_pykdl, pykdl_to_pose
 
 
 # ----- Define node -----
-class NeedlePosition(Node):
+class NeedlePoses(Node):
 
     def __init__(self):
-        super().__init__('needle_position')
+        super().__init__('needle_poses')
         
         # Initialize variables to store needle and camera poses in camera/world frame
         self.needle_pose = None
@@ -104,12 +104,12 @@ class NeedlePosition(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    needle_position = NeedlePosition()
+    needle_poses = NeedlePoses()
 
-    rclpy.spin(needle_position)
+    rclpy.spin(needle_poses)
 
     # Destroy the node explicitly
-    needle_position.destroy_node()
+    needle_poses.destroy_node()
     rclpy.shutdown()
 
 

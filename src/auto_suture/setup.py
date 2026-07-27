@@ -39,10 +39,10 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'needle_frame_converter = auto_suture.needle_frame_converter:main',
-            'needle_position = auto_suture.needle_position_node:main',
-            'tool_grasp_pose = auto_suture.tool_grasp_pose_node:main',
-            'move_to_grasp = auto_suture.move_to_grasp_node:main',
+            'Simulation_to_ECM = auto_suture.Simulation_to_ECM:main',
+            'Needle_Poses = auto_suture.Needle_Poses:main',
+            'Grasp_Needle = auto_suture.Grasp_Needle:main',
+            'Needle_Driving = auto_suture.Needle_Driving:main',
         ],
     },
 )

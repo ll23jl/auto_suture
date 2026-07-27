@@ -41,27 +41,19 @@ def generate_launch_description():
     )
 
 
-    # Needle frame converter node
-    needle_frame_converter = Node(
+    # Simulation to ECM node
+    Simulation_to_ECM_Node = Node(
         package="auto_suture",
-        executable="needle_frame_converter",
-        name="needle_frame_converter",
+        executable="Simulation_to_ECM",
+        name="Simulation_to_ECM",
         output="screen"
     )
 
-    # Needle position node
-    needle_position = Node(
+    # Needle poses node
+    Needle_Poses = Node(
         package="auto_suture",
-        executable="needle_position",
-        name="needle_position",
-        output="screen"
-    )
-
-    # Move to grasp node
-    move_to_grasp = Node(
-        package="auto_suture",
-        executable="move_to_grasp",
-        name="move_to_grasp",
+        executable="Needle_Poses",
+        name="Needle_Poses",
         output="screen"
     )
 
@@ -73,21 +65,29 @@ def generate_launch_description():
         'grasp_offsets.yaml'
     )
 
-
-    # Tool grasp pose node
-    tool_grasp_pose = Node(
+    # Grasp needle node
+    Grasp_Needle = Node(
         package="auto_suture",
-        executable="tool_grasp_pose",
-        name="tool_grasp_pose",
+        executable="Grasp_Needle",
+        name="Grasp_Needle",
         parameters=[grasp_config],
+        arguments=["psm2", "grip"],
         output="screen"
     )
-    
+
+    # Needle driving node
+    Needle_Driving = Node(
+        package="auto_suture",
+        executable="Needle_Driving",
+        name="Needle_Driving",
+        output="screen"
+    )
+
+
 
     return LaunchDescription([
         simulation,
         crtk,
-        needle_frame_converter,
-        needle_position,
-        tool_grasp_pose
+        Simulation_to_ECM_Node,
+        Needle_Poses
     ])
