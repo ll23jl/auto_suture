@@ -1,11 +1,7 @@
 
-# Node that converts needle pose in the camera frame into the world frame
-# Subscribes to needle pose (in camera frame) and camera pose data given by ECM
-# Transforms needle pose into the world frame
-# Publishes needle pose in the world frame as PoseStamped
-# -----------------------------------------------------------------------
 
-# Imports
+# ---------------------------------------- Imports ----------------------------------------
+
 
 import rclpy
 from rclpy.node import Node
@@ -16,16 +12,20 @@ from PyKDL import Frame, Rotation, Vector
 from utility.transform_functions import pose_to_pykdl, pykdl_to_pose
 
 
-# ----- Define node -----
+# ---------------------------------------- Needle poses node ----------------------------------------
+
+
 class NeedlePoses(Node):
 
     def __init__(self):
         super().__init__('needle_poses')
         
-        # Initialize variables to store needle and camera poses in camera/world frame
+        # ------------------------------ Variables ------------------------------
+
         self.needle_pose = None
         self.camera_pose = None
 
+        # ------------------------------ Subscriptions ------------------------------
 
         # Subcriber to needle pose in camera frame
         self.needle_subscription = self.create_subscription(
@@ -43,7 +43,7 @@ class NeedlePoses(Node):
             10
         )
 
-        # Subscriber to
+        # ------------------------------ Publishers ------------------------------
 
         # Publisher for needle pose in world frame
         self.publisher_ = self.create_publisher(
@@ -52,6 +52,7 @@ class NeedlePoses(Node):
             10
         )
 
+    # ------------------------------ Functions ------------------------------
 
     # ----- Callback function that stores needle pose in camera frame -----
     def needle_callback(self, msg):
@@ -99,6 +100,9 @@ class NeedlePoses(Node):
         pose.pose = pykdl_to_pose(T_needle_world)
 
         self.publisher_.publish(pose)
+
+
+# ---------------------------------------- Main ----------------------------------------
 
 
 def main(args=None):

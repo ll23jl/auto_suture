@@ -5,6 +5,7 @@ from ament_index_python.packages import get_package_share_directory
 
 import os
 
+# !!!!!!! Note: please change simulation file paths as necessary.
 
 def generate_launch_description():
 

@@ -1,11 +1,7 @@
 
-# Needle driving script
-# Tracks needle point
-# Path plans
-# Drives the needle
-# ----------------------------------------------------------------------
 
-# ------------------------------ Imports ------------------------------
+# ---------------------------------------- Imports ----------------------------------------
+
 
 import rclpy
 
@@ -15,13 +11,15 @@ from PyKDL import Frame, Rotation, Vector
 from utility.transform_functions import pose_to_pykdl, pykdl_to_pose, pykdl_to_posestamped
 
 
-# ------------------------------ Define node ------------------------------
+# ---------------------------------------- Needle driving node ----------------------------------------
+
+
 class NeedleDriving(Node):
 
     def __init__(self):
         super().__init__('needle_driving')
 
-        # -------------------- Variables --------------------
+        # ------------------------------ Variables ------------------------------
 
         self.needle_to_point_offset = Frame(
             Rotation.RPY(0., 0., -0.688), 
@@ -33,7 +31,7 @@ class NeedleDriving(Node):
         
         self.needle_point_in_world = None
 
-        # -------------------- Subscribers --------------------
+        # ------------------------------ Subscribers ------------------------------
 
         # Needle pose in world frame
         self.needle_sub = self.create_subscription(
@@ -43,7 +41,7 @@ class NeedleDriving(Node):
             10
         )
 
-        # -------------------- Publishers --------------------
+        # ------------------------------ Publishers ------------------------------
         
         # Needle point pose in world frame
         self.needle_point_pub = self.create_publisher(
@@ -52,7 +50,7 @@ class NeedleDriving(Node):
             10
         )
 
-    # -------------------- Callback Functions --------------------
+    # ------------------------------ Callback Functions ------------------------------
 
     # Store needle pose in world frame as pykdl
     def needle_sub_callback(self, msg):
@@ -61,7 +59,7 @@ class NeedleDriving(Node):
         self.find_needle_point(self.needle_in_world)
 
     
-    # -------------------- Other Functions --------------------
+    # ------------------------------ Other Functions ------------------------------
 
     # Finds the needle point pose in world frame
     def find_needle_point(self, needle_in_world):
@@ -74,17 +72,19 @@ class NeedleDriving(Node):
         self.needle_point_pub.publish(msg)
 
 
-# --------------------------------------------------------------------------------
-# -------------------------------- Path Planning ---------------------------------
 
-def plot_driving_path(self, entry_pose_in_world, exit_pose_in_world)
+# ---------------------------------------- Path Planning ----------------------------------------
 
 
 
 
+def plot_driving_path(self, start_pose_in_world, end_pose_in_world)
 
 
-# -------------------------------------------------------------------------------
+
+
+
+
 # ------------------------------------ Main -------------------------------------
 
 
