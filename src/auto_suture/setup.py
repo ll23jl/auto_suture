@@ -41,8 +41,10 @@ setup(
         'console_scripts': [
             'Simulation_to_ECM = auto_suture.Simulation_to_ECM:main',
             'Needle_Poses = auto_suture.Needle_Poses:main',
+            'Entry_Exit_Poses = auto_suture.Entry_Exit_Poses:main',
             'Grasp_Needle = auto_suture.Grasp_Needle:main',
             'Needle_Driving = auto_suture.Needle_Driving:main',
+            'controller = auto_suture.controller:main',
         ],
     },
 )

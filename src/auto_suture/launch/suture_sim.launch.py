@@ -16,7 +16,7 @@ def generate_launch_description():
         ],
         cwd="/home/jazmin/surgical_robotics_challenge-master",
         shell=True,
-        output="screen"
+        output="log"
     )
 
     # Wait for AMBF to start before launching the CRTK interface
@@ -36,7 +36,7 @@ def generate_launch_description():
                         os.environ.get("PYTHONPATH", "")
                     ])
                 },
-                output="screen"
+                output="log"
             )
         ]
     )
@@ -58,6 +58,15 @@ def generate_launch_description():
         output="screen"
     )
 
+    # Entry/exit poses node
+    Entry_Exit_Poses = Node(
+        package="auto_suture",
+        executable="Entry_Exit_Poses",
+        name="Entry_Exit_Poses",
+        output="screen"
+    )
+
+
     pkg_path = get_package_share_directory('auto_suture')
 
     grasp_config = os.path.join(
@@ -65,12 +74,13 @@ def generate_launch_description():
         'config',
         'grasp_offsets.yaml'
     )
+    
 
     # Grasp needle node
     Grasp_Needle = Node(
         package="auto_suture",
         executable="Grasp_Needle",
-        name="Grasp_Needle",
+        #name="Grasp_Needle",
         parameters=[grasp_config],
         arguments=["psm2", "grip"],
         output="screen"
@@ -84,11 +94,21 @@ def generate_launch_description():
         output="screen"
     )
 
+    # Controller node
+    Controller = Node(
+        package="auto_suture",
+        executable="controller",
+        name="controller",
+        output="screen"
+    )
+
 
 
     return LaunchDescription([
         simulation,
         crtk,
         Simulation_to_ECM_Node,
-        Needle_Poses
+        Needle_Poses,
+        Entry_Exit_Poses,
+        Controller
     ])
