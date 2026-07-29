@@ -262,6 +262,7 @@ def move_to_pose(node, target_pose, step_name, timeout_scale=50):
 
 def main():
     rclpy.init()
+    
     grasp_needle_node = GraspNeedle()
 
     if len(sys.argv) < 3:
