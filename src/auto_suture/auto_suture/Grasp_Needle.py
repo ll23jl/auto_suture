@@ -72,8 +72,9 @@ class GraspPoseCalculator:
 
 
 class GraspNeedle(Node):
-    def __init__(self):
-        super().__init__('grasp_needle', automatically_declare_parameters_from_overrides=True)
+    def __init__(self, psm='psm2'):
+        super().__init__(f'grasp_needle_{psm}', automatically_declare_parameters_from_overrides=True)
+        self.psm = psm
 
 
         # ------------------------------ Variables ------------------------------
@@ -88,14 +89,14 @@ class GraspNeedle(Node):
 
         self.gripper_meas = self.create_subscription(
             PoseStamped,
-            '/CRTK/psm2/measured_cp',
+            f'/CRTK/{self.psm}/measured_cp',
             self.gripper_pos_callback,
             10
         )
 
         self.base_pose_meas = self.create_subscription(
             RigidBodyState,
-            '/ambf/env/psm2/baselink/State',
+            f'/ambf/env/{self.psm}/baselink/State',
             self.base_pos_callback,
             10
         )
@@ -112,13 +113,13 @@ class GraspNeedle(Node):
 
         self.gripper_pub = self.create_publisher(
             PoseStamped,
-            '/CRTK/psm2/servo_cp',
+            f'/CRTK/{self.psm}/servo_cp',
             10
         )
 
         self.jaw_pub = self.create_publisher(
             JointState,
-            '/CRTK/psm2/jaw/servo_jp',
+            f'/CRTK/{self.psm}/jaw/servo_jp',
             10
         )
 
@@ -182,7 +183,7 @@ class GraspNeedle(Node):
 # ---------------------------------------- Move to pose function -----------------------------------------
 
 
-def move_to_pose(node, target_pose, step_name, timeout_scale=50):
+def move_to_pose(node, target_pose, step_name, timeout_scale=50, psm='psm2'):
 
     # -------------------- Blank array for error logging --------------------
     times = []
@@ -230,7 +231,7 @@ def move_to_pose(node, target_pose, step_name, timeout_scale=50):
         next_step = Frame()
         next_step.p = current_pose.p + T_delta.p
         next_step.M = current_pose.M * T_delta.M
-        next_pose = pykdl_to_posestamped(next_step, 'psm2/baselink')
+        next_pose = pykdl_to_posestamped(next_step, f'{psm}/baselink')
         node.gripper_pub.publish(next_pose)
         rclpy.spin_once(node, timeout_sec=0.01)
 
@@ -256,23 +257,42 @@ def move_to_pose(node, target_pose, step_name, timeout_scale=50):
 def main():
     rclpy.init()
     
-    grasp_needle_node = GraspNeedle()
-
     if len(sys.argv) < 3:
-        grasp_needle_node.get_logger().error(
+        # No node created yet, create a temporary node to log the error
+        tmp_node = GraspNeedle()
+        tmp_node.get_logger().error(
             'Usage: ros2 run auto_suture grasp_needle <psm> <grasp_type>'
         )
-        grasp_needle_node.destroy_node()
+        tmp_node.destroy_node()
         rclpy.shutdown()
         return
+
+    psm = sys.argv[1]
+    grasp_type = sys.argv[2]
+
+    if psm not in ('psm1', 'psm2'):
+        tmp_node = GraspNeedle()
+        tmp_node.get_logger().error(f'Invalid psm "{psm}". Expected "psm1" or "psm2"')
+        tmp_node.destroy_node()
+        rclpy.shutdown()
+        return
+
+    if grasp_type not in ('grip', 'tip'):
+        tmp_node = GraspNeedle()
+        tmp_node.get_logger().error(f'Invalid grasp_type "{grasp_type}". Expected "grip" or "tip"')
+        tmp_node.destroy_node()
+        rclpy.shutdown()
+        return
+
+    grasp_needle_node = GraspNeedle(psm=psm)
 
     # check initial data is not None
     grasp_needle_node.ensure_initial_data()
 
     try:
         grasp_pose, approach_pose = grasp_needle_node.calculate_grasp_pose(
-            sys.argv[1],
-            sys.argv[2]
+            psm,
+            grasp_type
         )
     except ValueError as exc:
         grasp_needle_node.get_logger().error(str(exc))
@@ -284,7 +304,7 @@ def main():
 
     target_pose = approach_pose
     grasp_needle_node.get_logger().info(f'\nMoving to approach pose:\n{target_pose}')
-    move_to_pose(grasp_needle_node, target_pose, 'Approach Pose')
+    move_to_pose(grasp_needle_node, target_pose, 'Approach Pose', psm=psm)
 
     # -------------------- Open jaws --------------------
 
@@ -296,7 +316,7 @@ def main():
 
     target_pose = grasp_pose
     grasp_needle_node.get_logger().info(f'\nMoving to grasp pose:\n{target_pose}')
-    move_to_pose(grasp_needle_node, target_pose, 'Grasp Pose')
+    move_to_pose(grasp_needle_node, target_pose, 'Grasp Pose', psm=psm)
 
     for _ in range(100):
         rclpy.spin_once(grasp_needle_node, timeout_sec=0.01)
@@ -322,7 +342,7 @@ def main():
     # -------------------- Move upwards --------------------
 
     grasp_needle_node.get_logger().info(f'\nMoving to pose:\n{target_pose}')
-    move_to_pose(grasp_needle_node, target_pose, 'Pick Up Needle', timeout_scale=20)
+    move_to_pose(grasp_needle_node, target_pose, 'Pick Up Needle', timeout_scale=20, psm=psm)
 
     # -------------------- Shutdown --------------------
     
