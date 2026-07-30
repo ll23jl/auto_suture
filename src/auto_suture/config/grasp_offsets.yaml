@@ -13,7 +13,7 @@
             yaw: 0.0
         tip:
           position:
-            x: 0.0
+            x: 0.006
             y: 0.0
             z: 0.0
           orientation:

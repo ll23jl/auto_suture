@@ -285,12 +285,6 @@ def main():
             * needle_point_in_gripper
         )
 
-        node.get_logger().info(f'\nneedle_point_in_world::\n{node.needle_point_in_world}')
-        node.get_logger().info(f'\nf - step in driving path:\n{f}')
-
-        
-        #node.get_logger().info(f'\nMoving to next pose:\n{target_gripper_in_base}')
-        #move_to_pose(node, target_gripper_in_base, 'Needle Driving')
 
         target = pykdl_to_posestamped(target_gripper_in_base, f"{node.psm}/baselink")
 

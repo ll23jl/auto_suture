@@ -61,7 +61,7 @@ class GraspPoseCalculator:
             Vector(0, 0, 0.01)
         )
 
-        approach_in_world = needle_frame * approach_offset * offset
+        approach_in_world = approach_offset * needle_frame * offset
         approach_frame = base_frame.Inverse() * approach_in_world
 
 
@@ -333,7 +333,7 @@ def main():
     current_pose = grasp_needle_node.gripper_in_base
     base_pose_in_world = grasp_needle_node.base_in_world
     current_pose_world = base_pose_in_world * current_pose
-    translation_offset = Vector(0.0, 0.0, -0.005)
+    translation_offset = Vector(0.0, 0.0, -0.002)
     rotation_offset = Rotation.RotZ(0.0)
     offset = Frame(rotation_offset, translation_offset)
     target_pose_world = current_pose_world * offset
