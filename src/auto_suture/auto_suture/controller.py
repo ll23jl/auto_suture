@@ -18,7 +18,7 @@ def run_step(command):
 def main():
 
     # Wait for AMBF simulation and ROS nodes to initialise
-    startup_delay = 10  # seconds
+    startup_delay = 10
     print(f"Waiting {startup_delay}s for simulation setup...")
     time.sleep(startup_delay)
 
@@ -35,6 +35,16 @@ def main():
     run_step([
         "ros2", "run", "auto_suture",
         "Needle_Driving"
+    ])
+
+    run_step([
+        "ros2", "run", "auto_suture",
+        "Grasp_Needle",
+        "psm1",
+        "tip",
+        "--ros-args",
+        "--params-file",
+        "/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/config/grasp_offsets.yaml"
     ])
 
     print("Suturing complete.")
