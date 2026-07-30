@@ -4,6 +4,7 @@
 
 
 import rclpy
+import sys
 import numpy as np
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
@@ -19,8 +20,9 @@ from auto_suture.Grasp_Needle import move_to_pose
 
 class NeedleDriving(Node):
 
-    def __init__(self):
-        super().__init__('needle_driving')
+    def __init__(self, psm='psm2'):
+        super().__init__(f'needle_driving_{psm}')
+        self.psm = psm
 
         # ------------------------------ Variables ------------------------------
 
@@ -74,14 +76,14 @@ class NeedleDriving(Node):
 
         self.base_pose_meas = self.create_subscription(
             RigidBodyState,
-            '/ambf/env/psm2/baselink/State',
+            f'/ambf/env/{self.psm}/baselink/State',
             self.base_pos_callback,
             10
         )
 
         self.gripper_meas = self.create_subscription(
             PoseStamped,
-            '/CRTK/psm2/measured_cp',
+            f'/CRTK/{self.psm}/measured_cp',
             self.gripper_pos_callback,
             10
         )
@@ -92,7 +94,7 @@ class NeedleDriving(Node):
 
         self.gripper_pub = self.create_publisher(
             PoseStamped,
-            '/CRTK/psm2/servo_cp',
+            f'/CRTK/{self.psm}/servo_cp',
             10
         )
 
@@ -224,7 +226,12 @@ def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
 
 def main():
     rclpy.init()
-    node = NeedleDriving()
+    # Optional CLI arg: psm (psm1 or psm2). Default to psm2.
+    psm = 'psm2'
+    if len(sys.argv) > 1:
+        psm = sys.argv[1]
+
+    node = NeedleDriving(psm=psm)
 
 
     # check initial data is not None
@@ -261,7 +268,7 @@ def main():
 
   
     node.get_logger().info(f'\nMoving to start pose:\n{target_gripper_in_base}\n\n')
-    move_to_pose(node, target_gripper_in_base, 'Needle Driving Start Pose')
+    move_to_pose(node, target_gripper_in_base, 'Needle Driving Start Pose', psm=node.psm)
 
 
     node.get_logger().info('\nNeedle driving sequence')
@@ -285,7 +292,7 @@ def main():
         #node.get_logger().info(f'\nMoving to next pose:\n{target_gripper_in_base}')
         #move_to_pose(node, target_gripper_in_base, 'Needle Driving')
 
-        target = pykdl_to_posestamped(target_gripper_in_base, "psm2/baselink")
+        target = pykdl_to_posestamped(target_gripper_in_base, f"{node.psm}/baselink")
 
         node.gripper_pub.publish(target)
         for _ in range(100):
