@@ -50,8 +50,8 @@ class GraspPoseCalculator:
             raise ValueError('No base pose received yet')
 
         offset = self.get_grasp_offset(psm, grasp_type)
-        needle_frame = pose_to_pykdl(needle_pose.pose)
-        base_frame = pose_to_pykdl(base_pose)
+        needle_frame = needle_pose
+        base_frame = base_pose
 
         needle_in_base = base_frame.Inverse() * needle_frame
         tool_frame = needle_in_base * offset
@@ -64,15 +64,8 @@ class GraspPoseCalculator:
         approach_in_world = needle_frame * approach_offset * offset
         approach_frame = base_frame.Inverse() * approach_in_world
 
-        grasp_pose = PoseStamped()
-        grasp_pose.header.frame_id = 'psm2/baselink'
-        grasp_pose.pose = pykdl_to_pose(tool_frame)
 
-        approach_pose = PoseStamped()
-        approach_pose.header.frame_id = 'psm2/baselink'
-        approach_pose.pose = pykdl_to_pose(approach_frame)
-
-        return grasp_pose, approach_pose
+        return tool_frame, approach_frame
 
 
 # ------------------------------------------ Grasp Needle Node -------------------------------------------
@@ -85,18 +78,18 @@ class GraspNeedle(Node):
 
         # ------------------------------ Variables ------------------------------
 
-        self.arm_pose = None
-        self.latest_needle_pose = None
-        self.latest_base_pose = None
+        self.gripper_in_base = None
+        self.needle_in_world = None
+        self.base_in_world = None
         self.grasp_calculator = GraspPoseCalculator(self)
 
 
         # ------------------------------ Subscriptions ------------------------------
 
-        self.arm_meas = self.create_subscription(
+        self.gripper_meas = self.create_subscription(
             PoseStamped,
             '/CRTK/psm2/measured_cp',
-            self.arm_pos_callback,
+            self.gripper_pos_callback,
             10
         )
 
@@ -117,7 +110,7 @@ class GraspNeedle(Node):
 
         # ------------------------------ Publishers ------------------------------
 
-        self.arm_pub = self.create_publisher(
+        self.gripper_pub = self.create_publisher(
             PoseStamped,
             '/CRTK/psm2/servo_cp',
             10
@@ -140,13 +133,13 @@ class GraspNeedle(Node):
         return self.grasp_calculator.compute_grasp_pose(
             psm,
             grasp_type,
-            self.latest_needle_pose,
-            self.latest_base_pose
+            self.needle_in_world,
+            self.base_in_world
         )
 
-    # store the latest arm pose
-    def arm_pos_callback(self, msg):
-        self.arm_pose = msg.pose
+    # store the latest gripper pose as pykdl
+    def gripper_pos_callback(self, msg):
+        self.gripper_in_base = pose_to_pykdl(msg.pose)
     
     # publish jaw angle to jaw servo
     def publish_jaw(self):
@@ -161,13 +154,13 @@ class GraspNeedle(Node):
     def set_jaw(self, angle):
         self.jaw_angle = angle
 
-    # store the latest base pose
+    # store the latest base pose as pykdl
     def base_pos_callback(self, msg):
-        self.latest_base_pose = msg.pose
+        self.base_in_world = pose_to_pykdl(msg.pose)
 
-    # store the latest needle pose
+    # store the latest needle pose as pykdl
     def needle_state_callback(self, msg):
-        self.latest_needle_pose = msg
+        self.needle_in_world = pose_to_pykdl(msg.pose)
         self.get_logger().debug(
             f'Updated needle pose: '
             f'{msg.pose.position.x}, '
@@ -178,9 +171,9 @@ class GraspNeedle(Node):
     # run until initial pose data is received
     def ensure_initial_data(self):
         while (
-            self.latest_needle_pose is None or
-            self.latest_base_pose is None or
-            self.arm_pose is None
+            self.needle_in_world is None or
+            self.base_in_world is None or
+            self.gripper_in_base is None
         ):
             self.get_logger().info('Waiting for initial pose data...')
             rclpy.spin_once(self, timeout_sec=0.1)
@@ -203,8 +196,8 @@ def move_to_pose(node, target_pose, step_name, timeout_scale=50):
     # -------------------- Movement stage --------------------
     while not done:
 
-        # find current arm pose
-        current_pose = pose_to_pykdl(node.arm_pose)
+        # find current gripper pose
+        current_pose = node.gripper_in_base
 
         # calcualte next step to reach goal pose
         T_delta, done, trans_error_mag, rot_error_mag, deadband, rot_deadband, max_translation, max_rotation = cartesian_interpolate_step(
@@ -232,29 +225,29 @@ def move_to_pose(node, target_pose, step_name, timeout_scale=50):
             node.get_logger().error('Controller diverging - aborting movement.')
             break
 
-        # -------------------- Apply step to arm -------------------- 
+        # -------------------- Apply step to gripper -------------------- 
 
         next_step = Frame()
         next_step.p = current_pose.p + T_delta.p
         next_step.M = current_pose.M * T_delta.M
         next_pose = pykdl_to_posestamped(next_step, 'psm2/baselink')
-        node.arm_pub.publish(next_pose)
+        node.gripper_pub.publish(next_pose)
         rclpy.spin_once(node, timeout_sec=0.01)
 
-    # -------------------- Plot errors --------------------
-    filepath = save_error_plot(
-        step_name=step_name,
-        times=times,
-        trans_errors=trans_errors,
-        rot_errors=rot_errors,
-        deadband=deadband,
-        rot_deadband=rot_deadband,
-        max_translation=max_translation,
-        max_rotation=max_rotation,
-        success=done
-    )
+    # # -------------------- Plot errors --------------------
+    # filepath = save_error_plot(
+    #     step_name=step_name,
+    #     times=times,
+    #     trans_errors=trans_errors,
+    #     rot_errors=rot_errors,
+    #     deadband=deadband,
+    #     rot_deadband=rot_deadband,
+    #     max_translation=max_translation,
+    #     max_rotation=max_rotation,
+    #     success=done
+    # )
 
-    node.get_logger().info(f'Saved plot to {filepath}')
+    # node.get_logger().info(f'Saved plot to {filepath}')
 
 
 # ------------------------------------------------- Main -------------------------------------------------
@@ -289,7 +282,7 @@ def main():
 
     # -------------------- Move to approach pose --------------------
 
-    target_pose = posestamped_to_pykdl(approach_pose)
+    target_pose = approach_pose
     grasp_needle_node.get_logger().info(f'\nMoving to approach pose:\n{target_pose}')
     move_to_pose(grasp_needle_node, target_pose, 'Approach Pose')
 
@@ -301,26 +294,26 @@ def main():
 
     # -------------------- Move to grasp pose --------------------
 
-    target_pose = posestamped_to_pykdl(grasp_pose)
+    target_pose = grasp_pose
     grasp_needle_node.get_logger().info(f'\nMoving to grasp pose:\n{target_pose}')
     move_to_pose(grasp_needle_node, target_pose, 'Grasp Pose')
 
-    for _ in range(50):
+    for _ in range(100):
         rclpy.spin_once(grasp_needle_node, timeout_sec=0.01)
 
     # -------------------- Close jaws --------------------
 
     grasp_needle_node.set_jaw(0.0)
     grasp_needle_node.get_logger().info('\nClosing jaws')
-    for _ in range(50):
+    for _ in range(100):
         rclpy.spin_once(grasp_needle_node, timeout_sec=0.01)
 
     # -------------------- Create target pose above the current pose --------------------
 
-    current_pose = pose_to_pykdl(grasp_needle_node.arm_pose)
-    base_pose_in_world = pose_to_pykdl(grasp_needle_node.latest_base_pose)
+    current_pose = grasp_needle_node.gripper_in_base
+    base_pose_in_world = grasp_needle_node.base_in_world
     current_pose_world = base_pose_in_world * current_pose
-    translation_offset = Vector(0.0, 0.0, -0.05)
+    translation_offset = Vector(0.0, 0.0, -0.005)
     rotation_offset = Rotation.RotZ(0.0)
     offset = Frame(rotation_offset, translation_offset)
     target_pose_world = current_pose_world * offset

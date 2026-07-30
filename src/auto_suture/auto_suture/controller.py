@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import time
 import subprocess
 import sys
 
@@ -16,6 +17,11 @@ def run_step(command):
 
 def main():
 
+    # Wait for AMBF simulation and ROS nodes to initialise
+    startup_delay = 10  # seconds
+    print(f"Waiting {startup_delay}s for simulation setup...")
+    time.sleep(startup_delay)
+
     run_step([
         "ros2", "run", "auto_suture",
         "Grasp_Needle",
@@ -31,7 +37,7 @@ def main():
         "Needle_Driving"
     ])
 
-    print("\nSuturing complete.")
+    print("Suturing complete.")
 
 
 if __name__ == "__main__":
