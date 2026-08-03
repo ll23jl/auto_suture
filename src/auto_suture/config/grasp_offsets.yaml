@@ -13,8 +13,8 @@
             yaw: 0.0
         tip:
           position:
-            x: 0.006
-            y: 0.0
+            x: 0.0058
+            y: 0.0002
             z: 0.0
           orientation:
             roll: -1.5707963267948966

@@ -9,10 +9,11 @@ import numpy as np
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
 from ambf_msgs.msg import RigidBodyState
+from sensor_msgs.msg import JointState
 import PyKDL
 from PyKDL import Frame, Rotation, Vector
 from utility.transform_functions import pose_to_pykdl, pykdl_to_pose, pykdl_to_posestamped
-from auto_suture.Grasp_Needle import move_to_pose
+from auto_suture.Move_To_Pose import move_to_pose
 
 
 # ---------------------------------------- Needle driving node ----------------------------------------
@@ -91,12 +92,21 @@ class NeedleDriving(Node):
 
         # ------------------------------ Publishers ------------------------------
 
-
+        # publisher to gripper pose in base frame
         self.gripper_pub = self.create_publisher(
             PoseStamped,
             f'/CRTK/{self.psm}/servo_cp',
             10
         )
+        
+        self.jaw_pub = self.create_publisher(
+            JointState,
+            f'/CRTK/{self.psm}/jaw/servo_jp',
+            10
+        )
+
+        self.jaw_angle = 0.0
+        self.jaw_timer = self.create_timer(0.1, self.publish_jaw)
 
 
     # ------------------------------ Callback Functions ------------------------------
@@ -154,10 +164,23 @@ class NeedleDriving(Node):
         self.needle_exit_in_world = Frame()
 
         self.needle_entry_in_world.p = entry.p + Vector(0.0, 0.0, 0.0)
-        self.needle_exit_in_world.p = exit_.p + Vector(0.005, 0.0, 0.004)
+        self.needle_exit_in_world.p = exit_.p + Vector(0.006, 0.0, 0.004)
 
         self.needle_entry_in_world.M = entry.M * Rotation.RPY(-1.570796327, 1.570796327, 0)
         self.needle_exit_in_world.M = exit_.M * Rotation.RPY(-1.570796327, -1.570796327, 0)
+
+    # publish jaw angle to jaw servo
+    def publish_jaw(self):
+        msg = JointState()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.name = ['jaw']
+        msg.position = [self.jaw_angle]
+
+        self.jaw_pub.publish(msg)
+
+    # set the jaw angle
+    def set_jaw(self, angle):
+        self.jaw_angle = angle
 
 
 # ------------------------------------------- Arc Path Planning -------------------------------------------

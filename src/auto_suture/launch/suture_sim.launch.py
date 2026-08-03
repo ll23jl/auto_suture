@@ -67,32 +67,32 @@ def generate_launch_description():
     )
 
 
-    pkg_path = get_package_share_directory('auto_suture')
+    # pkg_path = get_package_share_directory('auto_suture')
 
-    grasp_config = os.path.join(
-        pkg_path,
-        'config',
-        'grasp_offsets.yaml'
-    )
+    # grasp_config = os.path.join(
+    #     pkg_path,
+    #     'config',
+    #     'grasp_offsets.yaml'
+    # )
     
 
-    # Grasp needle node
-    Grasp_Needle = Node(
-        package="auto_suture",
-        executable="Grasp_Needle",
-        #name="Grasp_Needle",
-        parameters=[grasp_config],
-        arguments=["psm2", "grip"],
-        output="screen"
-    )
+    # # Grasp needle node
+    # Grasp_Needle = Node(
+    #     package="auto_suture",
+    #     executable="Grasp_Needle",
+    #     #name="Grasp_Needle",
+    #     parameters=[grasp_config],
+    #     arguments=["psm2", "grip"],
+    #     output="screen"
+    # )
 
-    # Needle driving node
-    Needle_Driving = Node(
-        package="auto_suture",
-        executable="Needle_Driving",
-        name="Needle_Driving",
-        output="screen"
-    )
+    # # Needle driving node
+    # Needle_Driving = Node(
+    #     package="auto_suture",
+    #     executable="Needle_Driving",
+    #     name="Needle_Driving",
+    #     output="screen"
+    # )
 
     # Controller node
     Controller = Node(

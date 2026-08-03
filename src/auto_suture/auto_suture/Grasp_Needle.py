@@ -16,6 +16,7 @@ from sensor_msgs.msg import JointState
 from utility.transform_functions import pose_to_pykdl, pykdl_to_pose, posestamped_to_pykdl, pykdl_to_posestamped
 from utility.utilities import cartesian_interpolate_step, save_error_plot
 from ambf_msgs.msg import RigidBodyState
+from auto_suture.Move_To_Pose import move_to_pose
 
 
 # --------------------------------------------- Helper Class ---------------------------------------------
@@ -180,75 +181,6 @@ class GraspNeedle(Node):
             rclpy.spin_once(self, timeout_sec=0.1)
 
 
-# ---------------------------------------- Move to pose function -----------------------------------------
-
-
-def move_to_pose(node, target_pose, step_name, timeout_scale=50, psm='psm2'):
-
-    # -------------------- Blank array for error logging --------------------
-    times = []
-    trans_errors = []
-    rot_errors = []
-    start_time = time.time()
-
-    previous_error = float('inf')
-    moving_away_count = 0
-    done = False
-    # -------------------- Movement stage --------------------
-    while not done:
-
-        # find current gripper pose
-        current_pose = node.gripper_in_base
-
-        # calcualte next step to reach goal pose
-        T_delta, done, trans_error_mag, rot_error_mag, deadband, rot_deadband, max_translation, max_rotation = cartesian_interpolate_step(
-            current_pose,
-            target_pose
-        )
-
-        # ------------- Error logging --------------
-
-        times.append(time.time() - start_time)
-        trans_errors.append(trans_error_mag)
-        rot_errors.append(rot_error_mag)
-
-        # ------------------------------------------
-        # ---------- Check for divergence ----------
-
-        if trans_error_mag >= previous_error:
-            moving_away_count += 1
-        else:
-            moving_away_count = 0
-
-        previous_error = trans_error_mag
-
-        if time.time() - start_time > 10 and moving_away_count > timeout_scale:
-            node.get_logger().error('Controller diverging - aborting movement.')
-            break
-
-        # -------------------- Apply step to gripper -------------------- 
-
-        next_step = Frame()
-        next_step.p = current_pose.p + T_delta.p
-        next_step.M = current_pose.M * T_delta.M
-        next_pose = pykdl_to_posestamped(next_step, f'{psm}/baselink')
-        node.gripper_pub.publish(next_pose)
-        rclpy.spin_once(node, timeout_sec=0.01)
-
-    # # -------------------- Plot errors --------------------
-    # filepath = save_error_plot(
-    #     step_name=step_name,
-    #     times=times,
-    #     trans_errors=trans_errors,
-    #     rot_errors=rot_errors,
-    #     deadband=deadband,
-    #     rot_deadband=rot_deadband,
-    #     max_translation=max_translation,
-    #     max_rotation=max_rotation,
-    #     success=done
-    # )
-
-    # node.get_logger().info(f'Saved plot to {filepath}')
 
 
 # ------------------------------------------------- Main -------------------------------------------------
@@ -328,21 +260,21 @@ def main():
     for _ in range(100):
         rclpy.spin_once(grasp_needle_node, timeout_sec=0.01)
 
-    # -------------------- Create target pose above the current pose --------------------
+    # # -------------------- Create target pose above the current pose --------------------
 
-    current_pose = grasp_needle_node.gripper_in_base
-    base_pose_in_world = grasp_needle_node.base_in_world
-    current_pose_world = base_pose_in_world * current_pose
-    translation_offset = Vector(0.0, 0.0, -0.002)
-    rotation_offset = Rotation.RotZ(0.0)
-    offset = Frame(rotation_offset, translation_offset)
-    target_pose_world = current_pose_world * offset
-    target_pose = base_pose_in_world.Inverse() * target_pose_world
+    # current_pose = grasp_needle_node.gripper_in_base
+    # base_pose_in_world = grasp_needle_node.base_in_world
+    # current_pose_world = base_pose_in_world * current_pose
+    # translation_offset = Vector(0.0, 0.0, -0.002)
+    # rotation_offset = Rotation.RotZ(0.0)
+    # offset = Frame(rotation_offset, translation_offset)
+    # target_pose_world = current_pose_world * offset
+    # target_pose = base_pose_in_world.Inverse() * target_pose_world
 
-    # -------------------- Move upwards --------------------
+    # # -------------------- Move upwards --------------------
 
-    grasp_needle_node.get_logger().info(f'\nMoving to pose:\n{target_pose}')
-    move_to_pose(grasp_needle_node, target_pose, 'Pick Up Needle', timeout_scale=20, psm=psm)
+    # grasp_needle_node.get_logger().info(f'\nMoving to pose:\n{target_pose}')
+    # move_to_pose(grasp_needle_node, target_pose, 'Pick Up Needle', timeout_scale=20, psm=psm)
 
     # -------------------- Shutdown --------------------
     

@@ -24,7 +24,7 @@ from ambf_msgs.msg import RigidBodyState
 
 def parse_target_pose(target_spec):
     if isinstance(target_spec, Frame):
-        return target_spec
+        return target_spec, None
 
     if isinstance(target_spec, (list, tuple)):
         values = [float(value) for value in target_spec]
@@ -32,17 +32,22 @@ def parse_target_pose(target_spec):
         text = target_spec.strip()
         values = [float(value) for value in text.replace(',', ' ').split() if value]
     else:
-        raise ValueError('Target pose must be a PyKDL Frame or six numeric values')
+        raise ValueError('Target pose must be a PyKDL Frame or 6/7 numeric values')
 
-    if len(values) != 6:
+    if len(values) not in (6, 7):
         raise ValueError(
-            'Target pose must contain six values: x y z roll pitch yaw'
+            'Target pose must contain 6 values: x y z roll pitch yaw or 7 values with jaw_angle'
         )
 
-    x, y, z, roll, pitch, yaw = values
+    if len(values) == 6:
+        x, y, z, roll, pitch, yaw = values
+        jaw_angle = None
+    else:
+        x, y, z, roll, pitch, yaw, jaw_angle = values
+
     translation = Vector(x, y, z)
     rotation = Rotation.RPY(roll, pitch, yaw)
-    return Frame(rotation, translation)
+    return Frame(rotation, translation), jaw_angle
 
 
 # ------------------------------------------ Move to Pose Node -------------------------------------------
@@ -86,6 +91,14 @@ class MoveToPose(Node):
             f'/CRTK/{self.psm}/servo_cp',
             10
         )
+        self.jaw_pub = self.create_publisher(
+            JointState,
+            f'/CRTK/{self.psm}/jaw/servo_jp',
+            10
+        )
+
+        self.jaw_angle = 0.0
+        self.jaw_timer = self.create_timer(0.1, self.publish_jaw)
 
 
         # ------------------------------ Functions ------------------------------
@@ -110,7 +123,18 @@ class MoveToPose(Node):
             self.get_logger().info('Waiting for initial pose data...')
             rclpy.spin_once(self, timeout_sec=0.1)
 
+    # publish jaw angle to jaw servo
+    def publish_jaw(self):
+        msg = JointState()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.name = ['jaw']
+        msg.position = [self.jaw_angle]
 
+        self.jaw_pub.publish(msg)
+
+    # set the jaw angle
+    def set_jaw(self, angle):
+        self.jaw_angle = angle
 
 # ---------------------------------------- Move to pose function -----------------------------------------
 
@@ -194,8 +218,8 @@ def main():
     if len(sys.argv) < 3:
         tmp_node = MoveToPose()
         tmp_node.get_logger().error(
-            'Usage: ros2 run auto_suture move_to_pose <psm> <x> <y> <z> <roll> <pitch> <yaw>\n'
-            'or: ros2 run auto_suture move_to_pose <psm> "x,y,z,roll,pitch,yaw"'
+            'Usage: ros2 run auto_suture move_to_pose <psm> <x> <y> <z> <roll> <pitch> <yaw> [jaw_angle]\n'
+            'or: ros2 run auto_suture move_to_pose <psm> "x,y,z,roll,pitch,yaw,jaw_angle"'
         )
         tmp_node.destroy_node()
         rclpy.shutdown()
@@ -212,9 +236,9 @@ def main():
 
     try:
         if len(sys.argv) == 3:
-            target_pose = parse_target_pose(sys.argv[2])
+            target_pose_offset, jaw_angle = parse_target_pose(sys.argv[2])
         else:
-            target_pose = parse_target_pose(sys.argv[2:8])
+            target_pose_offset, jaw_angle = parse_target_pose(sys.argv[2:])
     except ValueError as exc:
         tmp_node = MoveToPose(psm=psm)
         tmp_node.get_logger().error(str(exc))
@@ -227,10 +251,32 @@ def main():
     # check initial data is not None
     move_to_pose_node.ensure_initial_data()
 
+    # -------------------- Apply offset --------------------
+
+    gripper_in_world = move_to_pose_node.base_in_world * move_to_pose_node.gripper_in_base
+    target_pose = gripper_in_world * target_pose_offset
+
+    target_pose_in_base = move_to_pose_node.base_in_world.Inverse() * target_pose
+
+
+    # -------------------- Apply requested jaw state --------------------
+
+    if jaw_angle is not None:
+        move_to_pose_node.set_jaw(jaw_angle)
+        move_to_pose_node.get_logger().info(f'\nSetting jaw angle to {jaw_angle}')
+    else:
+        move_to_pose_node.set_jaw(0.0)
+        move_to_pose_node.get_logger().info('\nClosing jaws')
+
+    move_to_pose_node.publish_jaw()
+    for _ in range(100):
+        rclpy.spin_once(move_to_pose_node, timeout_sec=0.01)
+
+
     # -------------------- Move to target --------------------
 
-    move_to_pose_node.get_logger().info(f'\nMoving to pose:\n{target_pose}')
-    move_to_pose(move_to_pose_node, target_pose, 'Requested Pose', timeout_scale=20, psm=psm)
+    move_to_pose_node.get_logger().info(f'\nMoving to pose:\n{target_pose_in_base}')
+    move_to_pose(move_to_pose_node, target_pose_in_base, 'Requested Pose', timeout_scale=20, psm=psm)
 
     # -------------------- Shutdown --------------------
 
