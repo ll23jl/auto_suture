@@ -163,8 +163,8 @@ class NeedleDriving(Node):
         self.needle_entry_in_world = Frame()
         self.needle_exit_in_world = Frame()
 
-        self.needle_entry_in_world.p = entry.p + Vector(0.0, 0.0, 0.0)
-        self.needle_exit_in_world.p = exit_.p + Vector(0.006, 0.0, 0.004)
+        self.needle_entry_in_world.p = entry.p + Vector(-0.003, 0.0, 0.0025)
+        self.needle_exit_in_world.p = exit_.p + Vector(0.003, 0.0, 0.0025)
 
         self.needle_entry_in_world.M = entry.M * Rotation.RPY(-1.570796327, 1.570796327, 0)
         self.needle_exit_in_world.M = exit_.M * Rotation.RPY(-1.570796327, -1.570796327, 0)
@@ -195,52 +195,108 @@ def _normalize(v):
  
 def _kdl_vec_to_np(v):
     return np.array([v.x(), v.y(), v.z()])
- 
- 
-def _rodrigues_rotate(v, axis, angle):
-    """Rotate vector v (perpendicular to axis) about unit axis by angle."""
-    return v * np.cos(angle) + np.cross(axis, v) * np.sin(angle)
- 
+  
+
 
 def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
     """
-    Generates a true circular arc from start_frame to end_frame by treating
-    the motion as a single rigid rotation about a fixed axis (as is physically
-    the case for a rigid curved needle pivoting through tissue).
+    Generate a circular arc of fixed needle radius between two poses.
+
+    The trajectory assumes the needle point moves on a circle with the known
+    needle radius while the orientation rotates rigidly with the motion.
     """
-    # Relative rotation that takes start orientation -> end orientation
-    rel_rot = end_frame.M * start_frame.M.Inverse()
-    angle, axis_kdl = rel_rot.GetRotAngle()  # returns (angle, axis) as a tuple
-    axis = _normalize(_kdl_vec_to_np(axis_kdl))
+
+    needle_radius = 0.01018  # metres
+
+    # -------------------- Extract positions --------------------
 
     start_pos = _kdl_vec_to_np(start_frame.p)
     end_pos = _kdl_vec_to_np(end_frame.p)
 
-    # Project the chord into the plane perpendicular to the rotation axis.
+    # -------------------- Rotation axis --------------------
+
+    rel_rot = end_frame.M * start_frame.M.Inverse()
+    _, axis_kdl = rel_rot.GetRotAngle()
+    axis = _normalize(_kdl_vec_to_np(axis_kdl))
+
+    # -------------------- Chord geometry --------------------
+
     chord = end_pos - start_pos
+
+    # Only use the component lying in the plane of rotation
     chord_in_plane = chord - np.dot(chord, axis) * axis
     chord_len = np.linalg.norm(chord_in_plane)
 
+    if chord_len < 1e-9:
+        return [start_frame] * num_steps
+
+    if chord_len > 2.0 * needle_radius:
+        raise ValueError(
+            "Start and end points are farther apart than the needle diameter."
+        )
+
     mid = start_pos + 0.5 * chord_in_plane
+
     perp = _normalize(np.cross(axis, chord_in_plane))
 
-    half_angle = angle / 2.0
-    if abs(np.sin(half_angle)) > 1e-9:
-        dist_to_center = (chord_len / 2.0) / np.tan(half_angle)
-    else:
-        dist_to_center = 0.0  # degenerate: ~straight line, not a real arc case
+    dist_to_center = np.sqrt(
+        needle_radius**2 - (chord_len / 2.0) ** 2
+    )
 
     center = mid + dist_to_center * perp
-    radius_vec0 = start_pos - center  # start point relative to center
+
+    # -------------------- Radius vectors --------------------
+
+    radius_vec0 = start_pos - center
+    radius_vec1 = end_pos - center
+
+    radius_vec0 = needle_radius * _normalize(radius_vec0)
+    radius_vec1 = needle_radius * _normalize(radius_vec1)
+
+    # -------------------- Sweep angle --------------------
+
+    sweep_angle = np.arccos(
+        np.clip(
+            np.dot(
+                _normalize(radius_vec0),
+                _normalize(radius_vec1)
+            ),
+            -1.0,
+            1.0
+        )
+    )
+
+    # Determine clockwise / anticlockwise
+    if np.dot(np.cross(radius_vec0, radius_vec1), axis) < 0:
+        sweep_angle = -sweep_angle
+
+    # -------------------- Generate trajectory --------------------
 
     frames = []
+
     for t in np.linspace(0.0, 1.0, num_steps):
-        a = angle * t
-        rot = PyKDL.Rotation.Rot(PyKDL.Vector(*axis), a)
-        rotated_radius = _kdl_vec_to_np(rot * PyKDL.Vector(*radius_vec0))
-        pos = center + rotated_radius          # now numpy + numpy
-        M = rot * start_frame.M
-        frames.append(PyKDL.Frame(M, PyKDL.Vector(*pos)))  # convert back to PyKDL.Vector for the Frame
+
+        angle = sweep_angle * t
+
+        rot = PyKDL.Rotation.Rot(
+            PyKDL.Vector(*axis),
+            angle
+        )
+
+        rotated_radius = _kdl_vec_to_np(
+            rot * PyKDL.Vector(*radius_vec0)
+        )
+
+        pos = center + rotated_radius
+
+        orientation = rot * start_frame.M
+
+        frames.append(
+            PyKDL.Frame(
+                orientation,
+                PyKDL.Vector(*pos)
+            )
+        )
 
     return frames
 
@@ -316,7 +372,7 @@ def main():
             rclpy.spin_once(node, timeout_sec=0.01)
 
 
-    node.get_logger().info('\nNeedle driving complete...\n\nExiting...')    
+    node.get_logger().info('\nNeedle driving complete...\n\n')    
 
     # -------------------- Shutdown --------------------
     
