@@ -46,6 +46,7 @@ setup(
             'Needle_Driving = auto_suture.Needle_Driving:main',
             'controller = auto_suture.controller:main',
             'move_to_pose = auto_suture.Move_To_Pose:main',
+            'Needle_Extraction = auto_suture.Needle_Extraction:main',
         ],
     },
 )

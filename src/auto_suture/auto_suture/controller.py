@@ -26,7 +26,7 @@ def main():
     time.sleep(startup_delay)
 
 
-    run_step([
+    grasp_needle = start_step([
         "ros2", "run", "auto_suture",
         "Grasp_Needle",
         "psm2",
@@ -35,6 +35,17 @@ def main():
         "--params-file",
         "/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/config/grasp_offsets.yaml"
     ])
+
+    psm1_move_to_grasp = start_step([
+        "ros2", "run", "auto_suture",
+        "move_to_pose",
+        "psm1",
+        "0.01, -0.01, 0.15, 0.0, 0.0, 0.0, 0.5"
+    ])
+
+    grasp_needle.wait()
+    psm1_move_to_grasp.wait()
+
 
     run_step([
         "ros2", "run", "auto_suture",
@@ -59,22 +70,29 @@ def main():
     ])
 
 
-    let_go = start_step([
-        "ros2", "run", "auto_suture",
-        "move_to_pose",
-        "psm2",
-        "0.0, 0.0, -0.005, 0.0, 0.0, 0.0, 0.5"
-    ])
-
-    grab = start_step([
+    psm1_grab_needle = start_step([
         "ros2", "run", "auto_suture",
         "move_to_pose",
         "psm1",
-        "0.0, -0.001, -0.001, 0.0, 0.0, 0.0, 0.0"
+        "0.0, -0.0005, -0.0005, 0.0, 0.0, 0.0, 0.0"
     ])
 
-    let_go.wait()
-    grab.wait()
+
+    psm2_drop_needle = start_step([
+        "ros2", "run", "auto_suture",
+        "move_to_pose",
+        "psm2",
+        "0.0, 0.0, -0.05, 0.0, 0.0, 0.0, 0.5"
+    ])
+
+    psm2_drop_needle.wait()
+    psm1_grab_needle.wait()
+
+    run_step([
+        "ros2", "run", "auto_suture",
+        "Needle_Extraction"
+    ])
+
 
     print("\n\nSuturing complete... \n\nExiting...")
 
