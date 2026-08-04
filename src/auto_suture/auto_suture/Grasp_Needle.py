@@ -236,7 +236,7 @@ def main():
 
     target_pose = approach_pose
     grasp_needle_node.get_logger().info(f'\nMoving to approach pose:\n{target_pose}')
-    move_to_pose(grasp_needle_node, target_pose, 'Approach Pose', psm=psm)
+    move_to_pose(grasp_needle_node, target_pose, 'Approach Pose', psm=psm, max_translation=0.008, max_rotation=0.15)
 
     # -------------------- Open jaws --------------------
 

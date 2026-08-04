@@ -140,7 +140,7 @@ class MoveToPose(Node):
 
 
 
-def move_to_pose(node, target_pose, step_name, timeout_scale=50, psm='psm2'):
+def move_to_pose(node, target_pose, step_name, timeout_scale=50, psm='psm2',max_translation=0.005, max_rotation=0.1):
 
     # -------------------- Blank array for error logging --------------------
     times = []
@@ -160,7 +160,9 @@ def move_to_pose(node, target_pose, step_name, timeout_scale=50, psm='psm2'):
         # calcualte next step to reach goal pose
         T_delta, done, trans_error_mag, rot_error_mag, deadband, rot_deadband, max_translation, max_rotation = cartesian_interpolate_step(
             current_pose,
-            target_pose
+            target_pose,
+            max_translation=max_translation,
+            max_rotation=max_rotation,
         )
 
         # ------------- Error logging --------------
