@@ -205,7 +205,7 @@ def main():
     node.get_logger().info('\nData received')
 
     # find needle point from gripper perspective 
-    # this stays constant while needle is grasped
+    # this stays constant while needle is grasped 
     # it is used to figure out the required gripper pose for needle to follow the given trajectory
 
     needle_point_in_gripper = node.gripper_in_base.Inverse() * node.base_in_world.Inverse() * node.needle_point_in_world
@@ -229,7 +229,7 @@ def main():
 
     # define offset
     offset = Frame(
-        Rotation.RPY(0.0, 0.0, 0.0),
+        Rotation.RPY(0.0, 0.0, -0.01),
         Vector(0.0, 0.0, 0.0)
     )
 

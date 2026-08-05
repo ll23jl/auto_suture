@@ -198,13 +198,11 @@ def _kdl_vec_to_np(v):
   
 
 
-def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
-    """
-    Generate a circular arc of fixed needle radius between two poses.
+# Generate a circular arc of fixed needle radius between two poses.
+# The trajectory assumes the needle point moves on a circle with the known
+# needle radius while the orientation rotates rigidly with the motion.
 
-    The trajectory assumes the needle point moves on a circle with the known
-    needle radius while the orientation rotates rigidly with the motion.
-    """
+def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
 
     needle_radius = 0.01018  # metres
 
