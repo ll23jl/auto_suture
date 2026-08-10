@@ -22,9 +22,10 @@ from auto_suture.Needle_Driving import generate_needle_arc_trajectory, _normaliz
 
 class NeedleExtraction(Node):
 
-    def __init__(self, psm='psm1'):
+    def __init__(self, psm='psm1',entry_exit_number=1):
         super().__init__(f'needle_extraction_{psm}')
         self.psm = psm
+        self.entry_exit_number = entry_exit_number
 
         # ------------------------------ Variables ------------------------------
 
@@ -37,9 +38,9 @@ class NeedleExtraction(Node):
         
         self.needle_point_in_world = None
 
-        self.exit1_in_world = None
+        self.exit_in_world = None
 
-        self.entry1_in_world = None
+        self.entry_in_world = None
 
         self.base_in_world = None
 
@@ -61,18 +62,18 @@ class NeedleExtraction(Node):
         )
 
         # Exit 1 pose in world frame
-        self.exit1_sub = self.create_subscription(
+        self.exit_sub = self.create_subscription(
             PoseStamped,
-            '/exit1_pose_in_world_frame',
-            self.exit1_sub_callback,
+            f'/exit{self.entry_exit_number}_pose_in_world_frame',
+            self.exit_sub_callback,
             10
         )
 
         # Entry 1 pose in world frame
-        self.entry1_sub = self.create_subscription(
+        self.entry_sub = self.create_subscription(
             PoseStamped,
-            '/entry1_pose_in_world_frame',
-            self.entry1_sub_callback,
+            f'/entry{entry_exit_number}_pose_in_world_frame',
+            self.entry_sub_callback,
             10
         )
 
@@ -121,13 +122,13 @@ class NeedleExtraction(Node):
 
 
     # Store exit 1 pose in world frame as pykdl
-    def exit1_sub_callback(self, msg):
-        self.exit1_in_world = pose_to_pykdl(msg.pose)
+    def exit_sub_callback(self, msg):
+        self.exit_in_world = pose_to_pykdl(msg.pose)
 
 
     # Store exit 1 pose in world frame as pykdl
-    def entry1_sub_callback(self, msg):
-        self.entry1_in_world = pose_to_pykdl(msg.pose)
+    def entry_sub_callback(self, msg):
+        self.entry_in_world = pose_to_pykdl(msg.pose)
 
 
     # store the latest base pose as pykdl
@@ -153,8 +154,8 @@ class NeedleExtraction(Node):
     def ensure_initial_data(self):
         while (
             self.needle_point_in_world is None or
-            self.entry1_in_world is None or
-            self.exit1_in_world is None or
+            self.entry_in_world is None or
+            self.exit_in_world is None or
             self.base_in_world is None or
             self.gripper_in_base is None
         ):
@@ -192,12 +193,22 @@ class NeedleExtraction(Node):
 
 def main():
     rclpy.init()
-    # Optional CLI arg: psm (psm1 or psm2). Default to psm1.
+
+    # Defaults:
     psm = 'psm1'
+    entry_exit_number = 1
+
+
     if len(sys.argv) > 1:
         psm = sys.argv[1]
 
-    node = NeedleExtraction(psm=psm)
+    if len(sys.argv) > 2:
+        entry_exit_number = int(sys.argv[2])
+
+    node = NeedleExtraction(
+        psm=psm,
+        entry_exit_number=entry_exit_number
+    )
 
 
     # check initial data is not None
@@ -215,8 +226,8 @@ def main():
 
     # Get entry and exit poses
     node.get_needle_entry_exit_poses(
-        node.entry1_in_world,
-        node.exit1_in_world
+        node.entry_in_world,
+        node.exit_in_world
     )
 
     # -------------------- Define target pose --------------------
@@ -265,6 +276,20 @@ def main():
 
 
     node.get_logger().info('\nNeedle extraction complete...\n\n')    
+
+    # -------------------- Reorient gripper for handover --------------------
+
+    # define target pose for gripper to reorient for handover
+    reorient_offset = Frame(
+        Rotation.RPY(0.0, 0.0, -1.57),
+        Vector(-0.02, 0.0, 0.02)
+    )
+    reorient_in_world = node.exit_in_world * reorient_offset
+
+    reorient_pose = node.base_in_world.Inverse() * reorient_in_world
+
+    move_to_pose(node, reorient_pose, "Reorient Needle", timeout_scale=50, psm='psm1',max_translation=0.005, max_rotation=0.1)
+
 
     # -------------------- Shutdown --------------------
     
