@@ -62,7 +62,7 @@ class GraspPoseCalculator:
             Vector(0, 0, 0.01)
         )
 
-        approach_in_world = approach_offset * needle_frame * offset
+        approach_in_world = needle_frame * approach_offset * offset
         approach_frame = base_frame.Inverse() * approach_in_world
 
 
