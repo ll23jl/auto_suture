@@ -21,9 +21,10 @@ from auto_suture.Move_To_Pose import move_to_pose
 
 class NeedleDriving(Node):
 
-    def __init__(self, psm='psm2'):
+    def __init__(self, psm='psm2', entry_exit_number=1):
         super().__init__(f'needle_driving_{psm}')
         self.psm = psm
+        self.entry_exit_number = entry_exit_number
 
         # ------------------------------ Variables ------------------------------
 
@@ -36,9 +37,9 @@ class NeedleDriving(Node):
         
         self.needle_point_in_world = None
 
-        self.entry1_in_world = None
+        self.entry_in_world = None
 
-        self.exit1_in_world = None
+        self.exit_in_world = None
 
         self.base_in_world = None
 
@@ -60,18 +61,18 @@ class NeedleDriving(Node):
         )
 
         # Entry 1 pose in world frame
-        self.entry1_sub = self.create_subscription(
+        self.entry_sub = self.create_subscription(
             PoseStamped,
-            '/entry1_pose_in_world_frame',
-            self.entry1_sub_callback,
+            f'/entry{self.entry_exit_number}_pose_in_world_frame',
+            self.entry_sub_callback,
             10
         )
 
         # Exit 1 pose in world frame
-        self.exit1_sub = self.create_subscription(
+        self.exit_sub = self.create_subscription(
             PoseStamped,
-            '/exit1_pose_in_world_frame',
-            self.exit1_sub_callback,
+            f'/exit{self.entry_exit_number}_pose_in_world_frame',
+            self.exit_sub_callback,
             10
         )
 
@@ -119,13 +120,13 @@ class NeedleDriving(Node):
 
 
     # Store entry 1 pose in world frame as pykdl
-    def entry1_sub_callback(self, msg):
-        self.entry1_in_world = pose_to_pykdl(msg.pose)
+    def entry_sub_callback(self, msg):
+        self.entry_in_world = pose_to_pykdl(msg.pose)
 
 
     # Store exit 1 pose in world frame as pykdl
-    def exit1_sub_callback(self, msg):
-        self.exit1_in_world = pose_to_pykdl(msg.pose)
+    def exit_sub_callback(self, msg):
+        self.exit_in_world = pose_to_pykdl(msg.pose)
 
 
     # store the latest base pose as pykdl
@@ -151,8 +152,8 @@ class NeedleDriving(Node):
     def ensure_initial_data(self):
         while (
             self.needle_point_in_world is None or
-            self.entry1_in_world is None or
-            self.exit1_in_world is None or
+            self.entry_in_world is None or
+            self.exit_in_world is None or
             self.base_in_world is None or
             self.gripper_in_base is None
         ):
@@ -198,13 +199,11 @@ def _kdl_vec_to_np(v):
   
 
 
-def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
-    """
-    Generate a circular arc of fixed needle radius between two poses.
+# Generate a circular arc of fixed needle radius between two poses.
+# The trajectory assumes the needle point moves on a circle with the known
+# needle radius while the orientation rotates rigidly with the motion.
 
-    The trajectory assumes the needle point moves on a circle with the known
-    needle radius while the orientation rotates rigidly with the motion.
-    """
+def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
 
     needle_radius = 0.01018  # metres
 
@@ -305,13 +304,23 @@ def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
 
 def main():
     rclpy.init()
-    # Optional CLI arg: psm (psm1 or psm2). Default to psm2.
-    psm = 'psm2'
+
+    # Defaults
+    psm = "psm2"
+    entry_exit_number = 1
+
+    # Read command line arguments
     if len(sys.argv) > 1:
         psm = sys.argv[1]
 
-    node = NeedleDriving(psm=psm)
+    if len(sys.argv) > 2:
+        entry_exit_number = int(sys.argv[2])
 
+    node = NeedleDriving(
+        psm=psm,
+        entry_exit_number=entry_exit_number
+    )
+    
 
     # check initial data is not None
     node.ensure_initial_data()
@@ -328,8 +337,8 @@ def main():
 
     # Get entry and exit poses
     node.get_needle_entry_exit_poses(
-        node.entry1_in_world,
-        node.exit1_in_world
+        node.entry_in_world,
+        node.exit_in_world
     )
 
     # Generate arc steps

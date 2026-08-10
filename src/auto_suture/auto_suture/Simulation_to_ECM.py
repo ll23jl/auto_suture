@@ -62,6 +62,53 @@ class SimulationECM(Node):
             10
         )
 
+        # Subscriber to entry 2 in world frame
+        self.entry2_subscription = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/phantom/Entry2/State',
+            self.entry2_callback,
+            10
+        )
+
+        # Subscriber to exit 2 in world frame
+        self.exit2_subscription = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/phantom/Exit2/State',
+            self.exit2_callback,
+            10
+        )
+
+        # Subscriber to entry 3 in world frame
+        self.entry3_subscription = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/phantom/Entry3/State',
+            self.entry3_callback,
+            10
+        )
+
+        # Subscriber to exit 3 in world frame
+        self.exit3_subscription = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/phantom/Exit3/State',
+            self.exit3_callback,
+            10
+        )
+
+        # Subscriber to entry 4 in world frame
+        self.entry4_subscription = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/phantom/Entry4/State',
+            self.entry4_callback,
+            10
+        )
+
+        # Subscriber to exit 4 in world frame
+        self.exit4_subscription = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/phantom/Exit4/State',
+            self.exit4_callback,
+            10
+        )
 
         # ------------------------------ Publishers ------------------------------
         
@@ -83,6 +130,47 @@ class SimulationECM(Node):
         self.exit1_publisher_ = self.create_publisher(
             PoseStamped,
             '/exit1_pose_in_camera_frame',
+            10
+        )
+        # Publisher for entry 2 pose in camera frame
+        self.entry2_publisher_ = self.create_publisher(
+            PoseStamped,
+            '/entry2_pose_in_camera_frame',
+            10
+        )
+
+        # Publisher for exit 2 pose in camera frame
+        self.exit2_publisher_ = self.create_publisher(
+            PoseStamped,
+            '/exit2_pose_in_camera_frame',
+            10
+        )
+
+        # Publisher for entry 3 pose in camera frame
+        self.entry3_publisher_ = self.create_publisher(
+            PoseStamped,
+            '/entry3_pose_in_camera_frame',
+            10
+        )
+
+        # Publisher for exit 3 pose in camera frame
+        self.exit3_publisher_ = self.create_publisher(
+            PoseStamped,
+            '/exit3_pose_in_camera_frame',
+            10
+        )
+
+        # Publisher for entry 4 pose in camera frame
+        self.entry4_publisher_ = self.create_publisher(
+            PoseStamped,
+            '/entry4_pose_in_camera_frame',
+            10
+        )
+
+        # Publisher for exit 4 pose in camera frame
+        self.exit4_publisher_ = self.create_publisher(
+            PoseStamped,
+            '/exit4_pose_in_camera_frame',
             10
         )
 
@@ -108,6 +196,48 @@ class SimulationECM(Node):
         new_msg = self.transform_world_to_camera(self.exit1_pose)
         if new_msg is not None:
             self.exit1_publisher_.publish(new_msg)
+
+    # Callback function for new entry 2 poses 
+    def entry2_callback(self, msg):
+        self.entry2_pose = msg.pose
+        new_msg = self.transform_world_to_camera(self.entry2_pose)
+        if new_msg is not None:
+            self.entry2_publisher_.publish(new_msg)
+
+    # Callback function for new exit 2 poses 
+    def exit2_callback(self, msg):
+        self.exit2_pose = msg.pose
+        new_msg = self.transform_world_to_camera(self.exit2_pose)
+        if new_msg is not None:
+            self.exit2_publisher_.publish(new_msg)
+
+    # Callback function for new entry 3 poses 
+    def entry3_callback(self, msg):
+        self.entry3_pose = msg.pose
+        new_msg = self.transform_world_to_camera(self.entry3_pose)
+        if new_msg is not None:
+            self.entry3_publisher_.publish(new_msg)
+
+    # Callback function for new exit 3 poses 
+    def exit3_callback(self, msg):
+        self.exit3_pose = msg.pose
+        new_msg = self.transform_world_to_camera(self.exit3_pose)
+        if new_msg is not None:
+            self.exit3_publisher_.publish(new_msg)
+
+    # Callback function for new entry 4 poses 
+    def entry4_callback(self, msg):
+        self.entry4_pose = msg.pose
+        new_msg = self.transform_world_to_camera(self.entry4_pose)
+        if new_msg is not None:
+            self.entry4_publisher_.publish(new_msg)
+
+    # Callback function for new exit 4 poses 
+    def exit4_callback(self, msg):
+        self.exit4_pose = msg.pose
+        new_msg = self.transform_world_to_camera(self.exit4_pose)
+        if new_msg is not None:
+            self.exit4_publisher_.publish(new_msg)
 
 
     # Callback function that stores camera pose in world frame 
