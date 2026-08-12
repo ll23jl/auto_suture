@@ -18,12 +18,119 @@ def start_step(command):
     print(f"Starting: {' '.join(command)}")
     return subprocess.Popen(command)
 
+
+# ---------------------------------------- Node ----------------------------------------
+
+
+class Controller(Node):
+    def __init__(self):
+        super().__init__('controller')
+
+
+        # -------------------- Variables --------------------
+
+        self.psm1_gripper_in_base = None
+        self.psm2_gripper_in_base = None
+        self.psm1_base_in_world = None
+        self.psm2_base_in_world = None
+        self.needle_in_world = None
+        
+
+        # -------------------- Subscriptions --------------------
+
+        self.psm1_meas = self.create_subscription(
+            PoseStamped,
+            '/CRTK/psm1/measured_cp',
+            self.psm1_gripper_callback,
+            10
+        )
+
+        self.psm2_meas = self.create_subscription(
+            PoseStamped,
+            '/CRTK/psm2/measured_cp',
+            self.psm2_gripper_callback,
+            10
+        )
+
+        self.psm1_base_meas = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/psm1/baselink/State',
+            self.psm1_base_callback,
+            10
+        )
+
+        self.psm2_base_meas = self.create_subscription(
+            RigidBodyState,
+            '/ambf/env/psm2/baselink/State',
+            self.psm2_base_callback,
+            10
+        )
+
+        self.needle_meas = self.create_subscription(
+            PoseStamped,
+            '/needle_pose_in_world_frame',
+            self.needle_callback,
+            10
+        )
+ 
+
+    # -------------------- Callback functions --------------------
+
+    def psm1_gripper_callback(self, msg):
+        self.psm1_gripper_in_base = pose_to_pykdl(msg.pose)
+
+    def psm2_gripper_callback(self, msg):
+        self.psm2_gripper_in_base = pose_to_pykdl(msg.pose)
+        
+    def psm1_base_callback(self, msg):
+        self.psm1_base_in_world = pose_to_pykdl(msg.pose)
+
+    def psm2_base_callback(self, msg):
+        self.psm2_base_in_world = pose_to_pykdl(msg.pose)
+
+    def needle_callback(self, msg):
+        self.needle_in_world = pose_to_pykdl(msg.pose)
+
+
+    # -------------------- Other functions --------------------
+
+    # run until initial pose data is received
+    def ensure_initial_data(self):
+        while (
+            self.psm1_gripper_in_base is None or
+            self.psm2_gripper_in_base is None or
+            self.psm1_base_in_world is None or
+            self.psm2_base_in_world is None or
+            self.needle_in_world is None
+        ):
+            self.get_logger().info('Waiting for initial pose data...')
+            rclpy.spin_once(self, timeout_sec=0.1)   
+
+
+
+
+# ---------------------------------------- Main ----------------------------------------
+
+
 def main():
 
+    # start controller node
+    rclpy.init()
+    node = Controller()
+
+    # wait for initial data
+    node.ensure_initial_data()
+    node.get_logger().info('\nData received\n')
+
     # Wait for AMBF simulation and ROS nodes to initialise
-    startup_delay = 20
+    startup_delay = 10
     print(f"Waiting {startup_delay}s for simulation setup...")
     time.sleep(startup_delay)
+
+
+    # --------------------------------- handover tests -------------------------------
+
+
 
     # ---------------------------------------- PSM2 grasp needle ----------------------------------------
     run_step([
@@ -31,18 +138,10 @@ def main():
         "Grasp_Needle",
         "psm2",
         "grip",
+        "up",
         "--ros-args",
         "--params-file",
         "/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/config/grasp_offsets.yaml"
-    ])
-
-
-    # ---------------------------------------- PSM2 pick up needle ----------------------------------------
-    run_step([
-        "ros2", "run", "auto_suture",
-        "move_to_pose",
-        "psm2",
-        "0.0, 0.0, -0.02, 0.0, 0.0, 0.0, 0.0"           # psm2 move 2mm up in world frame and close jaw
     ])
 
 
@@ -65,6 +164,7 @@ def main():
             "Grasp_Needle",
             "psm1",
             "tip",
+            "up",
             "--ros-args",
             "--params-file",
             "/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/config/grasp_offsets.yaml"
@@ -100,33 +200,11 @@ def main():
 
         # ---------------------------------------- Needle handover ----------------------------------------
 
+
         run_step([
             "ros2", "run", "auto_suture",
-            "Grasp_Needle",
-            "psm2",
-            "grip",
-            "--ros-args",
-            "--params-file",
-            "/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/config/grasp_offsets.yaml"
+            "Handover"
         ])
-
-        psm2_grab_needle = start_step([
-            "ros2", "run", "auto_suture",
-            "move_to_pose",
-            "psm2",
-            "0.0, -0.0005, -0.0005, 0.0, 0.0, 0.0, 0.0"
-        ])
-
-
-        psm1_drop_needle = start_step([
-            "ros2", "run", "auto_suture",
-            "move_to_pose",
-            "psm1",
-            "0.0, 0.0, -0.01, 0.0, 0.0, 0.0, 0.5"
-        ])
-
-        psm1_drop_needle.wait()
-        psm2_grab_needle.wait()
 
 
     # ---------------------------------------- Exit ----------------------------------------
