@@ -28,8 +28,8 @@ class GraspPoseCalculator:
         self.node = node
 
     # get grasp offset parameters
-    def get_grasp_offset(self, psm, grasp_type):
-        prefix = f'grasp_offsets.{psm}.{grasp_type}'
+    def get_grasp_offset(self, psm, grasp_type, is_upside_down):
+        prefix = f'grasp_offsets.{psm}.{grasp_type}.{is_upside_down}'
 
         x = self.node.get_parameter(prefix + '.position.x').value
         y = self.node.get_parameter(prefix + '.position.y').value
@@ -49,21 +49,36 @@ class GraspPoseCalculator:
             raise ValueError('No needle pose received yet')
         if base_pose is None:
             raise ValueError('No base pose received yet')
-
-        offset = self.get_grasp_offset(psm, grasp_type)
+        
         needle_frame = needle_pose
+
         base_frame = base_pose
+
+        if needle_frame.M[2, 2] < 0:
+            # needle is upside down
+            is_upside_down = "down"
+            approach_offset = Frame(
+                Rotation.Identity(),
+                Vector(0.0, 0.0, -0.02)
+            )
+        else:
+            # needle is facing up
+            is_upside_down = "up"
+            approach_offset = Frame(
+                Rotation.Identity(),
+                Vector(0.0, 0.0, 0.01)
+            )
+
+        offset = self.get_grasp_offset(psm, grasp_type, is_upside_down)
 
         needle_in_base = base_frame.Inverse() * needle_frame
         tool_frame = needle_in_base * offset
 
-        approach_offset = Frame(
-            Rotation.Identity(),
-            Vector(0, 0, 0.01)
-        )
+        
 
-        approach_in_world = approach_offset * needle_frame * offset
+        approach_in_world = needle_frame * approach_offset * offset
         approach_frame = base_frame.Inverse() * approach_in_world
+    
 
 
         return tool_frame, approach_frame
@@ -216,69 +231,53 @@ def main():
         rclpy.shutdown()
         return
 
-    grasp_needle_node = GraspNeedle(psm=psm)
+    node = GraspNeedle(psm=psm)
 
     # check initial data is not None
-    grasp_needle_node.ensure_initial_data()
+    node.ensure_initial_data()
 
     try:
-        grasp_pose, approach_pose = grasp_needle_node.calculate_grasp_pose(
+        grasp_pose, approach_pose = node.calculate_grasp_pose(
             psm,
             grasp_type
         )
     except ValueError as exc:
-        grasp_needle_node.get_logger().error(str(exc))
-        grasp_needle_node.destroy_node()
+        node.get_logger().error(str(exc))
+        node.destroy_node()
         rclpy.shutdown()
         return
 
     # -------------------- Move to approach pose --------------------
 
     target_pose = approach_pose
-    grasp_needle_node.get_logger().info(f'\nMoving to approach pose:\n{target_pose}')
-    move_to_pose(grasp_needle_node, target_pose, 'Approach Pose', psm=psm, max_translation=0.008, max_rotation=0.15)
+    node.get_logger().info(f'\nMoving to approach pose:\n{target_pose}')
+    move_to_pose(target_pose, 'Approach Pose', psm=psm, max_translation=0.008, max_rotation=0.15)
 
     # -------------------- Open jaws --------------------
 
-    grasp_needle_node.set_jaw(0.5)
-    grasp_needle_node.get_logger().info('\nOpening jaws')
-    rclpy.spin_once(grasp_needle_node, timeout_sec=0.01)
+    node.set_jaw(0.5)
+    node.get_logger().info('\nOpening jaws')
+    rclpy.spin_once(node, timeout_sec=0.01)
 
     # -------------------- Move to grasp pose --------------------
 
     target_pose = grasp_pose
-    grasp_needle_node.get_logger().info(f'\nMoving to grasp pose:\n{target_pose}')
-    move_to_pose(grasp_needle_node, target_pose, 'Grasp Pose', psm=psm)
+    node.get_logger().info(f'\nMoving to grasp pose:\n{target_pose}')
+    move_to_pose(target_pose, 'Grasp Pose', psm=psm)
 
     for _ in range(100):
-        rclpy.spin_once(grasp_needle_node, timeout_sec=0.01)
+        rclpy.spin_once(node, timeout_sec=0.01)
 
     # -------------------- Close jaws --------------------
 
-    grasp_needle_node.set_jaw(0.0)
-    grasp_needle_node.get_logger().info('\nClosing jaws')
+    node.set_jaw(0.0)
+    node.get_logger().info('\nClosing jaws')
     for _ in range(100):
-        rclpy.spin_once(grasp_needle_node, timeout_sec=0.01)
-
-    # # -------------------- Create target pose above the current pose --------------------
-
-    # current_pose = grasp_needle_node.gripper_in_base
-    # base_pose_in_world = grasp_needle_node.base_in_world
-    # current_pose_world = base_pose_in_world * current_pose
-    # translation_offset = Vector(0.0, 0.0, -0.002)
-    # rotation_offset = Rotation.RotZ(0.0)
-    # offset = Frame(rotation_offset, translation_offset)
-    # target_pose_world = current_pose_world * offset
-    # target_pose = base_pose_in_world.Inverse() * target_pose_world
-
-    # # -------------------- Move upwards --------------------
-
-    # grasp_needle_node.get_logger().info(f'\nMoving to pose:\n{target_pose}')
-    # move_to_pose(grasp_needle_node, target_pose, 'Pick Up Needle', timeout_scale=20, psm=psm)
+        rclpy.spin_once(node, timeout_sec=0.01)
 
     # -------------------- Shutdown --------------------
     
-    grasp_needle_node.destroy_node()
+    node.destroy_node()
     rclpy.shutdown()
 
 

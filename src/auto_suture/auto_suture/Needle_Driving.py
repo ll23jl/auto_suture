@@ -356,7 +356,7 @@ def main():
 
   
     node.get_logger().info(f'\nMoving to start pose:\n{target_gripper_in_base}\n\n')
-    move_to_pose(node, target_gripper_in_base, 'Needle Driving Start Pose', psm=node.psm)
+    move_to_pose(target_gripper_in_base, 'Needle Driving Start Pose', psm=node.psm)
 
 
     node.get_logger().info('\nNeedle driving sequence')

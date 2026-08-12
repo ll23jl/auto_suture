@@ -13,7 +13,6 @@ from sensor_msgs.msg import JointState
 import PyKDL
 from PyKDL import Frame, Rotation, Vector
 from utility.transform_functions import pose_to_pykdl, pykdl_to_pose, pykdl_to_posestamped
-from auto_suture.Move_To_Pose import move_to_pose
 from auto_suture.Needle_Driving import generate_needle_arc_trajectory, _normalize, _kdl_vec_to_np
 
 
@@ -276,19 +275,6 @@ def main():
 
 
     node.get_logger().info('\nNeedle extraction complete...\n\n')    
-
-    # -------------------- Reorient gripper for handover --------------------
-
-    # define target pose for gripper to reorient for handover
-    reorient_offset = Frame(
-        Rotation.RPY(0.0, 0.0, -1.57),
-        Vector(-0.02, 0.0, 0.02)
-    )
-    reorient_in_world = node.exit_in_world * reorient_offset
-
-    reorient_pose = node.base_in_world.Inverse() * reorient_in_world
-
-    move_to_pose(node, reorient_pose, "Reorient Needle", timeout_scale=50, psm='psm1',max_translation=0.005, max_rotation=0.1)
 
 
     # -------------------- Shutdown --------------------
