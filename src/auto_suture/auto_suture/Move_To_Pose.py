@@ -97,7 +97,7 @@ class MoveToPose(Node):
             10
         )
 
-        self.jaw_angle = 0.0
+        self.jaw_angle = None
         self.jaw_timer = self.create_timer(0.1, self.publish_jaw)
 
 
@@ -125,6 +125,10 @@ class MoveToPose(Node):
 
     # publish jaw angle to jaw servo
     def publish_jaw(self):
+
+        if self.jaw_angle is None:
+            return
+
         msg = JointState()
         msg.header.stamp = self.get_clock().now().to_msg()
         msg.name = ['jaw']
@@ -136,11 +140,12 @@ class MoveToPose(Node):
     def set_jaw(self, angle):
         self.jaw_angle = angle
 
+
 # ---------------------------------------- Move to pose function -----------------------------------------
 
 
 
-def move_to_pose(node, target_pose, step_name, timeout_scale=50, psm='psm2',max_translation=0.005, max_rotation=0.1):
+def move_to_pose(target_pose, step_name, timeout_scale=50, psm='psm2',max_translation=0.005, max_rotation=0.1):
 
     # -------------------- Blank array for error logging --------------------
     times = []
@@ -151,6 +156,12 @@ def move_to_pose(node, target_pose, step_name, timeout_scale=50, psm='psm2',max_
     previous_error = float('inf')
     moving_away_count = 0
     done = False
+
+    node = MoveToPose(psm=psm)
+
+    # Wait for this node to receive its own measurements
+    node.ensure_initial_data()
+
     # -------------------- Movement stage --------------------
     while not done:
 
@@ -218,71 +229,47 @@ def main():
     rclpy.init()
 
     if len(sys.argv) < 3:
-        tmp_node = MoveToPose()
-        tmp_node.get_logger().error(
-            'Usage: ros2 run auto_suture move_to_pose <psm> <x> <y> <z> <roll> <pitch> <yaw> [jaw_angle]\n'
-            'or: ros2 run auto_suture move_to_pose <psm> "x,y,z,roll,pitch,yaw,jaw_angle"'
+        print(
+            'Usage: ros2 run auto_suture move_to_pose '
+            '<psm> <x> <y> <z> <roll> <pitch> <yaw> [jaw_angle]'
         )
-        tmp_node.destroy_node()
         rclpy.shutdown()
         return
 
     psm = sys.argv[1]
 
     if psm not in ('psm1', 'psm2'):
-        tmp_node = MoveToPose()
-        tmp_node.get_logger().error(f'Invalid psm "{psm}". Expected "psm1" or "psm2"')
-        tmp_node.destroy_node()
+        print(
+            f'Invalid psm "{psm}". Expected "psm1" or "psm2"'
+        )
         rclpy.shutdown()
         return
 
     try:
         if len(sys.argv) == 3:
-            target_pose_offset, jaw_angle = parse_target_pose(sys.argv[2])
+            target_pose_in_base, jaw_angle = parse_target_pose(
+                sys.argv[2]
+            )
         else:
-            target_pose_offset, jaw_angle = parse_target_pose(sys.argv[2:])
+            target_pose_in_base, jaw_angle = parse_target_pose(
+                sys.argv[2:]
+            )
+
     except ValueError as exc:
-        tmp_node = MoveToPose(psm=psm)
-        tmp_node.get_logger().error(str(exc))
-        tmp_node.destroy_node()
+        print(str(exc))
         rclpy.shutdown()
         return
 
-    move_to_pose_node = MoveToPose(psm=psm)
-
-    # check initial data is not None
-    move_to_pose_node.ensure_initial_data()
-
-    # -------------------- Apply offset --------------------
-
-    gripper_in_world = move_to_pose_node.base_in_world * move_to_pose_node.gripper_in_base
-    target_pose = gripper_in_world * target_pose_offset
-
-    target_pose_in_base = move_to_pose_node.base_in_world.Inverse() * target_pose
+    # -------------------- Move --------------------
 
 
-    # -------------------- Apply requested jaw state --------------------
+    move_to_pose(
+        target_pose_in_base,
+        'Requested Pose',
+        timeout_scale=20,
+        psm=psm
+    )
 
-    if jaw_angle is not None:
-        move_to_pose_node.set_jaw(jaw_angle)
-        move_to_pose_node.get_logger().info(f'\nSetting jaw angle to {jaw_angle}')
-    else:
-        move_to_pose_node.set_jaw(0.0)
-        move_to_pose_node.get_logger().info('\nClosing jaws')
-
-    move_to_pose_node.publish_jaw()
-    for _ in range(100):
-        rclpy.spin_once(move_to_pose_node, timeout_sec=0.01)
-
-
-    # -------------------- Move to target --------------------
-
-    move_to_pose_node.get_logger().info(f'\nMoving to pose:\n{target_pose_in_base}')
-    move_to_pose(move_to_pose_node, target_pose_in_base, 'Requested Pose', timeout_scale=20, psm=psm)
-
-    # -------------------- Shutdown --------------------
-
-    move_to_pose_node.destroy_node()
     rclpy.shutdown()
 
 
