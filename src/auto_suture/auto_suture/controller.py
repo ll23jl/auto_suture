@@ -3,6 +3,13 @@
 import time
 import subprocess
 import sys
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import PoseStamped
+from ambf_msgs.msg import RigidBodyState
+from utility.transform_functions import pose_to_pykdl
+
+
 
 
 def run_step(command):
@@ -122,10 +129,6 @@ def main():
     node.ensure_initial_data()
     node.get_logger().info('\nData received\n')
 
-    # Wait for AMBF simulation and ROS nodes to initialise
-    startup_delay = 10
-    print(f"Waiting {startup_delay}s for simulation setup...")
-    time.sleep(startup_delay)
 
 
     # --------------------------------- handover tests -------------------------------
@@ -183,7 +186,7 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm2",
-            "0.0, 0.0, -0.02, 0.0, 0.0, 0.0, 0.5"
+            "0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.5"
         ])
 
         psm2_drop_needle.wait()

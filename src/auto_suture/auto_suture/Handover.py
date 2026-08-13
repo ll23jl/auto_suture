@@ -199,11 +199,13 @@ def main():
         # find desired psm1 pose, given the target needle pose
         target_psm1_gripper_in_base = node.psm1_base_in_world.Inverse() * node.needle_target_in_world * needle_in_psm1.Inverse()
 
+        target_psm1_gripper_in_world = node.psm1_base_in_world * target_psm1_gripper_in_base
+
         node.get_logger().info('\nMoving to handover pose\n')
 
 
         # move
-        move_to_pose(target_psm1_gripper_in_base, "PSM1 to handover pose", timeout_scale=50, psm='psm1',max_translation=0.005, max_rotation=0.1)
+        move_to_pose('absolute', target_psm1_gripper_in_world, "PSM1 to handover pose", timeout_scale=50, psm='psm1',max_translation=0.005, max_rotation=0.1)
 
         node.get_logger().info('\nGrasping needle\n')
 
@@ -248,10 +250,12 @@ def main():
         # find desired psm2 pose, given the target needle pose
         target_psm2_gripper_in_base = node.psm2_base_in_world.Inverse() * node.needle_target_in_world * needle_in_psm2.Inverse()
 
+        target_psm2_gripper_in_world = node.psm2_base_in_world * target_psm2_gripper_in_base
+
         node.get_logger().info('\nMoving to handover pose\n')
 
         # move
-        move_to_pose(target_psm2_gripper_in_base, "PSM2 to handover pose", timeout_scale=50, psm='psm2',max_translation=0.005, max_rotation=0.1)
+        move_to_pose(target_psm2_gripper_in_world, "PSM2 to handover pose", timeout_scale=50, psm='psm2',max_translation=0.005, max_rotation=0.1)
 
 
         node.get_logger().info('\nGrasping needle\n')

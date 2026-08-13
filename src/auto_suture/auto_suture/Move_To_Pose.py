@@ -145,7 +145,7 @@ class MoveToPose(Node):
 
 
 
-def move_to_pose(target_pose, step_name, timeout_scale=50, psm='psm2',max_translation=0.005, max_rotation=0.1):
+def move_to_pose(move_type, target_pose, step_name, timeout_scale=50, psm='psm2',max_translation=0.005, max_rotation=0.1,jaw_angle=None):
 
     # -------------------- Blank array for error logging --------------------
     times = []
@@ -162,6 +162,38 @@ def move_to_pose(target_pose, step_name, timeout_scale=50, psm='psm2',max_transl
     # Wait for this node to receive its own measurements
     node.ensure_initial_data()
 
+
+    if move_type == 'absolute':
+        # target pose in an absolute pose in the world frame
+
+        target_pose_in_world = target_pose
+
+        target_pose_in_base = node.base_in_world.Inverse() * target_pose_in_world
+
+    elif move_type == 'relative':
+        # target pose = offset from current pose in the world
+
+        gripper_in_world = node.base_in_world * node.gripper_in_base
+
+        target_pose_in_world = Frame(
+            target_pose.M * gripper_in_world.M,
+            gripper_in_world.p + target_pose.p
+        )
+
+        target_pose_in_base = node.base_in_world.Inverse() * target_pose_in_world
+
+    else:
+        # reject
+
+        node.get_logger.error('\nWrong movement type. Expected relative or absolute.\n')
+        return
+
+    # -------------------- Jaw angle ----------------
+
+    if jaw_angle is not None:
+        node.set_jaw(jaw_angle)
+
+
     # -------------------- Movement stage --------------------
     while not done:
 
@@ -171,7 +203,7 @@ def move_to_pose(target_pose, step_name, timeout_scale=50, psm='psm2',max_transl
         # calcualte next step to reach goal pose
         T_delta, done, trans_error_mag, rot_error_mag, deadband, rot_deadband, max_translation, max_rotation = cartesian_interpolate_step(
             current_pose,
-            target_pose,
+            target_pose_in_base,
             max_translation=max_translation,
             max_rotation=max_rotation,
         )
@@ -247,11 +279,11 @@ def main():
 
     try:
         if len(sys.argv) == 3:
-            target_pose_in_base, jaw_angle = parse_target_pose(
+            target_pose_in_world, jaw_angle = parse_target_pose(
                 sys.argv[2]
             )
         else:
-            target_pose_in_base, jaw_angle = parse_target_pose(
+            target_pose_in_world, jaw_angle = parse_target_pose(
                 sys.argv[2:]
             )
 
@@ -262,12 +294,14 @@ def main():
 
     # -------------------- Move --------------------
 
-
+    
     move_to_pose(
-        target_pose_in_base,
+        'relative',
+        target_pose_in_world,
         'Requested Pose',
         timeout_scale=20,
-        psm=psm
+        psm=psm,
+        jaw_angle=jaw_angle
     )
 
     rclpy.shutdown()

@@ -249,9 +249,9 @@ def main():
 
     # -------------------- Move to approach pose --------------------
 
-    target_pose = approach_pose
+    target_pose = node.base_in_world * approach_pose
     node.get_logger().info(f'\nMoving to approach pose:\n{target_pose}')
-    move_to_pose(target_pose, 'Approach Pose', psm=psm, max_translation=0.008, max_rotation=0.15)
+    move_to_pose('absolute', target_pose, 'Approach Pose', psm=psm, max_translation=0.008, max_rotation=0.15)
 
     # -------------------- Open jaws --------------------
 
@@ -261,9 +261,9 @@ def main():
 
     # -------------------- Move to grasp pose --------------------
 
-    target_pose = grasp_pose
+    target_pose = node.base_in_world * grasp_pose
     node.get_logger().info(f'\nMoving to grasp pose:\n{target_pose}')
-    move_to_pose(target_pose, 'Grasp Pose', psm=psm)
+    move_to_pose('absolute', target_pose, 'Grasp Pose', psm=psm)
 
     for _ in range(100):
         rclpy.spin_once(node, timeout_sec=0.01)
