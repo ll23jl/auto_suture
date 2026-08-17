@@ -34,7 +34,7 @@ class Handover(Node):
         # define target needle handover pose in world frame:
         self.needle_target_in_world = Frame(
             Rotation.RPY(0.0, 0.0, 0.0),
-            Vector(0.0, 0.0, 0.0)
+            Vector(0.01, 0.2, 0.71)
         )
 
         self.psm1_left_has_needle = False
@@ -149,14 +149,20 @@ class Handover(Node):
             self.psm2_right_has_needle = has_needle
 
         # Check the pairs
-        if self.psm1_left_has_needle and self.psm1_right_has_needle:
+        if (
+            self.psm1_left_has_needle
+            and self.psm1_right_has_needle
+            and self.psm2_left_has_needle
+            and self.psm2_right_has_needle
+        ):
+            self.has_needle = 'both'
+
+        elif self.psm1_left_has_needle or self.psm1_right_has_needle:
             self.has_needle = 'psm1'
 
-        elif self.psm2_left_has_needle and self.psm2_right_has_needle:
+        elif self.psm2_left_has_needle or self.psm2_right_has_needle:
             self.has_needle = 'psm2'
-        
-        elif self.psm2_left_has_needle and self.psm2_right_has_needle and self.psm1_left_has_needle and self.psm1_right_has_needle:
-            self.has_needle = 'both'
+
         else:
             self.has_needle = None
 
@@ -165,14 +171,16 @@ class Handover(Node):
 
     # run until initial pose data is received
     def ensure_initial_data(self):
+        self.get_logger().info('Waiting for initial pose data...')
         while (
             self.psm1_gripper_in_base is None or
             self.psm2_gripper_in_base is None or
             self.psm1_base_in_world is None or
             self.psm2_base_in_world is None or
-            self.needle_in_world is None
+            self.needle_in_world is None or
+            self.has_needle is None
         ):
-            self.get_logger().info('Waiting for initial pose data...')
+            
             rclpy.spin_once(self, timeout_sec=0.1)        
 
 
@@ -193,21 +201,6 @@ def main():
     if node.has_needle == 'psm1':
         # PSM1 has needle
 
-        # find needle in psm1 gripper - this is constant while the needle is held
-        needle_in_psm1 = node.psm1_gripper_in_base.Inverse() * node.psm1_base_in_world.Inverse() * node.needle_in_world
-
-        # find desired psm1 pose, given the target needle pose
-        target_psm1_gripper_in_base = node.psm1_base_in_world.Inverse() * node.needle_target_in_world * needle_in_psm1.Inverse()
-
-        target_psm1_gripper_in_world = node.psm1_base_in_world * target_psm1_gripper_in_base
-
-        node.get_logger().info('\nMoving to handover pose\n')
-
-
-        # move
-        move_to_pose('absolute', target_psm1_gripper_in_world, "PSM1 to handover pose", timeout_scale=50, psm='psm1',max_translation=0.005, max_rotation=0.1)
-
-        node.get_logger().info('\nGrasping needle\n')
 
         # command psm2 to grasp needle at the grip
         run_step([
@@ -226,7 +219,7 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm2",
-            "0.0, -0.0005, -0.0005, 0.0, 0.0, 0.0, 0.0"
+            "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0"
         ])
 
         # command psm1 to let go
@@ -234,31 +227,15 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm1",
-            "0.0, 0.0, -0.01, 0.0, 0.0, 0.0, 0.5"
+            "0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.5"
         ])
 
         psm1_drop_needle.wait()
         psm2_grab_needle.wait()
 
-
     elif node.has_needle == 'psm2':
         # PSM2 has needle
 
-        # find needle in psm2 gripper - this is constant while the needle is held
-        needle_in_psm2 = node.psm2_gripper_in_base.Inverse() * node.psm2_base_in_world.Inverse() * node.needle_in_world
-
-        # find desired psm2 pose, given the target needle pose
-        target_psm2_gripper_in_base = node.psm2_base_in_world.Inverse() * node.needle_target_in_world * needle_in_psm2.Inverse()
-
-        target_psm2_gripper_in_world = node.psm2_base_in_world * target_psm2_gripper_in_base
-
-        node.get_logger().info('\nMoving to handover pose\n')
-
-        # move
-        move_to_pose(target_psm2_gripper_in_world, "PSM2 to handover pose", timeout_scale=50, psm='psm2',max_translation=0.005, max_rotation=0.1)
-
-
-        node.get_logger().info('\nGrasping needle\n')
 
         # command psm1 to grasp needle at the tip
         run_step([
@@ -277,7 +254,7 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm1",
-            "0.0, -0.0005, -0.0005, 0.0, 0.0, 0.0, 0.0"
+            "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0"
         ])
 
         # command psm2 to let go
@@ -285,29 +262,44 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm2",
-            "0.0, 0.0, -0.01, 0.0, 0.0, 0.0, 0.5"
+            "0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.5"
         ])
 
         psm2_drop_needle.wait()
         psm1_grab_needle.wait()
 
-    elif node.has_needle == 'both':
-        
-
     else:
-        # Neither has needle
-        # command psm2 to grasp needle at the grip
-
-        node.get_logger().info('\nGrasping needle\n')
-    
-        run_step([
+        # both have the needle
+        
+        # command psm2 to hold needle
+        psm2_grab_needle = start_step([
             "ros2", "run", "auto_suture",
-            "Grasp_Needle",
+            "move_to_pose",
             "psm2",
-            "grip",
-            "up",
-            "--ros-args",
-            "--params-file",
-            "/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/config/grasp_offsets.yaml"
+            "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0"
         ])
 
+        # command psm1 to let go
+        psm1_drop_needle = start_step([
+            "ros2", "run", "auto_suture",
+            "move_to_pose",
+            "psm1",
+            "0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.5"
+        ])
+
+        psm1_drop_needle.wait()
+        psm2_grab_needle.wait()
+
+
+
+    
+    
+    
+    # -------------------- Shutdown --------------------
+    
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

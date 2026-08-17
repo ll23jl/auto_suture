@@ -25,7 +25,7 @@
           up:
             position:
               x: 0.0055
-              y: 0.005
+              y: 0.0055
               z: 0.007
             orientation:
               roll: 3.141592653589793
