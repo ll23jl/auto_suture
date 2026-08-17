@@ -19,6 +19,7 @@ def run_step(command):
 
     if result.returncode != 0:
         print(f"Step failed with return code {result.returncode}")
+        print(f"Command was: {' '.join(command)}")
         sys.exit(result.returncode)
 
 def start_step(command):
@@ -103,6 +104,7 @@ class Controller(Node):
 
     # run until initial pose data is received
     def ensure_initial_data(self):
+        self.get_logger().info('Waiting for initial pose data...')
         while (
             self.psm1_gripper_in_base is None or
             self.psm2_gripper_in_base is None or
@@ -110,7 +112,7 @@ class Controller(Node):
             self.psm2_base_in_world is None or
             self.needle_in_world is None
         ):
-            self.get_logger().info('Waiting for initial pose data...')
+            
             rclpy.spin_once(self, timeout_sec=0.1)   
 
 
@@ -130,11 +132,6 @@ def main():
     node.get_logger().info('\nData received\n')
 
 
-
-    # --------------------------------- handover tests -------------------------------
-
-
-
     # ---------------------------------------- PSM2 grasp needle ----------------------------------------
     run_step([
         "ros2", "run", "auto_suture",
@@ -146,6 +143,32 @@ def main():
         "--params-file",
         "/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/config/grasp_offsets.yaml"
     ])
+
+    # check if needle was placed the other way:
+
+    if node.needle_in_world.M[2, 2] < 0:
+        # needle is upside down
+        # swap needle to psm1 and then back to psm2
+
+        print('Needle in incorrect suturing position')
+
+        run_step([
+            "ros2", "run", "auto_suture",
+            "move_to_pose",
+            "psm2",
+            "0.0, 0.0, 0.01, 1.57, 1.57, 0.0, 0.0"
+        ])
+
+        run_step([
+            "ros2", "run", "auto_suture",
+            "Handover"
+        ])
+
+        run_step([
+            "ros2", "run", "auto_suture",
+            "Handover"
+        ])
+
 
 
 
@@ -178,7 +201,7 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm1",
-            "0.0, -0.0005, -0.0005, 0.0, 0.0, 0.0, 0.0"
+            "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0"
         ])
 
 
@@ -206,13 +229,40 @@ def main():
 
         run_step([
             "ros2", "run", "auto_suture",
-            "Handover"
+            "Grasp_Needle",
+            "psm2",
+            "grip",
+            "up",
+            "--ros-args",
+            "--params-file",
+            "/home/jazmin/auto_suture/install/auto_suture/share/auto_suture/config/grasp_offsets.yaml"
         ])
 
+
+        psm2_grab_needle = start_step([
+            "ros2", "run", "auto_suture",
+            "move_to_pose",
+            "psm2",
+            "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0"
+        ])
+
+
+        psm1_drop_needle = start_step([
+            "ros2", "run", "auto_suture",
+            "move_to_pose",
+            "psm1",
+            "0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.5"
+        ])
+
+        psm1_drop_needle.wait()
+        psm2_grab_needle.wait()
 
     # ---------------------------------------- Exit ----------------------------------------
 
     print("\n\nSuturing complete... \n\nExiting...")
+
+    node.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == "__main__":

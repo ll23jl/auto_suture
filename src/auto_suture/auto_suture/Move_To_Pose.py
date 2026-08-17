@@ -116,11 +116,12 @@ class MoveToPose(Node):
 
     # run until initial pose data is received
     def ensure_initial_data(self):
+        self.get_logger().info('Waiting for initial pose data...')
         while (
             self.base_in_world is None or
             self.gripper_in_base is None
         ):
-            self.get_logger().info('Waiting for initial pose data...')
+            
             rclpy.spin_once(self, timeout_sec=0.1)
 
     # publish jaw angle to jaw servo
@@ -251,6 +252,14 @@ def move_to_pose(move_type, target_pose, step_name, timeout_scale=50, psm='psm2'
     )
 
     node.get_logger().info(f'Saved plot to {filepath}')
+
+
+    # -------------------- Shutdown --------------------
+    
+    node.destroy_node()
+
+
+
 
 
 # ------------------------------------------------- Main -------------------------------------------------

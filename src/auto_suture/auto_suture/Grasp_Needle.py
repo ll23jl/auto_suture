@@ -187,12 +187,13 @@ class GraspNeedle(Node):
 
     # run until initial pose data is received
     def ensure_initial_data(self):
+        self.get_logger().info('Waiting for initial pose data...')
         while (
             self.needle_in_world is None or
             self.base_in_world is None or
             self.gripper_in_base is None
         ):
-            self.get_logger().info('Waiting for initial pose data...')
+            
             rclpy.spin_once(self, timeout_sec=0.1)
 
 

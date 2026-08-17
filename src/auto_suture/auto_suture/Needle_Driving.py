@@ -150,6 +150,7 @@ class NeedleDriving(Node):
 
     # run until initial pose data is received
     def ensure_initial_data(self):
+        self.get_logger().info('Waiting for initial pose data...')
         while (
             self.needle_point_in_world is None or
             self.entry_in_world is None or
@@ -157,7 +158,7 @@ class NeedleDriving(Node):
             self.base_in_world is None or
             self.gripper_in_base is None
         ):
-            self.get_logger().info('Waiting for initial pose data...')
+            
             rclpy.spin_once(self, timeout_sec=0.1)
 
     def get_needle_entry_exit_poses(self, entry, exit_):
@@ -357,7 +358,7 @@ def main():
     target_gripper_in_world = node.base_in_world * target_gripper_in_base
 
   
-    node.get_logger().info(f'\nMoving to start pose:\n{target_gripper_in_base}\n\n')
+    node.get_logger().info(f'\nMoving to start pose:\n{target_gripper_in_world}\n\n')
     move_to_pose('absolute', target_gripper_in_world, 'Needle Driving Start Pose', psm=node.psm)
 
 
