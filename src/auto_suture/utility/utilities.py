@@ -11,7 +11,7 @@ from utility.transform_functions import pose_to_pykdl, pykdl_to_pose, posestampe
 def cartesian_interpolate_step(T_curr, T_goal,
                                max_translation=0.005,
                                max_rotation=0.1,
-                               deadband=0.001):
+                               deadband=0.0011):
 
     
     # Adjust deadband for rotation
