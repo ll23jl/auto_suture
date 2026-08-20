@@ -54,7 +54,7 @@ class GraspPoseCalculator:
 
         base_frame = base_pose
 
-        if needle_frame.M[2, 2] < 0:
+        if needle_frame.M[2, 2] < -0.01:
             # needle is upside down
             is_upside_down = "down"
             approach_offset = Frame(
@@ -271,7 +271,7 @@ def main():
 
     # -------------------- Close jaws --------------------
 
-    node.set_jaw(0.0)
+    node.set_jaw(0.04)
     node.get_logger().info('\nClosing jaws')
     for _ in range(100):
         rclpy.spin_once(node, timeout_sec=0.01)
