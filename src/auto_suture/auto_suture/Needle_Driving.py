@@ -106,7 +106,7 @@ class NeedleDriving(Node):
             10
         )
 
-        self.jaw_angle = 0.0
+        self.jaw_angle = 0.04
         self.jaw_timer = self.create_timer(0.1, self.publish_jaw)
 
 
@@ -165,8 +165,8 @@ class NeedleDriving(Node):
         self.needle_entry_in_world = Frame()
         self.needle_exit_in_world = Frame()
 
-        self.needle_entry_in_world.p = entry.p + Vector(-0.003, 0.0, 0.0025)
-        self.needle_exit_in_world.p = exit_.p + Vector(0.003, 0.0, 0.0025)
+        self.needle_entry_in_world.p = entry.p + Vector(-0.002, 0.0, 0.002)
+        self.needle_exit_in_world.p = exit_.p + Vector(0.002, 0.0, 0.002)
 
         self.needle_entry_in_world.M = entry.M * Rotation.RPY(-1.570796327, 1.570796327, 0)
         self.needle_exit_in_world.M = exit_.M * Rotation.RPY(-1.570796327, -1.570796327, 0)
@@ -204,7 +204,7 @@ def _kdl_vec_to_np(v):
 # The trajectory assumes the needle point moves on a circle with the known
 # needle radius while the orientation rotates rigidly with the motion.
 
-def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
+def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100, extra_angle_deg=0.0):
 
     needle_radius = 0.01018  # metres
 
@@ -269,6 +269,16 @@ def generate_needle_arc_trajectory(start_frame, end_frame, num_steps=100):
     # Determine clockwise / anticlockwise
     if np.dot(np.cross(radius_vec0, radius_vec1), axis) < 0:
         sweep_angle = -sweep_angle
+
+
+    # Continue further around the same circle
+    extra_angle = np.deg2rad(extra_angle_deg)
+
+    # Continue in the same direction as the original arc
+    if sweep_angle >= 0:
+        sweep_angle += extra_angle
+    else:
+        sweep_angle -= extra_angle
 
     # -------------------- Generate trajectory --------------------
 
@@ -343,7 +353,7 @@ def main():
     )
 
     # Generate arc steps
-    driving_path = generate_needle_arc_trajectory(node.needle_entry_in_world, node.needle_exit_in_world, num_steps=100)
+    driving_path = generate_needle_arc_trajectory(node.needle_entry_in_world, node.needle_exit_in_world, num_steps=100, extra_angle_deg=40)
 
     # Generate approach pose
     approach_pose = Frame()

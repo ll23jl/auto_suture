@@ -106,7 +106,7 @@ class NeedleExtraction(Node):
             10
         )
 
-        self.jaw_angle = 0.0
+        self.jaw_angle = 0.04
         self.jaw_timer = self.create_timer(0.1, self.publish_jaw)
 
 
@@ -151,6 +151,7 @@ class NeedleExtraction(Node):
 
     # run until initial pose data is received
     def ensure_initial_data(self):
+        self.get_logger().info('Waiting for initial pose data...')
         while (
             self.needle_point_in_world is None or
             self.entry_in_world is None or
@@ -158,15 +159,14 @@ class NeedleExtraction(Node):
             self.base_in_world is None or
             self.gripper_in_base is None
         ):
-            self.get_logger().info('Waiting for initial pose data...')
             rclpy.spin_once(self, timeout_sec=0.1)
 
     def get_needle_entry_exit_poses(self, entry, exit_):
         self.needle_entry_in_world = Frame()
         self.needle_exit_in_world = Frame()
 
-        self.needle_entry_in_world.p = entry.p + Vector(-0.003, 0.0, 0.0025)
-        self.needle_exit_in_world.p = exit_.p + Vector(0.003, 0.0, 0.0025)
+        self.needle_entry_in_world.p = entry.p + Vector(-0.002, 0.0, 0.002)
+        self.needle_exit_in_world.p = exit_.p + Vector(0.002, 0.0, 0.002)
 
         self.needle_entry_in_world.M = entry.M * Rotation.RPY(-1.570796327, 1.570796327, 0)
         self.needle_exit_in_world.M = exit_.M * Rotation.RPY(-1.570796327, -1.570796327, 0)
@@ -249,7 +249,7 @@ def main():
     # -------------------- Generate extraction path --------------------
 
     # Generate arc steps
-    extraction_path = generate_needle_arc_trajectory(node.needle_exit_in_world, target_pose, num_steps=100)
+    extraction_path = generate_needle_arc_trajectory(node.needle_point_in_world, target_pose, num_steps=100, extra_angle_deg=45)
 
 
     node.get_logger().info('\nNeedle extraction sequence')
