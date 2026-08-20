@@ -156,7 +156,7 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm2",
-            "0.0, 0.0, 0.01, 1.57, 1.57, 0.0, 0.0"
+            "0.0, 0.0, 0.01, 1.57, 1.57, 0.0, 0.04"
         ])
 
         run_step([
@@ -169,11 +169,16 @@ def main():
             "Handover"
         ])
 
+    start_time = time.perf_counter()
+    iteration_times = []
 
 
+    for step in range(1, 5):
 
-    for step in range(1, 4):
-        print(f"\n\nStarting suture {step}...\n\n")
+        node.get_logger().info(f"\n\nStarting suture {step}...\n\n")
+
+
+        iteration_start = time.perf_counter()
 
 
         # ---------------------------------------- Needle driving through entry ----------------------------------------
@@ -201,7 +206,7 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm1",
-            "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0"
+            "0.0, 0.0005, 0.0005, 0.0, 0.0, 0.0, 0.04"
         ])
 
 
@@ -209,18 +214,35 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm2",
-            "0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.5"
+            "0.0, 0.005, 0.0, 0.0, 0.0, 0.0, 0.5"
         ])
 
         psm2_drop_needle.wait()
         psm1_grab_needle.wait()
 
         # ---------------------------------------- Needle extraction through exit ----------------------------------------
-        run_step([
+        psm1_extraction = start_step([
             "ros2", "run", "auto_suture",
             "Needle_Extraction",
             "psm1",
             f"{step}"
+        ])
+
+        psm2_retract = start_step([
+            "ros2", "run", "auto_suture",
+            "move_to_pose",
+            "psm2",
+            "0.0, 0.02, 0.01, 0.0, 0.0, 0.0, 0.5"
+        ])
+
+        psm1_extraction.wait()
+        psm2_retract.wait()
+
+        run_step([
+            "ros2", "run", "auto_suture",
+            "move_to_pose",
+            "psm1",
+            "0.01, 0.0, 0.0, 0.0, 3.14159, 0.0, 0.04"
         ])
 
 
@@ -243,7 +265,7 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm2",
-            "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0"
+            "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.04"
         ])
 
 
@@ -251,15 +273,36 @@ def main():
             "ros2", "run", "auto_suture",
             "move_to_pose",
             "psm1",
-            "0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.5"
+            "0.0, 0.0, 0.005, 0.0, 0.0, 0.0, 0.5"
         ])
 
         psm1_drop_needle.wait()
         psm2_grab_needle.wait()
 
+        # ---------------------------------------- End of iteration ----------------------------------------
+
+        iteration_time = time.perf_counter() - iteration_start
+        iteration_times.append(iteration_time)
+
+        total_elapsed = time.perf_counter() - start_time
+        node.get_logger().info(f"\nCompleted suture {step}")
+        node.get_logger().info(f"Suture {step} time: {iteration_time:.2f} seconds")
+        node.get_logger().info(f"Total elapsed time: {total_elapsed:.2f} seconds")
+
+
     # ---------------------------------------- Exit ----------------------------------------
 
-    print("\n\nSuturing complete... \n\nExiting...")
+    total_time = time.perf_counter() - start_time
+
+    node.get_logger().info("\n\n========== TIMING ==========")
+
+    for step, elapsed in enumerate(iteration_times, start=1):
+        node.get_logger().info(f"Suture {step}: {elapsed:.2f} seconds")
+
+    node.get_logger().info(f"Total time: {total_time:.2f} seconds")
+    node.get_logger().info("============================\n")
+
+    node.get_logger().info("\n\nSuturing complete... \n\nExiting...")
 
     node.destroy_node()
     rclpy.shutdown()
